@@ -1,7 +1,7 @@
 # Projeto_Byte_Monstro
 
 Ideias de projeto: 
- * https://www.image-line.com/
+ * https://actuar.com/software-para-academia#treino
  
 ## Integrantes do grupo 
  * Everton da Silva Souza - evertonsilva2345meia78@gmail.com
