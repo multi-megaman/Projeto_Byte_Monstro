@@ -1,4 +1,4 @@
-package beans;
+package br.ufrpe.byte_monstro.byte_monstro_fx.beans;
 //import beans.enums.*;
 
 public enum EnumExercicios {

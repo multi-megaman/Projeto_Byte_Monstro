@@ -1,4 +1,4 @@
-package beans;
+package br.ufrpe.byte_monstro.byte_monstro_fx.beans;
 
 public abstract class UsuarioGeral {
     private long id;

@@ -1,6 +1,5 @@
-package beans;
+package br.ufrpe.byte_monstro.byte_monstro_fx.beans;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Profissional extends UsuarioGeral{
@@ -36,7 +35,7 @@ public class Profissional extends UsuarioGeral{
     }
 
     public ArrayList<Aluno> procuarAlunosParaTrocaDoTreino() {
-        return new ArrayList<Aluno>;
+        return new ArrayList<Aluno>();
     }
 
     public void gerarRelatorio(Aluno a) {
