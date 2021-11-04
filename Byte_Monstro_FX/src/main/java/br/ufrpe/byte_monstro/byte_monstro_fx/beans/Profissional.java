@@ -13,8 +13,18 @@ public class Profissional extends UsuarioGeral{
         this.unidadeAtual = unidadeAtual;
         this.alunosVinculados = new ArrayList<Aluno>();
     }
+    
+    public Profissional() {
+        
+    }
 
-    public TreinoDiario criarFichasDeExercicio() {
+	@Override
+	public String toString() {
+		return "Profissional [senha=" + senha + ", unidadeAtual=" + unidadeAtual + ", alunosVinculados="
+				+ alunosVinculados + "   " + this.getAltura() + "]";
+	}
+
+	public TreinoDiario criarFichasDeExercicio() {
         return new TreinoDiario();
     }
 
