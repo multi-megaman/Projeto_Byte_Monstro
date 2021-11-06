@@ -1,9 +1,14 @@
 package br.ufrpe.byte_monstro.byte_monstro_fx.beans;
 
+import br.ufrpe.byte_monstro.byte_monstro_fx.beans.Exercicios;
 import java.util.ArrayList;
 
 public class TreinoDiario {
     public ArrayList<Exercicios> exercicios;
+
+    public TreinoDiario() {
+        this.exercicios = exercicios;
+    }
 
     public void adicionarExercicio(Exercicios exercicio) {
         exercicios.add(exercicio);
@@ -12,10 +17,4 @@ public class TreinoDiario {
         exercicios.remove(exercicio);
     }
 
-
-    public void printExercicio(){
-        for (Exercicios exAtual : exercicios) {
-            System.out.println(exAtual.getTipo() +" | "+ exAtual.getSerie() + " | " + exAtual.getRepeticao() + " | ");
-        }
-    }
 }

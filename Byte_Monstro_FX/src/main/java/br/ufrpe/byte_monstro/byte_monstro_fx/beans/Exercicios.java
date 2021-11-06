@@ -1,12 +1,14 @@
 package br.ufrpe.byte_monstro.byte_monstro_fx.beans;
 
+import br.ufrpe.byte_monstro.byte_monstro_fx.beans.EnumExercicios;
+
 public class Exercicios {
     private EnumExercicios tipo;
     private int serie;
-    private int repeticao;
+    private String repeticao;
     private int carga;
 
-    public Exercicios(EnumExercicios tipo, int serie, int repeticao, int carga) {
+    public Exercicios(EnumExercicios tipo, int serie, String repeticao, int carga) {
         this.tipo = tipo;
         this.serie = serie;
         this.repeticao = repeticao;
@@ -29,11 +31,11 @@ public class Exercicios {
         this.serie = serie;
     }
 
-    public int getRepeticao() {
+    public String getRepeticao() {
         return repeticao;
     }
 
-    public void setRepeticao(int repeticao) {
+    public void setRepeticao(String repeticao) {
         this.repeticao = repeticao;
     }
 
@@ -43,5 +45,10 @@ public class Exercicios {
 
     public void setCarga(int carga) {
         this.carga = carga;
+    }
+
+    @Override
+    public String toString(){
+        return String.format("%-25s|%dX|%-5s|%oKg", tipo, serie, repeticao, carga);
     }
 }
