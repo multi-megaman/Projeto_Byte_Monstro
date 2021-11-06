@@ -2,12 +2,17 @@ package br.ufrpe.byte_monstro.byte_monstro_fx.beans;
 
 import java.util.ArrayList;
 
+import Byte_Monstro_FX.src.main.java.br.ufrpe.byte_monstro.byte_monstro_fx.beans.EnumAcademias;
+import br.ufrpe.byte_monstro.byte_monstro_fx.beans.UsuarioGeral;
+import br.ufrpe.byte_monstro.byte_monstro_fx.beans.TreinoDiario;
+import br.ufrpe.byte_monstro.byte_monstro_fx.beans.Aluno;
+
 public class Profissional extends UsuarioGeral{
     private String senha;
-    private String unidadeAtual;
+    private EnumAcademias unidadeAtual;
     private ArrayList<Aluno> alunosVinculados;
 
-    public Profissional(long id, String nome, int idade, char genero, double peso, double altura, double percentualGordura, String senha, String unidadeAtual) {
+    public Profissional(long id, String nome, int idade, char genero, double peso, double altura, double percentualGordura, String senha, EnumAcademias unidadeAtual) {
         super(id, nome, idade, genero, peso, altura, percentualGordura);
         this.senha = senha;
         this.unidadeAtual = unidadeAtual;
@@ -18,7 +23,15 @@ public class Profissional extends UsuarioGeral{
         
     }
 
-	@Override
+    public EnumAcademias getUnidadeAtual() {
+        return unidadeAtual;
+    }
+
+    public void setUnidadeAtual(EnumAcademias unidadeAtual) {
+        this.unidadeAtual = unidadeAtual;
+    }
+
+    @Override
 	public String toString() {
 		return "Profissional [senha=" + senha + ", unidadeAtual=" + unidadeAtual + ", alunosVinculados="
 				+ alunosVinculados + "   " + this.getAltura() + "]";
@@ -28,31 +41,25 @@ public class Profissional extends UsuarioGeral{
         return new TreinoDiario();
     }
 
-    public void adicionarFichaDeExercicioAoAluno(Aluno a) {
-
-    }
-
-    public void editarFichaDeTreino (Aluno a, TreinoDiario t) {
-
-    }
-
-    public void editarDadosDoAluno (Aluno a) {
-
-    }
-
-    public void editarQntMaxima(Aluno a) {
-
+    public void adicionarFichaDeExercicioAoAluno(Aluno a, TreinoDiario td) {
+        a.sequenciaDeTreinos.add(td);
     }
 
     public ArrayList<Aluno> procuarAlunosParaTrocaDoTreino() {
-        return new ArrayList<Aluno>();
+        ArrayList<Aluno> solicitaramTroca = new ArrayList<Aluno>();
+        for (Aluno i : alunosVinculados){
+            if (i.getPedirTrocaDoTreino()){
+                solicitaramTroca.add(i);
+            }
+        }
+        return solicitaramTroca;
     }
 
-    public void gerarRelatorio(Aluno a) {
+    //public void gerarRelatorio(Aluno a) { }
 
-    }
+    //public void editarFichaDeTreino (Aluno a, TreinoDiario t) { }
 
-    public void listarAlunosDoProfessor() {
+    //public void editarDadosDoAluno (Aluno a) { }
 
-    }
+    //public void editarQntMaxima(Aluno a) { }
 }

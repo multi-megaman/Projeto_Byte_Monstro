@@ -18,11 +18,10 @@ public abstract class UsuarioGeral {
         this.altura = altura;
         this.percentualGordura = percentualGordura;
     }
-    
+
     public UsuarioGeral() {
 
     }
-    
 
     public long getId() {
         return id;
@@ -81,31 +80,9 @@ public abstract class UsuarioGeral {
     }
 
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(altura);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + genero;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + idade;
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		temp = Double.doubleToLongBits(percentualGordura);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(peso);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		return result;
-	}
 
-	@Override
-	public String toString() {
-		return "UsuarioGeral [id=" + id + ", nome=" + nome + ", idade=" + idade + ", genero=" + genero + ", peso="
-				+ peso + ", altura=" + altura + ", percentualGordura=" + percentualGordura + "]";
-	}
-	
-	
-
-
+    @Override
+    public String toString(){
+        return String.format("%-8d|%-40s", getId(), getNome());
+    }
 }
