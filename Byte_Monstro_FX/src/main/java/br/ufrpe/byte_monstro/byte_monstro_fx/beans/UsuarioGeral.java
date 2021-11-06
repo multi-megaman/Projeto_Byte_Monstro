@@ -80,6 +80,7 @@ public abstract class UsuarioGeral {
         this.percentualGordura = percentualGordura;
     }
 
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

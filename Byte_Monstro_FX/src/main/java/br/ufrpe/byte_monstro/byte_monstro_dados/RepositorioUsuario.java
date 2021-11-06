@@ -2,15 +2,16 @@ package br.ufrpe.byte_monstro.byte_monstro_dados;
 
 import java.util.ArrayList;
 
+import br.ufrpe.byte_monstro.byte_monstro_fx.beans.Aluno;
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.Profissional;
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.UsuarioGeral;
 
-public class RepositorioUsuario {
+public class RepositorioUsuario<T> implements IRepositorioUsuario<T> {
 	
-	ArrayList <UsuarioGeral> usuarios = new ArrayList<>();
+	ArrayList <T> usuarios = new ArrayList<>();
 	
 	
-	private void cadastrarUsuario(UsuarioGeral ug){
+	public void inserir(T ug){
 		
 		if(usuarios.contains(ug) || ug.equals(null)) {
 			
@@ -28,7 +29,7 @@ public class RepositorioUsuario {
 }
 	
 	
-	private void removerUsuario(UsuarioGeral ug){
+	public void remover(T ug){
 		
 		if(usuarios.contains(ug) && !ug.equals(null)) {
 			
@@ -46,7 +47,7 @@ public class RepositorioUsuario {
 		
 	}
 	
-	public void atualizar(UsuarioGeral usuario) {
+	public void atualizar(T usuario) {
 		
 		if(usuarios.contains(usuario) || usuario.equals(null)) {
 			
@@ -65,18 +66,18 @@ public class RepositorioUsuario {
 	}
 	
 	
-	public UsuarioGeral VerificaRetornaUsuario(long ID) {
+	/*public T VerificaRetornaUsuario(long ID) {
 		
-		for(UsuarioGeral u : this.usuarios) {
+		for(T u : this.usuarios) {
 			if(u.getId() == ID) {
 				return u;
 			}
 		}
 		
 		return null;
-	}
+	}*/
 	
-	public boolean verificarExistenciaUsuario(long ID) {
+	/*public boolean verificarExistenciaUsuario(long ID) {
 		
 		for(UsuarioGeral u : this.usuarios) {
 			if(u.getId() == ID) {
@@ -86,7 +87,7 @@ public class RepositorioUsuario {
 		
 		return false;
 		
-	}
+	}*/
 	
 	
 	@Override
@@ -97,15 +98,15 @@ public class RepositorioUsuario {
 
 	public static void main(String[] args) {
 		
-		RepositorioUsuario ru = new RepositorioUsuario();
+		RepositorioUsuario ru = new RepositorioUsuario<Profissional>();
 		
 		Profissional p = new Profissional();
 		
 		p.setAltura(42);
 		
-		ru.cadastrarUsuario(p);
+		ru.inserir(p);
 		
-		System.out.println(ru.verificarExistenciaUsuario(p.getId()));
+		System.out.println(ru);
 		
 		
 		
