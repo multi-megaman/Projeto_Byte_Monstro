@@ -15,7 +15,7 @@ public class Aluno extends UsuarioGeral {
     private long professor;
     protected ArrayList<TreinoDiario> sequenciaDeTreinos;
 
-    public Aluno(long id, String nome, int idade, char genero, double peso, double altura, double percentualGordura, LocalDate dataMatricula) {
+    public Aluno(long id, String nome, int idade, char genero, double peso, double altura, double percentualGordura, LocalDate dataMatricula, long idProf) {
         super(id, nome, idade, genero, peso, altura, percentualGordura);
         this.dataMatricula = dataMatricula;
         this.qntMaximaDeSequencia = 0;
@@ -23,7 +23,9 @@ public class Aluno extends UsuarioGeral {
         this.relatoriosDisponiveis = "NULL";
         this.pedirTrocaDoTreino = false;
         sequenciaDeTreinos = new ArrayList<TreinoDiario>();
+        this.professor = idProf;
     }
+
 
     public LocalDate getDataMatricula() {
         return dataMatricula;
@@ -90,5 +92,8 @@ public class Aluno extends UsuarioGeral {
         return sequenciaDeTreinos.get(index);
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }
