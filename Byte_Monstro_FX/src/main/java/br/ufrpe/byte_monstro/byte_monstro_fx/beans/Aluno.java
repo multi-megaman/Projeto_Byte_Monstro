@@ -83,6 +83,14 @@ public class Aluno extends UsuarioGeral {
         this.sequenciaDeTreinos = sequenciaDeTreinos;
     }
 
+    public void adicionarTreino(TreinoDiario treino) {
+        sequenciaDeTreinos.add(treino);
+    }
+
+    public void removerTreino(TreinoDiario treino) {
+        sequenciaDeTreinos.remove(treino);
+    }
+
     public double calcularIMC(){
         return this.getPeso()/(this.getAltura()*this.getAltura());
     }

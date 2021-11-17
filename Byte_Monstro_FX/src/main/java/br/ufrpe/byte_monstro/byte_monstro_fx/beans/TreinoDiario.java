@@ -7,7 +7,12 @@ public class TreinoDiario {
     public ArrayList<Exercicios> exercicios;
 
     public TreinoDiario() {
-        this.exercicios = exercicios;
+
+        exercicios = new ArrayList<Exercicios>();
+    }
+
+    public ArrayList<Exercicios> getExercicios() {
+        return exercicios;
     }
 
     public void adicionarExercicio(Exercicios exercicio) {
@@ -17,4 +22,8 @@ public class TreinoDiario {
         exercicios.remove(exercicio);
     }
 
+    @Override
+    public String toString() {
+        return exercicios.toString();
+    }
 }

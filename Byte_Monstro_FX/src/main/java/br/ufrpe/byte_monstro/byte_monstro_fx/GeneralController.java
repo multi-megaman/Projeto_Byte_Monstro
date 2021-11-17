@@ -5,10 +5,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+
 import java.time.format.DateTimeFormatter;
 
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.*;
@@ -50,24 +48,70 @@ public class GeneralController {
     private TextField idProfPicker;
 
     @FXML
+    private ComboBox exercicioEnumComboBox;
+
+    @FXML
+    private TextField seriePicker;
+
+    @FXML
+    private TextField repeticaoPicker;
+
+    @FXML
+    private TextField cargaPicker;
+
+    @FXML
     private ListView<Aluno> listaUsuarios;
 
-    private ObservableList<Aluno> lista;
+    private ObservableList<Aluno> listaUsuariosObservavel;
+
+    @FXML
+    private ListView<TreinoDiario> listaTreinos;
+
+    private ObservableList<TreinoDiario> listaTreinosObservavel;
+
+    @FXML
+    private ListView<Exercicios> listaExercicios;
+
+    private ObservableList<Exercicios> listaExerciciosObservavel;
 
     public void initialize(){
-        lista = FXCollections.observableArrayList();
+        exercicioEnumComboBox.getItems().setAll(EnumExercicios.values());
+
+        listaUsuariosObservavel = FXCollections.observableArrayList();
+        listaTreinosObservavel = FXCollections.observableArrayList();
+        listaExerciciosObservavel = FXCollections.observableArrayList();
         genItems();
-        listaUsuarios.setItems(lista);
+        listaUsuarios.setItems(listaUsuariosObservavel);
+        //listaTreinos.setItems(listaTreinosObservavel);
+        //listaExercicios.setItems(listaExerciciosObservavel);
 
 
 
         //registerEventHandlers();
     }
-    private void genItems() {
+    private void genItems() { //PARA TESTES APENAS
         for(int i=0;i<10;i++){
             int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
+            int randomQntTreinos = ThreadLocalRandom.current().nextInt(1, 7);
+
             //lista.add(new String("Aluno_"+Integer.toString(i)));
-            lista.add(new Aluno(randomNum,"Aluno_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),LocalDate.parse("10/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy")),178*i));
+            listaUsuariosObservavel.add(new Aluno(randomNum,"Aluno_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),LocalDate.parse("10/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy")),178*i));
+
+            for (int j = 0; j < randomQntTreinos; j++) {
+                TreinoDiario novoTreino = new TreinoDiario();
+                int randomQntExercicios = ThreadLocalRandom.current().nextInt(1, 10);
+
+                for (int k = 0; k < randomQntExercicios; k++){
+                    int randomIdEnumExercicio = ThreadLocalRandom.current().nextInt(0, 9);
+                    int randomQntSeries = ThreadLocalRandom.current().nextInt(1, 6);
+                    int randomQntRepeticoes = ThreadLocalRandom.current().nextInt(8, 15);
+                    int randomCarga = ThreadLocalRandom.current().nextInt(10, 150);
+
+                    Exercicios novoExercicio = new Exercicios(EnumExercicios.values()[randomIdEnumExercicio],randomQntSeries,String.valueOf(randomQntRepeticoes),randomCarga);
+                    novoTreino.adicionarExercicio(novoExercicio);
+                }
+                listaUsuariosObservavel.get(i).adicionarTreino(novoTreino);
+            }
         }
     }
 
@@ -84,12 +128,35 @@ public class GeneralController {
         matriculaPicker.setValue(aluno.getDataMatricula());
         idProfPicker.setText(String.valueOf(aluno.getProfessor()));
 
+        listaTreinosObservavel = FXCollections.observableArrayList(aluno.getSequenciaDeTreinos());
+        listaTreinos.setItems(listaTreinosObservavel);
+
+    }
+
+    @FXML
+    public void clickTreino() {
+        TreinoDiario treino = listaTreinos.getSelectionModel().getSelectedItem();
+
+        listaExerciciosObservavel = FXCollections.observableArrayList(treino.getExercicios());
+        listaExercicios.setItems(listaExerciciosObservavel);
+
+    }
+
+    @FXML
+    public void clickExercicio() {
+        Exercicios exercicio = listaExercicios.getSelectionModel().getSelectedItem();
+
+        exercicioEnumComboBox.setValue(exercicio.getTipo());
+        seriePicker.setText(String.valueOf(exercicio.getSerie()));
+        repeticaoPicker.setText(String.valueOf(exercicio.getRepeticao()));
+        cargaPicker.setText(String.valueOf(exercicio.getCarga()));
+
     }
 
     @FXML
     public void btnDeletePressed(ActionEvent eventoacao){
         int id = listaUsuarios.getSelectionModel().getSelectedIndex();
-        lista.remove(id);
+        listaUsuariosObservavel.remove(id);
 
         System.out.println("[DEBUG] Delete Pressionado");
     }
@@ -118,7 +185,7 @@ public class GeneralController {
 
         //AQUI SERIA A FUNÇÃO PADRÃO PARA COLOCAR UM NOVO USUÁRIO NA LISTA
         Aluno alunoNovo = new Aluno((long) randomNum,namePicker.getText(),Integer.parseInt(idadePicker.getText()),Character.toUpperCase(generoPicker.getText().charAt(0)),Double.parseDouble(pesoPicker.getText()),Double.parseDouble(alturaPicker.getText()),Double.parseDouble(gorduraPicker.getText()),matriculaPicker.getValue(),Long.valueOf(idProfPicker.getText()));
-        lista.add(alunoNovo);
+        listaUsuariosObservavel.add(alunoNovo);
     }
 
     @FXML

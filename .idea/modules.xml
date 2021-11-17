@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Byte_Monstro_FX/Byte_Monstro_FX.iml" filepath="$PROJECT_DIR$/Byte_Monstro_FX/Byte_Monstro_FX.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Projeto_Byte_Monstro.iml" filepath="$PROJECT_DIR$/.idea/Projeto_Byte_Monstro.iml" />
     </modules>
   </component>
