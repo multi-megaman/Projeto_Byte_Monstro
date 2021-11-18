@@ -40,10 +40,10 @@
             <Label layoutX="71.0" layoutY="265.0" text="Altura" />
             <Label layoutX="63.0" layoutY="307.0" text="Gordura" />
             <Label layoutX="52.0" layoutY="358.0" text="Matricula" />
-            <Button fx:id="btnAdd" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnAddPressed" text="Add" />
-            <Button layoutX="133.0" layoutY="59.0" mnemonicParsing="false" onAction="#btnClearPressed" text="Clear" textFill="#798000" />
-            <Button fx:id="deleteButton" layoutX="233.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnDeletePressed" text="Delete" />
-            <Button layoutX="132.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnUpdatePressed" text="Update" />
+            <Button fx:id="btnAdd" layoutX="324.0" layoutY="119.0" mnemonicParsing="false" onAction="#btnAddPressed" text="Add" />
+            <Button layoutX="321.0" layoutY="354.0" mnemonicParsing="false" onAction="#btnClearPressed" text="Clear" textFill="#798000" />
+            <Button fx:id="deleteButton" layoutX="317.0" layoutY="261.0" mnemonicParsing="false" onAction="#btnDeletePressed" text="Delete" />
+            <Button layoutX="315.0" layoutY="187.0" mnemonicParsing="false" onAction="#btnUpdatePressed" text="Update" />
             <TextField fx:id="idProfPicker" layoutX="110.0" layoutY="404.0" />
             <Label layoutX="63.0" layoutY="408.0" text="Id prof" />
          </children>
@@ -60,8 +60,12 @@
             <Label layoutX="522.0" layoutY="83.0" text="Series:" />
             <Label layoutX="508.0" layoutY="132.0" text="Repetições:" />
             <Label layoutX="525.0" layoutY="174.0" text="Carga:" />
-            <TabPane fx:id="treinosTabPane" layoutX="10.0" layoutY="9.0" prefHeight="345.0" prefWidth="487.0" tabClosingPolicy="UNAVAILABLE" />
-            <Button layoutX="619.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnAlterPressed" text="Alter" />
+            <TabPane fx:id="treinosTabPane" layoutX="10.0" layoutY="9.0" prefHeight="234.0" prefWidth="487.0" tabClosingPolicy="UNAVAILABLE" />
+            <Button layoutX="625.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnAlterPressed" text="Alter" />
+            <Button layoutX="66.0" layoutY="267.0" mnemonicParsing="false" onAction="#btnNewPressed" text="New" />
+            <Button layoutX="291.0" layoutY="267.0" mnemonicParsing="false" onAction="#btnRemovePressed" text="Remove" />
+            <Button layoutX="568.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnInsertPressed" text="Insert" />
+            <Button layoutX="675.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnErasetPressed" text="Erase" />
          </children>
       </Pane>
    </bottom>

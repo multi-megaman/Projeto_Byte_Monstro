@@ -98,9 +98,8 @@ public class Aluno extends UsuarioGeral {
         return this.getPeso()/(this.getAltura()*this.getAltura());
     }
 
-    //ALTERAR DEPOIS
-    public TreinoDiario retornarTreinoAtual(int index) {
-        return sequenciaDeTreinos.get(index);
+    public ArrayList<TreinoDiario> getTreinoDiario() {
+        return sequenciaDeTreinos;
     }
 
     @Override

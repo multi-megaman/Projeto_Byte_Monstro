@@ -159,18 +159,7 @@ public class GeneralController {
         System.out.println("[DEBUG] Delete Pressionado");
     }
 
-    @FXML
-    public void btnAlterPressed(ActionEvent eventoacao) {
-        Tab tabAtual = treinosTabPane.getSelectionModel().getSelectedItem();
-        ListView<Exercicios> listaExercicios = (ListView<Exercicios>) tabAtual.getContent();
 
-        Exercicios exercicioSelecionado = listaExercicios.getSelectionModel().getSelectedItem();
-
-        exercicioSelecionado.setTipo(EnumExercicios.values()[exercicioEnumComboBox.getSelectionModel().getSelectedIndex()]);
-        exercicioSelecionado.setSerie(Integer.parseInt(seriePicker.getText()));
-        exercicioSelecionado.setRepeticao(repeticaoPicker.getText());
-        exercicioSelecionado.setCarga(Integer.parseInt(cargaPicker.getText()));
-    }
 
     @FXML
     public void btnUpdatePressed(ActionEvent eventoacao) {
@@ -184,6 +173,8 @@ public class GeneralController {
         aluno.setDataMatricula(matriculaPicker.getValue());
         aluno.setProfessor(Long.valueOf(idProfPicker.getText()));
 
+        
+        listaUsuarios.setItems(listaUsuariosObservavel);
         System.out.println("[DEBUG] Update Pressionado");
     }
 
@@ -210,5 +201,93 @@ public class GeneralController {
         matriculaPicker.setValue(null);
         idProfPicker.setText(null);
         System.out.println("[DEBUG] Clear Pressionado");
+    }
+
+    @FXML
+    public void btnNewPressed(ActionEvent eventoacao) {
+
+        Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
+        ObservableList<Tab> tabs = treinosTabPane.getTabs();
+        int numeroExercicioNovo = 0;
+
+        for (int i = 0; i < tabs.size(); i++ ) {
+            numeroExercicioNovo += 1;
+        }
+
+        Tab novaTab = new Tab(String.format("Treino %d",numeroExercicioNovo));
+        ListView<Exercicios> listaExercicios = new ListView<Exercicios>();
+        aluno.adicionarTreino(new TreinoDiario());
+
+        listaExercicios.setItems(FXCollections.observableArrayList(aluno.getTreinoDiarioEspecifico(aluno.getTreinoDiario().size() -1).getExercicios()));
+        novaTab.setContent(listaExercicios);
+
+        treinosTabPane.getTabs().add(novaTab);
+
+
+    }
+
+    @FXML
+    public void btnRemovePressed(ActionEvent eventoacao) {
+        Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
+        int tabAtualId = treinosTabPane.getSelectionModel().getSelectedIndex();
+        Tab tabAtual = treinosTabPane.getSelectionModel().getSelectedItem();
+
+        aluno.removerTreino(aluno.getTreinoDiarioEspecifico(tabAtualId));
+
+        treinosTabPane.getTabs().remove(tabAtual);
+    }
+
+    @FXML
+    public void btnAlterPressed(ActionEvent eventoacao) {
+        Tab tabAtual = treinosTabPane.getSelectionModel().getSelectedItem();
+        ListView<Exercicios> listaExercicios = (ListView<Exercicios>) tabAtual.getContent();
+
+        Exercicios exercicioSelecionado = listaExercicios.getSelectionModel().getSelectedItem();
+
+        exercicioSelecionado.setTipo(EnumExercicios.values()[exercicioEnumComboBox.getSelectionModel().getSelectedIndex()]);
+        exercicioSelecionado.setSerie(Integer.parseInt(seriePicker.getText()));
+        exercicioSelecionado.setRepeticao(repeticaoPicker.getText());
+        exercicioSelecionado.setCarga(Integer.parseInt(cargaPicker.getText()));
+    }
+
+    @FXML
+    public void btnInsertPressed(ActionEvent eventoacao) {
+        Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
+        int tabAtualId = treinosTabPane.getSelectionModel().getSelectedIndex();
+        Tab tabAtual = treinosTabPane.getSelectionModel().getSelectedItem();
+
+        aluno.getTreinoDiarioEspecifico(tabAtualId).adicionarExercicio(new Exercicios(EnumExercicios.values()[exercicioEnumComboBox.getSelectionModel().getSelectedIndex()],Integer.parseInt(seriePicker.getText()),repeticaoPicker.getText(),Integer.parseInt(cargaPicker.getText())));
+
+        System.out.print("[DEBUG] treinos do aluno: " + aluno.getTreinoDiarioEspecifico(tabAtualId));
+
+        ListView<Exercicios> listaExercicios = new ListView<Exercicios>();
+        listaExercicios.setItems(FXCollections.observableArrayList(aluno.getTreinoDiarioEspecifico(tabAtualId).getExercicios()));
+
+        tabAtual.setContent(listaExercicios);
+
+    }
+
+    @FXML
+    public void btnErasetPressed(ActionEvent eventoacao) {
+        Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
+        int tabAtualId = treinosTabPane.getSelectionModel().getSelectedIndex();
+        Tab tabAtual = treinosTabPane.getSelectionModel().getSelectedItem();
+        ListView<Exercicios> listaExercicios = (ListView<Exercicios>) tabAtual.getContent();
+        Exercicios exercicioSelecionado = listaExercicios.getSelectionModel().getSelectedItem();
+
+        System.out.print("[DEBUG] Exercicio do aluno: " + exercicioSelecionado + "\n");
+
+
+        aluno.getTreinoDiarioEspecifico(tabAtualId).retirarExercicio(exercicioSelecionado);
+
+        System.out.print("[DEBUG] treinos do aluno: " + aluno.getTreinoDiarioEspecifico(tabAtualId) + "\n");
+
+
+
+        //listaExercicios.getItems().remove(exercicioSelecionado);
+        listaExercicios.setItems(FXCollections.observableArrayList(aluno.getTreinoDiarioEspecifico(tabAtualId).getExercicios()));
+
+        tabAtual.setContent(listaExercicios);
+
     }
 }
