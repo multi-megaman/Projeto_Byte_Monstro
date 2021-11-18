@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Byte_Monstro_FX" target="17" />
+      <module name="Byte_Monstro_FX" target="16" />
     </bytecodeTargetLevel>
   </component>
 </project>

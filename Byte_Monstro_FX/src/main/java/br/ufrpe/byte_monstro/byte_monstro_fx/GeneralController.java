@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import java.time.LocalDate;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GeneralController {
@@ -156,6 +157,19 @@ public class GeneralController {
         listaUsuariosObservavel.remove(id);
 
         System.out.println("[DEBUG] Delete Pressionado");
+    }
+
+    @FXML
+    public void btnAlterPressed(ActionEvent eventoacao) {
+        Tab tabAtual = treinosTabPane.getSelectionModel().getSelectedItem();
+        ListView<Exercicios> listaExercicios = (ListView<Exercicios>) tabAtual.getContent();
+
+        Exercicios exercicioSelecionado = listaExercicios.getSelectionModel().getSelectedItem();
+
+        exercicioSelecionado.setTipo(EnumExercicios.values()[exercicioEnumComboBox.getSelectionModel().getSelectedIndex()]);
+        exercicioSelecionado.setSerie(Integer.parseInt(seriePicker.getText()));
+        exercicioSelecionado.setRepeticao(repeticaoPicker.getText());
+        exercicioSelecionado.setCarga(Integer.parseInt(cargaPicker.getText()));
     }
 
     @FXML
