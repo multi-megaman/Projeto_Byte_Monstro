@@ -2,7 +2,7 @@ package br.ufrpe.byte_monstro.byte_monstro_fx.beans;
 
 import java.util.ArrayList;
 
-import Byte_Monstro_FX.src.main.java.br.ufrpe.byte_monstro.byte_monstro_fx.beans.EnumAcademias;
+import br.ufrpe.byte_monstro.byte_monstro_fx.beans.EnumAcademias;
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.UsuarioGeral;
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.TreinoDiario;
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.Aluno;

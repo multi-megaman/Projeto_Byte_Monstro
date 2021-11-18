@@ -1,6 +1,6 @@
 package br.ufrpe.byte_monstro.byte_monstro_fx.beans;
 
-import Byte_Monstro_FX.src.main.java.br.ufrpe.byte_monstro.byte_monstro_fx.beans.EnumAcademias;
+import br.ufrpe.byte_monstro.byte_monstro_fx.beans.EnumAcademias;
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.Aluno;
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.Profissional;
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.UsuarioGeral;
