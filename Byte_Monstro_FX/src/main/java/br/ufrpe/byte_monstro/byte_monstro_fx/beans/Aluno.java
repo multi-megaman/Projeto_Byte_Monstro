@@ -15,7 +15,7 @@ public class Aluno extends UsuarioGeral {
     private long professor;
     protected ArrayList<TreinoDiario> sequenciaDeTreinos;
 
-    public Aluno(long id, String nome, int idade, char genero, double peso, double altura, double percentualGordura, LocalDate dataMatricula) {
+    public Aluno(long id, String nome, int idade, char genero, double peso, double altura, double percentualGordura, LocalDate dataMatricula, long idProf) {
         super(id, nome, idade, genero, peso, altura, percentualGordura);
         this.dataMatricula = dataMatricula;
         this.qntMaximaDeSequencia = 0;
@@ -23,6 +23,11 @@ public class Aluno extends UsuarioGeral {
         this.relatoriosDisponiveis = "NULL";
         this.pedirTrocaDoTreino = false;
         sequenciaDeTreinos = new ArrayList<TreinoDiario>();
+        this.professor = idProf;
+    }
+
+    public TreinoDiario getTreinoDiarioEspecifico (int index) {
+        return sequenciaDeTreinos.get(index);
     }
 
     public LocalDate getDataMatricula() {
@@ -81,14 +86,24 @@ public class Aluno extends UsuarioGeral {
         this.sequenciaDeTreinos = sequenciaDeTreinos;
     }
 
+    public void adicionarTreino(TreinoDiario treino) {
+        sequenciaDeTreinos.add(treino);
+    }
+
+    public void removerTreino(TreinoDiario treino) {
+        sequenciaDeTreinos.remove(treino);
+    }
+
     public double calcularIMC(){
         return this.getPeso()/(this.getAltura()*this.getAltura());
     }
 
-    //ALTERAR DEPOIS
-    public TreinoDiario retornarTreinoAtual(int index) {
-        return sequenciaDeTreinos.get(index);
+    public ArrayList<TreinoDiario> getTreinoDiario() {
+        return sequenciaDeTreinos;
     }
 
-
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

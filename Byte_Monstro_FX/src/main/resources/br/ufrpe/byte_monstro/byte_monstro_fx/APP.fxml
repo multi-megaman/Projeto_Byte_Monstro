@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.byte_monstro.byte_monstro_fx.GeneralController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.byte_monstro.byte_monstro_fx.GeneralController">
    <right>
       <VBox prefHeight="400.0" prefWidth="307.0" BorderPane.alignment="CENTER">
          <children>
             <Pane prefHeight="457.0" prefWidth="307.0">
                <children>
-                  <ListView fx:id="listaUsuarios" layoutX="34.0" layoutY="51.0" prefHeight="299.0" prefWidth="240.0" />
+                  <ListView fx:id="listaUsuarios" layoutX="34.0" layoutY="51.0" onMouseClicked="#clickAluno" prefHeight="299.0" prefWidth="240.0" />
                </children>
             </Pane>
          </children>
       </VBox>
    </right>
    <center>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <Pane prefHeight="458.0" prefWidth="293.0" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="generoPicker" layoutX="110.0" layoutY="174.0" />
             <TextField fx:id="namePicker" layoutX="110.0" layoutY="98.0" />
@@ -38,9 +40,33 @@
             <Label layoutX="71.0" layoutY="265.0" text="Altura" />
             <Label layoutX="63.0" layoutY="307.0" text="Gordura" />
             <Label layoutX="52.0" layoutY="358.0" text="Matricula" />
-            <Button fx:id="btnOk" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnOkPressed" text="Ok" />
-            <Button fx:id="btnCancel" layoutX="56.0" layoutY="12.0" mnemonicParsing="false" text="Cancel" textFill="#798000" />
+            <Button fx:id="btnAdd" layoutX="324.0" layoutY="119.0" mnemonicParsing="false" onAction="#btnAddPressed" text="Add" />
+            <Button layoutX="321.0" layoutY="354.0" mnemonicParsing="false" onAction="#btnClearPressed" text="Clear" textFill="#798000" />
+            <Button fx:id="deleteButton" layoutX="317.0" layoutY="261.0" mnemonicParsing="false" onAction="#btnDeletePressed" text="Delete" />
+            <Button layoutX="315.0" layoutY="187.0" mnemonicParsing="false" onAction="#btnUpdatePressed" text="Update" />
+            <TextField fx:id="idProfPicker" layoutX="110.0" layoutY="404.0" />
+            <Label layoutX="63.0" layoutY="408.0" text="Id prof" />
          </children>
       </Pane>
    </center>
+   <bottom>
+      <Pane prefHeight="356.0" prefWidth="750.0" BorderPane.alignment="CENTER">
+         <children>
+            <ComboBox fx:id="exercicioEnumComboBox" layoutX="571.0" layoutY="34.0" prefWidth="150.0" />
+            <Label layoutX="518.0" layoutY="38.0" text="Nome:" />
+            <TextField fx:id="seriePicker" layoutX="571.0" layoutY="79.0" />
+            <TextField fx:id="repeticaoPicker" layoutX="571.0" layoutY="128.0" />
+            <TextField fx:id="cargaPicker" layoutX="572.0" layoutY="170.0" />
+            <Label layoutX="522.0" layoutY="83.0" text="Series:" />
+            <Label layoutX="508.0" layoutY="132.0" text="Repetições:" />
+            <Label layoutX="525.0" layoutY="174.0" text="Carga:" />
+            <TabPane fx:id="treinosTabPane" layoutX="10.0" layoutY="9.0" prefHeight="234.0" prefWidth="487.0" tabClosingPolicy="UNAVAILABLE" />
+            <Button layoutX="625.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnAlterPressed" text="Alter" />
+            <Button layoutX="66.0" layoutY="267.0" mnemonicParsing="false" onAction="#btnNewPressed" text="New" />
+            <Button layoutX="291.0" layoutY="267.0" mnemonicParsing="false" onAction="#btnRemovePressed" text="Remove" />
+            <Button layoutX="568.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnInsertPressed" text="Insert" />
+            <Button layoutX="675.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnErasetPressed" text="Erase" />
+         </children>
+      </Pane>
+   </bottom>
 </BorderPane>

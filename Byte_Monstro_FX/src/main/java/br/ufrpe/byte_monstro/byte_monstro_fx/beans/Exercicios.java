@@ -49,6 +49,6 @@ public class Exercicios {
 
     @Override
     public String toString(){
-        return String.format("%-25s|%dX|%-5s|%oKg", tipo, serie, repeticao, carga);
+        return String.format("%-25s|%dX|%-5s|%d Kg", tipo, serie, repeticao, carga);
     }
 }
