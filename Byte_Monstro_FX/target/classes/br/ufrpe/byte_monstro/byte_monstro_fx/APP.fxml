@@ -5,6 +5,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
@@ -51,18 +52,15 @@
    <bottom>
       <Pane prefHeight="356.0" prefWidth="750.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="134.0" layoutY="46.0" text="Treinos" />
-            <Label layoutX="342.0" layoutY="46.0" text="Exercicios" />
-            <ComboBox fx:id="exercicioEnumComboBox" layoutX="570.0" layoutY="87.0" prefWidth="150.0" />
-            <Label layoutX="517.0" layoutY="91.0" text="Nome:" />
-            <ListView fx:id="listaTreinos" layoutX="53.0" layoutY="87.0" onMouseClicked="#clickTreino" prefHeight="200.0" prefWidth="200.0" />
-            <ListView fx:id="listaExercicios" layoutX="275.0" layoutY="87.0" onMouseClicked="#clickExercicio" prefHeight="200.0" prefWidth="200.0" />
-            <TextField fx:id="seriePicker" layoutX="570.0" layoutY="132.0" />
-            <TextField fx:id="repeticaoPicker" layoutX="570.0" layoutY="181.0" />
-            <TextField fx:id="cargaPicker" layoutX="571.0" layoutY="223.0" />
-            <Label layoutX="521.0" layoutY="136.0" text="Series:" />
-            <Label layoutX="507.0" layoutY="185.0" text="Repetições:" />
-            <Label layoutX="524.0" layoutY="227.0" text="Carga:" />
+            <ComboBox fx:id="exercicioEnumComboBox" layoutX="571.0" layoutY="34.0" prefWidth="150.0" />
+            <Label layoutX="518.0" layoutY="38.0" text="Nome:" />
+            <TextField fx:id="seriePicker" layoutX="571.0" layoutY="79.0" />
+            <TextField fx:id="repeticaoPicker" layoutX="571.0" layoutY="128.0" />
+            <TextField fx:id="cargaPicker" layoutX="572.0" layoutY="170.0" />
+            <Label layoutX="522.0" layoutY="83.0" text="Series:" />
+            <Label layoutX="508.0" layoutY="132.0" text="Repetições:" />
+            <Label layoutX="525.0" layoutY="174.0" text="Carga:" />
+            <TabPane fx:id="treinosTabPane" layoutX="10.0" layoutY="9.0" prefHeight="345.0" prefWidth="487.0" tabClosingPolicy="UNAVAILABLE" />
          </children>
       </Pane>
    </bottom>

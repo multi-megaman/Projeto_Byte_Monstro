@@ -26,6 +26,9 @@ public class Aluno extends UsuarioGeral {
         this.professor = idProf;
     }
 
+    public TreinoDiario getTreinoDiarioEspecifico (int index) {
+        return sequenciaDeTreinos.get(index);
+    }
 
     public LocalDate getDataMatricula() {
         return dataMatricula;

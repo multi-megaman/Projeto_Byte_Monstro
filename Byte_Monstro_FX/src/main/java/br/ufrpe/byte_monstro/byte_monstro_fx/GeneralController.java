@@ -4,12 +4,14 @@ import com.dlsc.formsfx.model.structure.DateField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.time.format.DateTimeFormatter;
 
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.*;
+import javafx.scene.input.MouseEvent;
 
 import java.time.LocalDate;
 
@@ -65,25 +67,18 @@ public class GeneralController {
     private ObservableList<Aluno> listaUsuariosObservavel;
 
     @FXML
-    private ListView<TreinoDiario> listaTreinos;
+    private TabPane treinosTabPane;
 
-    private ObservableList<TreinoDiario> listaTreinosObservavel;
-
-    @FXML
-    private ListView<Exercicios> listaExercicios;
-
-    private ObservableList<Exercicios> listaExerciciosObservavel;
 
     public void initialize(){
         exercicioEnumComboBox.getItems().setAll(EnumExercicios.values());
 
         listaUsuariosObservavel = FXCollections.observableArrayList();
-        listaTreinosObservavel = FXCollections.observableArrayList();
-        listaExerciciosObservavel = FXCollections.observableArrayList();
+
+
         genItems();
         listaUsuarios.setItems(listaUsuariosObservavel);
-        //listaTreinos.setItems(listaTreinosObservavel);
-        //listaExercicios.setItems(listaExerciciosObservavel);
+
 
 
 
@@ -128,30 +123,32 @@ public class GeneralController {
         matriculaPicker.setValue(aluno.getDataMatricula());
         idProfPicker.setText(String.valueOf(aluno.getProfessor()));
 
-        listaTreinosObservavel = FXCollections.observableArrayList(aluno.getSequenciaDeTreinos());
-        listaTreinos.setItems(listaTreinosObservavel);
+        treinosTabPane.getTabs().clear();
+        for (int i = 0; i < aluno.getSequenciaDeTreinos().size(); i++) {
+            Tab novaTab = new Tab(String.format("Treino %d",i));
+            ListView<Exercicios> listaExercicios = new ListView<Exercicios>();
+            listaExercicios.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                                                  @Override
+                                                  public void handle(MouseEvent mouseEvent) {
+                                                      Exercicios exercicio = listaExercicios.getSelectionModel().getSelectedItem();
+                                                      exercicioEnumComboBox.setValue(exercicio.getTipo());
+                                                      seriePicker.setText(String.valueOf(exercicio.getSerie()));
+                                                      repeticaoPicker.setText(String.valueOf(exercicio.getRepeticao()));
+                                                      cargaPicker.setText(String.valueOf(exercicio.getCarga()));
+                                                  }
+                                              });
+
+
+                    listaExercicios.setItems(FXCollections.observableArrayList(aluno.getTreinoDiarioEspecifico(i).getExercicios()));
+            novaTab.setContent(listaExercicios);
+            treinosTabPane.getTabs().add(novaTab);
+        }
+        /*Tab novaTab = new Tab("Exercicio1");
+        novaTab.setContent(listaUsuarios);
+        treinosTabPane.getTabs().add(novaTab);*/
 
     }
 
-    @FXML
-    public void clickTreino() {
-        TreinoDiario treino = listaTreinos.getSelectionModel().getSelectedItem();
-
-        listaExerciciosObservavel = FXCollections.observableArrayList(treino.getExercicios());
-        listaExercicios.setItems(listaExerciciosObservavel);
-
-    }
-
-    @FXML
-    public void clickExercicio() {
-        Exercicios exercicio = listaExercicios.getSelectionModel().getSelectedItem();
-
-        exercicioEnumComboBox.setValue(exercicio.getTipo());
-        seriePicker.setText(String.valueOf(exercicio.getSerie()));
-        repeticaoPicker.setText(String.valueOf(exercicio.getRepeticao()));
-        cargaPicker.setText(String.valueOf(exercicio.getCarga()));
-
-    }
 
     @FXML
     public void btnDeletePressed(ActionEvent eventoacao){
