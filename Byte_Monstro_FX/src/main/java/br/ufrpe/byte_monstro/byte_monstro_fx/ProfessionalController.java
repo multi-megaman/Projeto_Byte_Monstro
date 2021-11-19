@@ -77,14 +77,19 @@ public class ProfessionalController {
     private TabPane treinosTabPane;
 
 
+    public void setListaUsuariosObservavel(ObservableList<Aluno> lista) {
+        listaUsuariosObservavel = lista;
+        listaUsuarios.setItems(listaUsuariosObservavel);
+    }
+
     public void initialize(){
         exercicioEnumComboBox.getItems().setAll(EnumExercicios.values());
 
-        listaUsuariosObservavel = FXCollections.observableArrayList();
+        //listaUsuariosObservavel = FXCollections.observableArrayList();
 
 
-        genItems();
-        listaUsuarios.setItems(listaUsuariosObservavel);
+        //genItems();
+        //listaUsuarios.setItems(listaUsuariosObservavel);
 
 
 

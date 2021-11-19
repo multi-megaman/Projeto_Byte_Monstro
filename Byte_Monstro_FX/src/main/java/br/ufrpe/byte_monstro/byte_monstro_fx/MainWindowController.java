@@ -93,8 +93,9 @@ public class MainWindowController {
                         novoTreino.adicionarExercicio(novoExercicio);
                     }
                     listaUsuariosObservavel.get(j).adicionarTreino(novoTreino);
-                    listaProfissionaisObservavel.get(i).adicionarAlunoNaLista(listaUsuariosObservavel.get(j));
+
                 }
+                listaProfissionaisObservavel.get(i).adicionarAlunoNaLista(listaUsuariosObservavel.get(j));
             }
             numeroNoNomeDoAluno += 10;
             }
@@ -129,19 +130,29 @@ public class MainWindowController {
 
         Profissional profissionalEscolhido = listaProfissionais.getSelectionModel().getSelectedItem();
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ProfessionalWindow.fxml"));
+
         listaProfissionais.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
             @Override
             public void handle(MouseEvent click) {
 
                 if (click.getClickCount() == 2) {
-                    System.out.println("[DEBUG] ir para a tela do professor");
+                    System.out.println("[DEBUG] ir para a tela do professor. lista: " + FXCollections.observableArrayList(profissionalEscolhido.getAlunos()));
                     Parent root = null;
+                    try {
+                        root = loader.load();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    ProfessionalController professionalController = loader.getController();
+                    professionalController.setListaUsuariosObservavel(FXCollections.observableArrayList(profissionalEscolhido.getAlunos()));
+                    /*Parent root = null;
                     try {
                         root = FXMLLoader.load(getClass().getResource("ProfessionalWindow.fxml"));
                     } catch (IOException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                     Stage stage = (Stage)((Node)click.getSource()).getScene().getWindow();
                     Scene scene = new Scene(root);
                     stage.setScene(scene);

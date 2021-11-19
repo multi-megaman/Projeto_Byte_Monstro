@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2137f37-a309-4cdd-86e1-2b8bf25fd94c" name="Changes" comment="" />
+    <list default="true" id="e2137f37-a309-4cdd-86e1-2b8bf25fd94c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/MainWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/ProfessionalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/ProfessionalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Profissional.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Profissional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Profissional.class" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Profissional.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -74,6 +80,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

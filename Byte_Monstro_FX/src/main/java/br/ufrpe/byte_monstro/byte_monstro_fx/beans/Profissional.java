@@ -31,6 +31,10 @@ public class Profissional extends UsuarioGeral{
         alunosVinculados.remove(aluno);
     }
 
+    public ArrayList<Aluno> getAlunos() {
+        return alunosVinculados;
+    }
+
     public EnumAcademias getUnidadeAtual() {
         return unidadeAtual;
     }
