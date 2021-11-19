@@ -23,6 +23,14 @@ public class Profissional extends UsuarioGeral{
         
     }
 
+    public void adicionarAlunoNaLista(Aluno aluno) {
+        alunosVinculados.add(aluno);
+    }
+
+    public void removerAlunoNaLista(Aluno aluno) {
+        alunosVinculados.remove(aluno);
+    }
+
     public EnumAcademias getUnidadeAtual() {
         return unidadeAtual;
     }

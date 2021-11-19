@@ -6,12 +6,18 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.time.LocalDate;
 
@@ -19,7 +25,7 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class GeneralController {
+public class ProfessionalController {
 
     //ArrayList<String> lista_teste = new ArrayList<String>();
 
@@ -98,7 +104,7 @@ public class GeneralController {
                 int randomQntExercicios = ThreadLocalRandom.current().nextInt(1, 10);
 
                 for (int k = 0; k < randomQntExercicios; k++){
-                    int randomIdEnumExercicio = ThreadLocalRandom.current().nextInt(0, 9);
+                    int randomIdEnumExercicio = ThreadLocalRandom.current().nextInt(0, EnumExercicios.values().length - 1);
                     int randomQntSeries = ThreadLocalRandom.current().nextInt(1, 6);
                     int randomQntRepeticoes = ThreadLocalRandom.current().nextInt(8, 15);
                     int randomCarga = ThreadLocalRandom.current().nextInt(10, 150);
@@ -241,6 +247,8 @@ public class GeneralController {
     public void btnAlterPressed(ActionEvent eventoacao) {
         Tab tabAtual = treinosTabPane.getSelectionModel().getSelectedItem();
         ListView<Exercicios> listaExercicios = (ListView<Exercicios>) tabAtual.getContent();
+        Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
+        int tabAtualId = treinosTabPane.getSelectionModel().getSelectedIndex();
 
         Exercicios exercicioSelecionado = listaExercicios.getSelectionModel().getSelectedItem();
 
@@ -248,6 +256,10 @@ public class GeneralController {
         exercicioSelecionado.setSerie(Integer.parseInt(seriePicker.getText()));
         exercicioSelecionado.setRepeticao(repeticaoPicker.getText());
         exercicioSelecionado.setCarga(Integer.parseInt(cargaPicker.getText()));
+
+        listaExercicios.setItems(FXCollections.observableArrayList(aluno.getTreinoDiarioEspecifico(tabAtualId).getExercicios()));
+
+        tabAtual.setContent(listaExercicios);
     }
 
     @FXML
@@ -268,7 +280,7 @@ public class GeneralController {
     }
 
     @FXML
-    public void btnErasetPressed(ActionEvent eventoacao) {
+    public void btnErasePressed(ActionEvent eventoacao) {
         Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
         int tabAtualId = treinosTabPane.getSelectionModel().getSelectedIndex();
         Tab tabAtual = treinosTabPane.getSelectionModel().getSelectedItem();
@@ -289,5 +301,19 @@ public class GeneralController {
 
         tabAtual.setContent(listaExercicios);
 
+    }
+
+    @FXML
+    public void btnBackPressed(ActionEvent event) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

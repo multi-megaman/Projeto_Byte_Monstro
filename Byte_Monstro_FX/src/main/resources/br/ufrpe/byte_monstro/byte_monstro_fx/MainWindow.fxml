@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.byte_monstro.byte_monstro_fx.MainWindowController">
+   <center>
+      <Pane prefHeight="475.0" prefWidth="443.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="39.0" layoutY="56.0" text="Pesquisar ID:" />
+            <ListView fx:id="listaUsuarios" layoutX="35.0" layoutY="97.0" onMouseClicked="#clickAluno" prefHeight="169.0" prefWidth="681.0" />
+            <ListView fx:id="listaProfissionais" layoutX="35.0" layoutY="322.0" onMouseClicked="#clickProfissional" prefHeight="200.0" prefWidth="681.0" />
+            <ListView fx:id="listaAdministradores" layoutX="35.0" layoutY="576.0" onMouseClicked="#clickAdm" prefHeight="169.0" prefWidth="681.0" />
+            <TextField fx:id="searchIdTextField" layoutX="120.0" layoutY="52.0" />
+            <Button layoutX="290.0" layoutY="52.0" mnemonicParsing="false" onAction="#btnSearchPressed" text="Search" />
+            <Button layoutX="364.0" layoutY="52.0" mnemonicParsing="false" onAction="#btnResetPressed" text="Reset" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

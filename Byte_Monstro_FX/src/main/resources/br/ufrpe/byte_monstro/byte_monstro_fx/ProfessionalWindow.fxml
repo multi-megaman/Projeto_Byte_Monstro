@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.byte_monstro.byte_monstro_fx.GeneralController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.byte_monstro.byte_monstro_fx.ProfessionalController">
    <right>
       <VBox prefHeight="400.0" prefWidth="307.0" BorderPane.alignment="CENTER">
          <children>
@@ -46,6 +46,7 @@
             <Button layoutX="315.0" layoutY="187.0" mnemonicParsing="false" onAction="#btnUpdatePressed" text="Update" />
             <TextField fx:id="idProfPicker" layoutX="110.0" layoutY="404.0" />
             <Label layoutX="63.0" layoutY="408.0" text="Id prof" />
+            <Button layoutX="30.0" layoutY="34.0" mnemonicParsing="false" onAction="#btnBackPressed" text=" &lt;- Back" />
          </children>
       </Pane>
    </center>
@@ -65,7 +66,7 @@
             <Button layoutX="66.0" layoutY="267.0" mnemonicParsing="false" onAction="#btnNewPressed" text="New" />
             <Button layoutX="291.0" layoutY="267.0" mnemonicParsing="false" onAction="#btnRemovePressed" text="Remove" />
             <Button layoutX="568.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnInsertPressed" text="Insert" />
-            <Button layoutX="675.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnErasetPressed" text="Erase" />
+            <Button layoutX="675.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnErasePressed" text="Erase" />
          </children>
       </Pane>
    </bottom>

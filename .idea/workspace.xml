@@ -5,9 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2137f37-a309-4cdd-86e1-2b8bf25fd94c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/MainWindowController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/resources/br/ufrpe/byte_monstro/byte_monstro_fx/MainWindow.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Administrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Administrador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/bin/src/main/resources/br/ufrpe/byte_monstro/byte_monstro_fx/APP.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/bin/src/main/resources/br/ufrpe/byte_monstro/byte_monstro_fx/APP.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/bin/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/APP.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/bin/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/APP.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/GeneralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/ProfessionalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/MonsterApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/MonsterApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Profissional.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Profissional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/resources/br/ufrpe/byte_monstro/byte_monstro_fx/APP.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/resources/br/ufrpe/byte_monstro/byte_monstro_fx/ProfessionalWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/APP.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/GeneralController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/MonsterApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/MonsterApplication.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,14 +28,24 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="214FqpZKhUUFggVRjKSBaSEwjt9" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="br.ufrpe.byte_monstro.byte_monstro_fx" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="MonsterApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -57,5 +77,19 @@
       <updated>1637192682440</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
