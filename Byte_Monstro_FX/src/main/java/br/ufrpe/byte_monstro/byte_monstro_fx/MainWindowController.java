@@ -7,18 +7,23 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MainWindowController {
 
@@ -125,41 +130,96 @@ public class MainWindowController {
         stage.show();
     }*/
 
+    private boolean handleButtonAction(String senhaUsuario, String senhaDigitada) { // botão de login
+        return true;
+        /*if (senhaUsuario == senhaDigitada) {
+            return true;
+        }
+        else {
+            return false;
+        }*/
+
+    }
+
     @FXML
     public void clickProfissional() throws  IOException {
 
         Profissional profissionalEscolhido = listaProfissionais.getSelectionModel().getSelectedItem();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ProfessionalWindow.fxml"));
+
 
         listaProfissionais.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+
 
             @Override
             public void handle(MouseEvent click) {
 
+                //AtomicBoolean confirmar = new AtomicBoolean(false);
+
+
                 if (click.getClickCount() == 2) {
-                    System.out.println("[DEBUG] ir para a tela do professor. lista: " + FXCollections.observableArrayList(profissionalEscolhido.getAlunos()));
-                    Parent root = null;
-                    try {
-                        root = loader.load();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    ProfessionalController professionalController = loader.getController();
-                    professionalController.setListaUsuariosObservavel(FXCollections.observableArrayList(profissionalEscolhido.getAlunos()));
-                    /*Parent root = null;
-                    try {
-                        root = FXMLLoader.load(getClass().getResource("ProfessionalWindow.fxml"));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }*/
-                    Stage stage = (Stage)((Node)click.getSource()).getScene().getWindow();
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
+                    //POPUP----------------------------
+
+                    Label labelPopUp = new Label("Digite sua senha:");
+                    Button btnConfirmar = new Button("Fazer Login");
+                    TextField senhaInput = new TextField();
+
+
+                    btnConfirmar.setOnAction(e -> {
+                                if(profissionalEscolhido.getSenha().equals(senhaInput.getText())) {
+                                    //IR PARA A JANELA DO PROFiSSIONAL-------------------
+
+                                    Stage stageAtual = (Stage) btnConfirmar.getScene().getWindow();
+                                    stageAtual.close();
+                                        FXMLLoader loaderProfissional = new FXMLLoader(getClass().getResource("ProfessionalWindow.fxml"));
+
+                                        Parent rootProfissional = null;
+                                        try {
+                                            rootProfissional = loaderProfissional.load();
+                                        } catch (IOException t) {
+                                            t.printStackTrace();
+                                        }
+
+                                        ProfessionalController professionalController = loaderProfissional.getController();
+                                        professionalController.setListaUsuariosObservavel(FXCollections.observableArrayList(profissionalEscolhido.getAlunos()));
+
+                                        Stage stage = (Stage)((Node)click.getSource()).getScene().getWindow();
+                                        Scene scene = new Scene(rootProfissional);
+                                        stage.setScene(scene);
+                                        stage.show();
+
+
+                                        System.out.println("[DEBUG] ir para a tela do professor. lista: " + FXCollections.observableArrayList(profissionalEscolhido.getAlunos()));
+
+                                    }
+
+                                //confirmar.set(true);
+                                System.out.print("[DEBUG] FOI PARA A TELA DE PROFISSIONAL");
+                            });
+                    /*btnConfirmar.setOnAction(new EventHandler<ActionEvent>() {
+                    });*/
+
+                    FlowPane flowPane = new FlowPane();
+                    flowPane.getChildren().addAll(labelPopUp,senhaInput,btnConfirmar);
+                    flowPane.setPadding(new Insets(20));
+                    flowPane.setVgap(20);
+
+                    Scene popUpLogin = new Scene(flowPane,250,150);
+                    Stage stagePopUp = new Stage();
+                    stagePopUp.initModality(Modality.APPLICATION_MODAL);
+                    stagePopUp.setScene(popUpLogin);
+                    stagePopUp.show();
+
+
+                    //---------------------------------
+
+
+
 
                 }
             }
+
         });
     }
 

@@ -23,6 +23,9 @@ public class Profissional extends UsuarioGeral{
         
     }
 
+    public String getSenha() {
+        return senha;
+    }
     public void adicionarAlunoNaLista(Aluno aluno) {
         alunosVinculados.add(aluno);
     }
