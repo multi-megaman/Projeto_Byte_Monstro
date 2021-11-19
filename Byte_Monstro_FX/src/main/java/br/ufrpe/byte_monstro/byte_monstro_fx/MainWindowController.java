@@ -135,7 +135,7 @@ public class MainWindowController {
             public void handle(MouseEvent click) {
 
                 if (click.getClickCount() == 2) {
-                    System.out.println("[DEBUG] ir para a proxima tela");
+                    System.out.println("[DEBUG] ir para a tela do professor");
                     Parent root = null;
                     try {
                         root = FXMLLoader.load(getClass().getResource("ProfessionalWindow.fxml"));

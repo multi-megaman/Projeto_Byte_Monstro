@@ -18,6 +18,7 @@
             <TextField fx:id="searchIdTextField" layoutX="120.0" layoutY="52.0" />
             <Button layoutX="290.0" layoutY="52.0" mnemonicParsing="false" onAction="#btnSearchPressed" text="Search" />
             <Button layoutX="364.0" layoutY="52.0" mnemonicParsing="false" onAction="#btnResetPressed" text="Reset" />
+            <Label layoutX="490.0" layoutY="56.0" text="Clice duas vezes no seu usuário" />
          </children>
       </Pane>
    </center>

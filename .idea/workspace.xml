@@ -5,19 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2137f37-a309-4cdd-86e1-2b8bf25fd94c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/MainWindowController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/resources/br/ufrpe/byte_monstro/byte_monstro_fx/MainWindow.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/bin/src/main/resources/br/ufrpe/byte_monstro/byte_monstro_fx/APP.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/bin/src/main/resources/br/ufrpe/byte_monstro/byte_monstro_fx/APP.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/bin/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/APP.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/bin/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/APP.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/GeneralController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/ProfessionalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/MonsterApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/MonsterApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Profissional.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Profissional.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/resources/br/ufrpe/byte_monstro/byte_monstro_fx/APP.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/resources/br/ufrpe/byte_monstro/byte_monstro_fx/ProfessionalWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/APP.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/GeneralController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/MonsterApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/MonsterApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/MainWindowController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
