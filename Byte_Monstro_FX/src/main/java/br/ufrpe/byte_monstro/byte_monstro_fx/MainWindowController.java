@@ -4,6 +4,7 @@ import br.ufrpe.byte_monstro.byte_monstro_fx.beans.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -116,30 +117,96 @@ public class MainWindowController {
 
 
     @FXML
-    public void clickAluno(){
-        Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
-        System.out.println("[DEBUG] Aluno: " + aluno);
+    public void clickAluno(Event ev) throws IOException {
+        Aluno alunoEscolhido = listaUsuarios.getSelectionModel().getSelectedItem();
+        //Profissional profissionalEscolhido = listaProfissionais.getSelectionModel().getSelectedItem();
 
+        //IR PARA A JANELA DO ALUNO-------------------
+
+
+                            /*FXMLLoader loadAluno = new FXMLLoader(getClass().getResource("AlunoWindow.fxml"));
+
+
+                            Parent rootAluno = loadAluno.load();
+
+
+                            AlunoController alunoController = loadAluno.getController();
+                            alunoController.setAluno(alunoEscolhido);
+
+
+                            Stage stage = (Stage)((Node)ev.getSource()).getScene().getWindow();
+                            Scene scene = new Scene(rootAluno);
+                            stage.setScene(scene);
+                            stage.show();
+
+
+                            System.out.println("[DEBUG] ir para a tela do Aluno.");*/
+
+        listaUsuarios.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+
+
+            @Override
+            public void handle(MouseEvent click) {
+
+                //AtomicBoolean confirmar = new AtomicBoolean(false);
+
+
+                if (click.getClickCount() == 2) {
+                    //POPUP----------------------------
+
+
+
+
+                            //IR PARA A JANELA DO PROFiSSIONAL-------------------
+
+                            //Stage stageAtual = (Stage) listaUsuarios.getScene().getWindow();
+                            //stageAtual.close();
+                            FXMLLoader loaderAluno = new FXMLLoader(getClass().getResource("AlunoWindow.fxml"));
+
+                            Parent rootAluno = null;
+                            try {
+                                rootAluno = loaderAluno.load();
+                            } catch (IOException t) {
+                                t.printStackTrace();
+                            }
+
+                            AlunoController alunoController = loaderAluno.getController();
+                            alunoController.setAluno(alunoEscolhido);
+                            alunoController.genItens();
+                            Stage stage = (Stage)((Node)click.getSource()).getScene().getWindow();
+                            Scene scene = new Scene(rootAluno);
+                            stage.setScene(scene);
+                            stage.show();
+
+
+                            System.out.println("[DEBUG] ir para a tela do Aluno. ");
+
+                        }
+
+                        //confirmar.set(true);
+                        //System.out.print("[DEBUG] FOI PARA A TELA DE PROFISSIONAL");
+                    }
+                    /*btnConfirmar.setOnAction(new EventHandler<ActionEvent>() {
+                    });*/
+
+
+
+                    //---------------------------------
+
+
+        });
     }
 
-   /* public void IrParaTelaDeLoginDoProfissional(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ProfessionalWindow.fxml"));
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }*/
 
-    private boolean handleButtonAction(String senhaUsuario, String senhaDigitada) { // botão de login
-        return true;
-        /*if (senhaUsuario == senhaDigitada) {
-            return true;
-        }
-        else {
-            return false;
-        }*/
+                    //---------------------------------
 
-    }
+
+
+
+
+
+
 
     @FXML
     public void clickProfissional() throws  IOException {
@@ -167,6 +234,7 @@ public class MainWindowController {
 
 
                     btnConfirmar.setOnAction(e -> {
+                                System.out.println("[DEBUG] senha digitada: "+ senhaInput.getText());
                                 if(profissionalEscolhido.getSenha().equals(senhaInput.getText())) {
                                     //IR PARA A JANELA DO PROFiSSIONAL-------------------
 
@@ -193,9 +261,16 @@ public class MainWindowController {
                                         System.out.println("[DEBUG] ir para a tela do professor. lista: " + FXCollections.observableArrayList(profissionalEscolhido.getAlunos()));
 
                                     }
+                                else {
+                                    Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                                    errorAlert.setHeaderText("!SENHA INCORRETA!");
+                                    errorAlert.setContentText("A SENHA DIGITADA ESTÀ INCORRETA, TENTE NOVAMENTE");
+                                    errorAlert.showAndWait();
+                                }
+
 
                                 //confirmar.set(true);
-                                System.out.print("[DEBUG] FOI PARA A TELA DE PROFISSIONAL");
+                                //System.out.print("[DEBUG] FOI PARA A TELA DE PROFISSIONAL");
                             });
                     /*btnConfirmar.setOnAction(new EventHandler<ActionEvent>() {
                     });*/

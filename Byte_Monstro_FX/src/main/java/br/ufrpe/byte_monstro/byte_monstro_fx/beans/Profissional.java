@@ -48,8 +48,7 @@ public class Profissional extends UsuarioGeral{
 
     @Override
 	public String toString() {
-		return "Profissional [senha=" + senha + ", unidadeAtual=" + unidadeAtual + ", alunosVinculados="
-				+ alunosVinculados + "   " + this.getAltura() + "]";
+		return super.toString() + " [senha (NÃO MOSTRAR A SENHA NO PROGRAMA FINAL)=" + senha + ", unidadeAtual=" + unidadeAtual + "]";
 	}
 
 	public TreinoDiario criarFichasDeExercicio() {
