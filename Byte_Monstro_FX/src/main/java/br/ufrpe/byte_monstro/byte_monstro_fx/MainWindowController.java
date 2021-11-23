@@ -48,6 +48,13 @@ public class MainWindowController {
     private ListView<Administrador> listaAdministradores;
     private ObservableList<Administrador> listaAdministradoresObservavel;
 
+    //PARA TESTES APENAS
+    private boolean criarNovosUsuarios = true;
+
+    public void setCriarNovosUsuarios(boolean vF) {
+        criarNovosUsuarios = vF;
+    }
+
 
     public void initialize(){
 
@@ -68,51 +75,53 @@ public class MainWindowController {
     private void genItems() { //PARA TESTES APENAS
         int numeroNoNomeDoAluno = 0;
 
-
-        //PROFISSIONAIS ----------
-        for(int i=0;i<10;i++){
-            int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
-            int randomAcademia = ThreadLocalRandom.current().nextInt(0, EnumAcademias.values().length -1);
-
-            //lista.add(new String("Aluno_"+Integer.toString(i)));
-            listaProfissionaisObservavel.add(new Profissional(randomNum,"Professor_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"abc" + Integer.toString(i),EnumAcademias.values()[randomAcademia]));
-
-            //ALUNOS -----------
-            for(int j=0 + numeroNoNomeDoAluno;j<10 + numeroNoNomeDoAluno;j++){
-                int randomNumAluno = ThreadLocalRandom.current().nextInt(1, 1000000);
-                int randomQntTreinos = ThreadLocalRandom.current().nextInt(1, 7);
+        if (criarNovosUsuarios){
+            //PROFISSIONAIS ----------
+            for(int i=0;i<10;i++){
+                int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
+                int randomAcademia = ThreadLocalRandom.current().nextInt(0, EnumAcademias.values().length -1);
 
                 //lista.add(new String("Aluno_"+Integer.toString(i)));
-                listaUsuariosObservavel.add(new Aluno(randomNumAluno,"Aluno_"+Integer.toString(j),j+10,'M',j+50.6,j*1.70,0.7*(j/2),LocalDate.parse("10/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy")),listaProfissionaisObservavel.get(i).getId()));
+                listaProfissionaisObservavel.add(new Profissional(randomNum,"Professor_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"abc" + Integer.toString(i),EnumAcademias.values()[randomAcademia]));
 
-                for (int l = 0; l < randomQntTreinos; l++) {
-                    TreinoDiario novoTreino = new TreinoDiario();
-                    int randomQntExercicios = ThreadLocalRandom.current().nextInt(1, 10);
+                //ALUNOS -----------
+                for(int j=0 + numeroNoNomeDoAluno;j<10 + numeroNoNomeDoAluno;j++){
+                    int randomNumAluno = ThreadLocalRandom.current().nextInt(1, 1000000);
+                    int randomQntTreinos = ThreadLocalRandom.current().nextInt(1, 7);
 
-                    for (int k = 0; k < randomQntExercicios; k++){
-                        int randomIdEnumExercicio = ThreadLocalRandom.current().nextInt(0, EnumExercicios.values().length - 1);
-                        int randomQntSeries = ThreadLocalRandom.current().nextInt(1, 6);
-                        int randomQntRepeticoes = ThreadLocalRandom.current().nextInt(8, 15);
-                        int randomCarga = ThreadLocalRandom.current().nextInt(10, 150);
+                    //lista.add(new String("Aluno_"+Integer.toString(i)));
+                    listaUsuariosObservavel.add(new Aluno(randomNumAluno,"Aluno_"+Integer.toString(j),j+10,'M',j+50.6,j*1.70,0.7*(j/2),LocalDate.parse("10/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy")),listaProfissionaisObservavel.get(i).getId()));
 
-                        Exercicios novoExercicio = new Exercicios(EnumExercicios.values()[randomIdEnumExercicio],randomQntSeries,String.valueOf(randomQntRepeticoes),randomCarga);
-                        novoTreino.adicionarExercicio(novoExercicio);
+                    for (int l = 0; l < randomQntTreinos; l++) {
+                        TreinoDiario novoTreino = new TreinoDiario();
+                        int randomQntExercicios = ThreadLocalRandom.current().nextInt(1, 10);
+
+                        for (int k = 0; k < randomQntExercicios; k++){
+                            int randomIdEnumExercicio = ThreadLocalRandom.current().nextInt(0, EnumExercicios.values().length - 1);
+                            int randomQntSeries = ThreadLocalRandom.current().nextInt(1, 6);
+                            int randomQntRepeticoes = ThreadLocalRandom.current().nextInt(8, 15);
+                            int randomCarga = ThreadLocalRandom.current().nextInt(10, 150);
+
+                            Exercicios novoExercicio = new Exercicios(EnumExercicios.values()[randomIdEnumExercicio],randomQntSeries,String.valueOf(randomQntRepeticoes),randomCarga);
+                            novoTreino.adicionarExercicio(novoExercicio);
+                        }
+                        listaUsuariosObservavel.get(j).adicionarTreino(novoTreino);
+
                     }
-                    listaUsuariosObservavel.get(j).adicionarTreino(novoTreino);
-
+                    listaProfissionaisObservavel.get(i).adicionarAlunoNaLista(listaUsuariosObservavel.get(j));
                 }
-                listaProfissionaisObservavel.get(i).adicionarAlunoNaLista(listaUsuariosObservavel.get(j));
-            }
-            numeroNoNomeDoAluno += 10;
+                numeroNoNomeDoAluno += 10;
             }
 
             //ADMS
-        for(int i=0;i<10;i++){
-            int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
+            for(int i=0;i<10;i++){
+                int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
 
-            listaAdministradoresObservavel.add(new Administrador(randomNum,"ADM_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"abc123"));
+                listaAdministradoresObservavel.add(new Administrador(randomNum,"ADM_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"abc123"));
 
+            }
         }
+
     }
 
 
@@ -209,7 +218,7 @@ public class MainWindowController {
         Profissional profissionalEscolhido = listaProfissionais.getSelectionModel().getSelectedItem();
 
         //PARA TESTE APENAS
-        System.out.println(profissionalEscolhido.getAlunos() + "\n");
+        //System.out.println(profissionalEscolhido.getAlunos() + "\n");
 
         listaProfissionais.setOnMouseClicked(new EventHandler<MouseEvent>() {
 

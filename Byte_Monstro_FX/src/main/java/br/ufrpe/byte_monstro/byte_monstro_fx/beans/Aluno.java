@@ -2,6 +2,8 @@ package br.ufrpe.byte_monstro.byte_monstro_fx.beans;
 
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.UsuarioGeral;
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.TreinoDiario;
+
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -15,6 +17,12 @@ public class Aluno extends UsuarioGeral {
     private long professor;
     protected ArrayList<TreinoDiario> sequenciaDeTreinos;
 
+    //public static int quantidadeMaximaDeItensPorHistorico = 6;
+
+    ArrayList<Double> historicoPeso;
+    ArrayList<Double> historicoGordura ;
+
+
     public Aluno(long id, String nome, int idade, char genero, double peso, double altura, double percentualGordura, LocalDate dataMatricula, long idProf) {
         super(id, nome, idade, genero, peso, altura, percentualGordura);
         this.dataMatricula = dataMatricula;
@@ -24,7 +32,71 @@ public class Aluno extends UsuarioGeral {
         this.pedirTrocaDoTreino = false;
         sequenciaDeTreinos = new ArrayList<TreinoDiario>();
         this.professor = idProf;
+
+        historicoPeso = new ArrayList<Double>();
+        historicoGordura = new ArrayList<Double>();
+        historicoPeso.add(peso);
+        historicoGordura.add(percentualGordura);
+
+
     }
+
+    public void adicionarPesoAoHistorico(double peso) {
+        //if (historicoPeso.size() <= quantidadeMaximaDeItensPorHistorico){
+            historicoPeso.add(peso);
+        /*}
+        else{//PARA FAZER COM QUE A LISTA TENHA UM LIMITE DE ITENS DEFINIDOS
+
+
+            for (int i = 0; i < historicoPeso.size()-1; i++) {
+                if(i < historicoPeso.size()-2){
+                    historicoPeso.set(i,historicoPeso.get(i+1));
+                }
+                else{
+                    historicoPeso.set(i+1,peso);
+                }
+
+            }
+        }*/
+
+    }
+
+    public void adicionarGorudraAoHistorico(double gordura) {
+        //if (historicoGordura.size() <= quantidadeMaximaDeItensPorHistorico){
+            historicoGordura.add(gordura);
+        /*}
+        else{//PARA FAZER COM QUE A LISTA TENHA UM LIMITE DE ITENS DEFINIDOS
+
+
+            for (int i = 0; i < historicoGordura.size()-1; i++) {
+                if(i < historicoGordura.size()-2){
+                    historicoGordura.set(i,historicoGordura.get(i+1));
+                }
+                else{
+                    historicoGordura.set(i+1,gordura);
+                }
+
+            }
+        }*/
+
+    }
+
+    //PARA TESTES APENAS
+    public void verHistoricos(){
+
+        System.out.println("Pesos:");
+        for (double i : historicoPeso) {
+            System.out.print(i + " ");
+        }
+
+        System.out.println("");
+
+        System.out.println("Gordura:");
+        for (double i : historicoGordura) {
+            System.out.print(i + " ");
+        }
+    }
+
 
     public TreinoDiario getTreinoDiarioEspecifico (int index) {
         return sequenciaDeTreinos.get(index);
@@ -82,9 +154,6 @@ public class Aluno extends UsuarioGeral {
         return sequenciaDeTreinos;
     }
 
-    public void setSequenciaDeTreinos(ArrayList<TreinoDiario> sequenciaDeTreinos) {
-        this.sequenciaDeTreinos = sequenciaDeTreinos;
-    }
 
     public void adicionarTreino(TreinoDiario treino) {
         sequenciaDeTreinos.add(treino);

@@ -190,9 +190,14 @@ public class ProfessionalController {
         aluno.setDataMatricula(matriculaPicker.getValue());
         aluno.setProfessor(Long.valueOf(idProfPicker.getText()));
 
+        aluno.adicionarPesoAoHistorico(Double.parseDouble(pesoPicker.getText()));
+        aluno.adicionarGorudraAoHistorico(Double.parseDouble(gorduraPicker.getText()));
+
         
         listaUsuarios.setItems(listaUsuariosObservavel);
         System.out.println("[DEBUG] Update Pressionado");
+
+        aluno.verHistoricos();
     }
 
     @FXML
@@ -316,12 +321,15 @@ public class ProfessionalController {
 
     @FXML
     public void btnBackPressed(ActionEvent event) {
+        FXMLLoader loaderMain = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+            root = loaderMain.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
