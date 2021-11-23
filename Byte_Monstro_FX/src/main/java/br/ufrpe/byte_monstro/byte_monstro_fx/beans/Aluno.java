@@ -18,7 +18,7 @@ public class Aluno extends UsuarioGeral {
     public Aluno(long id, String nome, int idade, char genero, double peso, double altura, double percentualGordura, LocalDate dataMatricula, long idProf) {
         super(id, nome, idade, genero, peso, altura, percentualGordura);
         this.dataMatricula = dataMatricula;
-        this.qntMaximaDeSequencia = 0;
+        this.qntMaximaDeSequencia = 30;
         this.qntTreinosPercorridos = 0;
         this.relatoriosDisponiveis = "NULL";
         this.pedirTrocaDoTreino = false;

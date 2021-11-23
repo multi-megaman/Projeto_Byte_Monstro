@@ -11,18 +11,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.byte_monstro.byte_monstro_fx.ProfessionalController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.byte_monstro.byte_monstro_fx.AdminController">
    <right>
       <VBox prefHeight="400.0" prefWidth="307.0" BorderPane.alignment="CENTER">
          <children>
             <Pane prefHeight="457.0" prefWidth="307.0">
                <children>
-                  <ListView fx:id="listaUsuarios" layoutX="34.0" layoutY="119.0" onMouseClicked="#clickAluno" prefHeight="299.0" prefWidth="240.0" />
-                  <TextField fx:id="searchTextFIeld" layoutX="110.0" layoutY="86.0" prefHeight="25.0" prefWidth="160.0" />
-                  <Label layoutX="34.0" layoutY="90.0" text="Pesquisar ID:" />
-                  <Button layoutX="42.0" layoutY="50.0" mnemonicParsing="false" onAction="#btnSearchPressed" text="Search" />
-                  <Button layoutX="205.0" layoutY="50.0" mnemonicParsing="false" onAction="#btnListAllPressed" text="List_All" />
-                  <Button layoutX="47.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnLstPendingPressed" text="Alunos com troca de treino pendente" />
+                  <ListView fx:id="listaUsuarios" layoutX="34.0" layoutY="51.0" onMouseClicked="#clickAluno" prefHeight="299.0" prefWidth="240.0" />
                </children>
             </Pane>
          </children>

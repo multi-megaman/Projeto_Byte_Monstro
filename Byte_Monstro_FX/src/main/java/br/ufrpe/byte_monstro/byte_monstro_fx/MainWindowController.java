@@ -199,11 +199,6 @@ public class MainWindowController {
     }
 
 
-                    //---------------------------------
-
-
-
-
 
 
 
@@ -213,7 +208,8 @@ public class MainWindowController {
 
         Profissional profissionalEscolhido = listaProfissionais.getSelectionModel().getSelectedItem();
 
-
+        //PARA TESTE APENAS
+        System.out.println(profissionalEscolhido.getAlunos() + "\n");
 
         listaProfissionais.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -250,7 +246,7 @@ public class MainWindowController {
                                         }
 
                                         ProfessionalController professionalController = loaderProfissional.getController();
-                                        professionalController.setListaUsuariosObservavel(FXCollections.observableArrayList(profissionalEscolhido.getAlunos()));
+                                        professionalController.setListaUsuariosObservavel(FXCollections.observableArrayList(profissionalEscolhido.getAlunos()),profissionalEscolhido);
 
                                         Stage stage = (Stage)((Node)click.getSource()).getScene().getWindow();
                                         Scene scene = new Scene(rootProfissional);
@@ -300,8 +296,92 @@ public class MainWindowController {
 
 
     @FXML
-    public void clickAdm() {
+    public void clickAdm() throws  IOException {
+        Administrador administradorEscolhido = listaAdministradores.getSelectionModel().getSelectedItem();
 
+
+
+        listaAdministradores.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+
+
+            @Override
+            public void handle(MouseEvent click) {
+
+                //AtomicBoolean confirmar = new AtomicBoolean(false);
+
+
+                if (click.getClickCount() == 2) {
+                    //POPUP----------------------------
+
+                    Label labelPopUp = new Label("Digite sua senha:");
+                    Button btnConfirmar = new Button("Fazer Login");
+                    TextField senhaInput = new TextField();
+
+
+                    btnConfirmar.setOnAction(e -> {
+                        System.out.println("[DEBUG] senha digitada: "+ senhaInput.getText());
+                        if(administradorEscolhido.getSenha().equals(senhaInput.getText())) {
+                            //IR PARA A JANELA DO ADM-------------------
+
+                            Stage stageAtual = (Stage) btnConfirmar.getScene().getWindow();
+                            stageAtual.close();
+                            FXMLLoader loaderADM = new FXMLLoader(getClass().getResource("AdminWindow.fxml"));
+
+                            Parent rootADM = null;
+                            try {
+                                rootADM = loaderADM.load();
+                            } catch (IOException t) {
+                                t.printStackTrace();
+                            }
+
+                            //ProfessionalController professionalController = loaderProfissional.getController();
+                            //professionalController.setListaUsuariosObservavel(FXCollections.observableArrayList(profissionalEscolhido.getAlunos()));
+
+                            Stage stage = (Stage)((Node)click.getSource()).getScene().getWindow();
+                            Scene scene = new Scene(rootADM);
+                            stage.setScene(scene);
+                            stage.show();
+
+
+                            System.out.println("[DEBUG] ir para a tela do ADM");
+
+                        }
+                        else {
+                            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                            errorAlert.setHeaderText("!SENHA INCORRETA!");
+                            errorAlert.setContentText("A SENHA DIGITADA ESTÀ INCORRETA, TENTE NOVAMENTE");
+                            errorAlert.showAndWait();
+                        }
+
+
+                        //confirmar.set(true);
+                        //System.out.print("[DEBUG] FOI PARA A TELA DE PROFISSIONAL");
+                    });
+                    /*btnConfirmar.setOnAction(new EventHandler<ActionEvent>() {
+                    });*/
+
+                    FlowPane flowPane = new FlowPane();
+                    flowPane.getChildren().addAll(labelPopUp,senhaInput,btnConfirmar);
+                    flowPane.setPadding(new Insets(20));
+                    flowPane.setVgap(20);
+
+                    Scene popUpLogin = new Scene(flowPane,250,150);
+                    Stage stagePopUp = new Stage();
+                    stagePopUp.initModality(Modality.APPLICATION_MODAL);
+                    stagePopUp.setScene(popUpLogin);
+                    stagePopUp.show();
+
+
+                    //---------------------------------
+
+
+
+
+                }
+            }
+
+        });
     }
     @FXML
     public void btnSearchPressed(ActionEvent acaoevento) {

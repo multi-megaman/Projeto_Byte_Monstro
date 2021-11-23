@@ -1,6 +1,9 @@
 package br.ufrpe.byte_monstro.byte_monstro_fx;
 
-import com.dlsc.formsfx.model.structure.DateField;
+import br.ufrpe.byte_monstro.byte_monstro_fx.beans.Aluno;
+import br.ufrpe.byte_monstro.byte_monstro_fx.beans.EnumExercicios;
+import br.ufrpe.byte_monstro.byte_monstro_fx.beans.Exercicios;
+import br.ufrpe.byte_monstro.byte_monstro_fx.beans.TreinoDiario;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,21 +14,15 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-
-import java.io.IOException;
-import java.time.format.DateTimeFormatter;
-
-import br.ufrpe.byte_monstro.byte_monstro_fx.beans.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.time.LocalDate;
-
-import java.util.ArrayList;
-import java.util.EnumMap;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class ProfessionalController {
+public class AdminController {
 
     //ArrayList<String> lista_teste = new ArrayList<String>();
 
@@ -76,16 +73,10 @@ public class ProfessionalController {
     @FXML
     private TabPane treinosTabPane;
 
-    @FXML
-    private TextField searchTextFIeld;
 
-    private Profissional profissionalEscolhido;
-
-
-    public void setListaUsuariosObservavel(ObservableList<Aluno> lista, Profissional profissional) {
+    public void setListaUsuariosObservavel(ObservableList<Aluno> lista) {
         listaUsuariosObservavel = lista;
         listaUsuarios.setItems(listaUsuariosObservavel);
-        profissionalEscolhido = profissional;
     }
 
     public void initialize(){
@@ -327,47 +318,4 @@ public class ProfessionalController {
         stage.setScene(scene);
         stage.show();
     }
-
-    @FXML
-    public void btnSearchPressed(ActionEvent eventoacao) {
-        ArrayList<Aluno> listaAlunosIDCompativel = new ArrayList<Aluno>();
-
-        for (Aluno i : profissionalEscolhido.getAlunos()) {
-            if ((i.getId() == Long.valueOf(searchTextFIeld.getText())) &&(searchTextFIeld.getText() != null && searchTextFIeld.getText() != "")) {
-                listaAlunosIDCompativel.add(i);
-            }
-        }
-
-        if (listaAlunosIDCompativel != null) {
-            listaUsuariosObservavel.setAll(listaAlunosIDCompativel);
-            listaUsuarios.setItems(listaUsuariosObservavel);
-        }
-
-
-
-    }
-
-    @FXML
-    public void btnListAllPressed(ActionEvent eventoacao) {
-        listaUsuariosObservavel.setAll(profissionalEscolhido.getAlunos());
-        listaUsuarios.setItems(listaUsuariosObservavel);
-
-    }
-
-    @FXML
-    public void btnLstPendingPressed(ActionEvent eventoacao) {
-        ArrayList<Aluno> listaAlunosPendente = new ArrayList<Aluno>();
-
-        for (Aluno i : profissionalEscolhido.getAlunos()) {
-            if (i.getPedirTrocaDoTreino()) {
-                listaAlunosPendente.add(i);
-            }
-        }
-
-        if (listaAlunosPendente != null) {
-            listaUsuariosObservavel.setAll(listaAlunosPendente);
-            listaUsuarios.setItems(listaUsuariosObservavel);
-        }
-    }
-
 }
