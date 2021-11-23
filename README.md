@@ -6,8 +6,6 @@ Ideias de projeto:
 ## Integrantes do grupo 
  * Everton da Silva Souza - evertonsilva2345meia78@gmail.com
  * Joyce Mirelle Oliveira Santos - joycemirelleos.02@gmail.com
- * Gabriel Souza Arruda de Queiroz - gabrielsouza943@outlook.com
- * James Anderson do Nascimento - nascjimmy@gmail.com
 
 ## Descrição geral do projeto 
 O programa fará parte de uma rede de academias de musculação, seu principal objetivo é armazenar e manipular uma série dedados dos clientes da academia para que os profissionais da área possam, de forma rápida e prática montar e indicar melhores séries de treino para os clientes. Tanto os usuários da academia quanto os profissionais terão acesso ao sistema, assim como os administradores, porém os usuários estão limitados apenas a olhar e imprimir suas próprias informações (como por exemplo a ficha do treino diário), enquanto os profissionais poderão livremente manipular os dados dos clientes conforme a demanda e os administradores poderão manipular os dados tanto dos clientes como dos profissionais da área.
