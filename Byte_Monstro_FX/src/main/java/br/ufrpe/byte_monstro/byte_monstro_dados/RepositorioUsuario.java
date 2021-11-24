@@ -1,19 +1,33 @@
 package br.ufrpe.byte_monstro.byte_monstro_dados;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.Aluno;
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.Profissional;
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.UsuarioGeral;
 
 public class RepositorioUsuario<T> implements IRepositorioUsuario<T> {
+
+	protected List<T> elementos;
+	private String filename;
+
+	@SuppressWarnings("unchecked")
+	public RepositorioUsuario(String filename) {
+		this.filename = filename;
+		this.elementos = new ArrayList<>();
+
+		Object listaElementos = RepositorioFileUtil.lerDoArquivo(this.filename);
+		if (listaElementos != null && listaElementos instanceof List<?>){
+			this.elementos = (List<T>) listaElementos;
+		}
+	}
 	
-	ArrayList <T> usuarios = new ArrayList<>();
-	
-	
+	@Override
 	public void inserir(T ug){
 		
-		if(usuarios.contains(ug) || ug.equals(null)) {
+		if(elementos.contains(ug) || ug.equals(null)) {
 			
 			System.out.println("N foi possível cadastrar o usuário");
 			return;
@@ -21,20 +35,27 @@ public class RepositorioUsuario<T> implements IRepositorioUsuario<T> {
 		}
 		
 		else {
-			
-			usuarios.add(ug);
+
+			elementos.add(ug);
 	
 		}
+
+		RepositorioFileUtil.salvarArquivo(elementos,this.filename);
 		
 }
-	
-	
+
+	@Override
+	public List<T> listar() {
+		return (this.elementos);
+	}
+
+	@Override
 	public void remover(T ug){
 		
-		if(usuarios.contains(ug) && !ug.equals(null)) {
+		if(elementos.contains(ug) && !ug.equals(null)) {
 			
 			
-			this.usuarios.remove(ug);
+			this.elementos.remove(ug);
 			
 		}
 		
@@ -44,15 +65,17 @@ public class RepositorioUsuario<T> implements IRepositorioUsuario<T> {
 			return;
 	
 		}
-		
+
+		RepositorioFileUtil.salvarArquivo(elementos,this.filename);
 	}
-	
+
+	@Override
 	public void atualizar(T usuario) {
 		
-		if(usuarios.contains(usuario) || usuario.equals(null)) {
+		if(elementos.contains(usuario)) {
 			
-			int posUsuario = this.usuarios.indexOf(usuario);
-			this.usuarios.set(posUsuario, usuario);
+			int posUsuario = this.elementos.indexOf(usuario);
+			this.elementos.set(posUsuario, usuario);
 			
 		}
 		
@@ -61,58 +84,18 @@ public class RepositorioUsuario<T> implements IRepositorioUsuario<T> {
 			
 			System.out.println("N foi possível atualizar o usuário");
 			
-		}	
-		
+		}
+
+		RepositorioFileUtil.salvarArquivo(elementos,this.filename);
 	}
-	
-	
-	/*public T VerificaRetornaUsuario(long ID) {
-		
-		for(T u : this.usuarios) {
-			if(u.getId() == ID) {
-				return u;
-			}
-		}
-		
-		return null;
-	}*/
-	
-	/*public boolean verificarExistenciaUsuario(long ID) {
-		
-		for(UsuarioGeral u : this.usuarios) {
-			if(u.getId() == ID) {
-				return true;
-			}
-		}
-		
-		return false;
-		
-	}*/
+
 	
 	
 	@Override
 	public String toString() {
-		return "RepositorioUsuario [usuarios=" + usuarios + "]";
+		return "RepositorioUsuario [usuarios=" + elementos + "]";
 	}
 
-
-	public static void main(String[] args) {
-		
-		RepositorioUsuario ru = new RepositorioUsuario<Profissional>();
-		
-		Profissional p = new Profissional();
-		
-		p.setAltura(42);
-		
-		ru.inserir(p);
-		
-		System.out.println(ru);
-		
-		
-		
-
-		
-	}
 
 
 }

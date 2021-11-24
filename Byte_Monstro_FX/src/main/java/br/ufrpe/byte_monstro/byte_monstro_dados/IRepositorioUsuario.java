@@ -9,7 +9,7 @@ public interface IRepositorioUsuario<T> {
 
 	void inserir(T obj);
 
-	//List<T> listar();
+	List<T> listar();
 
 	void remover(T obj) ;
 

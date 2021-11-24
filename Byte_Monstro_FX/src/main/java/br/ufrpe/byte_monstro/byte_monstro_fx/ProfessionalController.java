@@ -81,26 +81,26 @@ public class ProfessionalController {
 
     private Profissional profissionalEscolhido;
 
+    private ControladorRepositorioAluno repositorioAluno;
+    private ControladorRepositorioProfissional repositorioProfissional;
 
-    public void setListaUsuariosObservavel(ObservableList<Aluno> lista, Profissional profissional) {
+
+    public void setAll(ObservableList<Aluno> lista, Profissional profissional) {
         listaUsuariosObservavel = lista;
         listaUsuarios.setItems(listaUsuariosObservavel);
         profissionalEscolhido = profissional;
+
+        idProfPicker.setEditable(false);
+        idProfPicker.setText(String.valueOf(profissionalEscolhido.getId()));
     }
 
     public void initialize(){
         exercicioEnumComboBox.getItems().setAll(EnumExercicios.values());
 
-        //listaUsuariosObservavel = FXCollections.observableArrayList();
+        repositorioAluno = new ControladorRepositorioAluno();
+        repositorioProfissional = new ControladorRepositorioProfissional();
 
 
-        //genItems();
-        //listaUsuarios.setItems(listaUsuariosObservavel);
-
-
-
-
-        //registerEventHandlers();
     }
     private void genItems() { //PARA TESTES APENAS
         for(int i=0;i<10;i++){
@@ -170,8 +170,12 @@ public class ProfessionalController {
 
     @FXML
     public void btnDeletePressed(ActionEvent eventoacao){
-        int id = listaUsuarios.getSelectionModel().getSelectedIndex();
-        listaUsuariosObservavel.remove(id);
+        Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
+        //int id = listaUsuarios.getSelectionModel().getSelectedIndex();
+        listaUsuariosObservavel.remove(aluno);
+
+        repositorioAluno.removerAluno(aluno);
+        repositorioProfissional.atualizarProfissional(profissionalEscolhido);
 
         System.out.println("[DEBUG] Delete Pressionado");
     }
@@ -193,6 +197,8 @@ public class ProfessionalController {
         aluno.adicionarPesoAoHistorico(Double.parseDouble(pesoPicker.getText()));
         aluno.adicionarGorudraAoHistorico(Double.parseDouble(gorduraPicker.getText()));
 
+        repositorioAluno.atualizarAluno(aluno);
+
         
         listaUsuarios.setItems(listaUsuariosObservavel);
         System.out.println("[DEBUG] Update Pressionado");
@@ -210,6 +216,9 @@ public class ProfessionalController {
         //AQUI SERIA A FUNÇÃO PADRÃO PARA COLOCAR UM NOVO USUÁRIO NA LISTA
         Aluno alunoNovo = new Aluno((long) randomNum,namePicker.getText(),Integer.parseInt(idadePicker.getText()),Character.toUpperCase(generoPicker.getText().charAt(0)),Double.parseDouble(pesoPicker.getText()),Double.parseDouble(alturaPicker.getText()),Double.parseDouble(gorduraPicker.getText()),matriculaPicker.getValue(),Long.valueOf(idProfPicker.getText()));
         listaUsuariosObservavel.add(alunoNovo);
+
+        repositorioAluno.adicionarAluno(alunoNovo);
+        repositorioProfissional.atualizarProfissional(profissionalEscolhido);
     }
 
     @FXML

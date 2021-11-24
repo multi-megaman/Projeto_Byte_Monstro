@@ -1,5 +1,7 @@
 package br.ufrpe.byte_monstro.byte_monstro_fx.beans;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.EnumAcademias;
@@ -7,7 +9,10 @@ import br.ufrpe.byte_monstro.byte_monstro_fx.beans.UsuarioGeral;
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.TreinoDiario;
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.Aluno;
 
-public class Profissional extends UsuarioGeral{
+public class Profissional extends UsuarioGeral implements Serializable {
+    @Serial
+    private static final long serialVersionUID = -4258163491103260294L;
+
     private String senha;
     private EnumAcademias unidadeAtual;
     private ArrayList<Aluno> alunosVinculados;

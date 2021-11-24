@@ -3,11 +3,15 @@ package br.ufrpe.byte_monstro.byte_monstro_fx.beans;
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.UsuarioGeral;
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.TreinoDiario;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Aluno extends UsuarioGeral {
+public class Aluno extends UsuarioGeral implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 65991862911207121L;
     private LocalDate dataMatricula;
 
     private int qntMaximaDeSequencia;

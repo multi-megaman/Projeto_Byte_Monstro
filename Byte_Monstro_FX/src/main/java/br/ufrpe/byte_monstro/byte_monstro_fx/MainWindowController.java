@@ -48,21 +48,29 @@ public class MainWindowController {
     private ListView<Administrador> listaAdministradores;
     private ObservableList<Administrador> listaAdministradoresObservavel;
 
-    //PARA TESTES APENAS
-    private boolean criarNovosUsuarios = true;
 
-    public void setCriarNovosUsuarios(boolean vF) {
-        criarNovosUsuarios = vF;
-    }
+    private ControladorRepositorioAluno repositorioAluno;
+
+    private ControladorRepositorioProfissional repositorioProfissional;
+
+    private ControladorRepositorioAdministrador repositorioAdministrador;
+
+
 
 
     public void initialize(){
+        repositorioAluno = new ControladorRepositorioAluno();
+        repositorioProfissional = new ControladorRepositorioProfissional();
+        repositorioAdministrador = new ControladorRepositorioAdministrador();
 
-        listaUsuariosObservavel = FXCollections.observableArrayList();
-        listaProfissionaisObservavel = FXCollections.observableArrayList();
-        listaAdministradoresObservavel = FXCollections.observableArrayList();
+        //PARA TESTE APENAS
+        repositorioProfissional.adicionarProfissional(new Profissional(101010,"Professor_Teste",10+10,'M',10+50.6,10*1.70,0.7*(10/2),"1",EnumAcademias.values()[0]));
 
-        genItems();
+        listaUsuariosObservavel = FXCollections.observableArrayList(repositorioAluno.listarAlunos());
+        listaProfissionaisObservavel = FXCollections.observableArrayList(repositorioProfissional.listarProfissionais());
+        listaAdministradoresObservavel = FXCollections.observableArrayList(repositorioAdministrador.listarAdministradores());
+
+        //genItems();
         listaUsuarios.setItems(listaUsuariosObservavel);
         listaProfissionais.setItems(listaProfissionaisObservavel);
         listaAdministradores.setItems(listaAdministradoresObservavel);
@@ -75,7 +83,6 @@ public class MainWindowController {
     private void genItems() { //PARA TESTES APENAS
         int numeroNoNomeDoAluno = 0;
 
-        if (criarNovosUsuarios){
             //PROFISSIONAIS ----------
             for(int i=0;i<10;i++){
                 int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
@@ -120,7 +127,7 @@ public class MainWindowController {
                 listaAdministradoresObservavel.add(new Administrador(randomNum,"ADM_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"abc123"));
 
             }
-        }
+
 
     }
 
@@ -255,7 +262,7 @@ public class MainWindowController {
                                         }
 
                                         ProfessionalController professionalController = loaderProfissional.getController();
-                                        professionalController.setListaUsuariosObservavel(FXCollections.observableArrayList(profissionalEscolhido.getAlunos()),profissionalEscolhido);
+                                        professionalController.setAll(FXCollections.observableArrayList(profissionalEscolhido.getAlunos()),profissionalEscolhido);
 
                                         Stage stage = (Stage)((Node)click.getSource()).getScene().getWindow();
                                         Scene scene = new Scene(rootProfissional);
