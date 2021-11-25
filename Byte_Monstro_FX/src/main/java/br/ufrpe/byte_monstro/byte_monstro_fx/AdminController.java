@@ -1,309 +1,177 @@
 package br.ufrpe.byte_monstro.byte_monstro_fx;
 
-import br.ufrpe.byte_monstro.byte_monstro_fx.beans.Aluno;
-import br.ufrpe.byte_monstro.byte_monstro_fx.beans.EnumExercicios;
-import br.ufrpe.byte_monstro.byte_monstro_fx.beans.Exercicios;
-import br.ufrpe.byte_monstro.byte_monstro_fx.beans.TreinoDiario;
+import br.ufrpe.byte_monstro.byte_monstro_dados.IRepositorioUsuario;
+import com.dlsc.formsfx.model.structure.DateField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+
+import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+
+import br.ufrpe.byte_monstro.byte_monstro_fx.beans.*;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
+import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class AdminController {
 
-    //ArrayList<String> lista_teste = new ArrayList<String>();
+    @FXML
+    public Tab profissionaisTabPane;
+    @FXML
+    private Tab alunosTabPane;
+    @FXML
+    private Tab admsTabPane;
 
     @FXML
-    private Button deleteButton;
+    public TextField searchFieldP;
+    @FXML
+    public TextField searchFieldA;
+    @FXML
+    public TextField searchFieldAdm;
 
     @FXML
-    private TextField namePicker;
+    private TextField nomePickerP;
+    @FXML
+    private TextField generoPickerP;
+    @FXML
+    private TextField idadePickerP;
+    @FXML
+    private TextField pesoPickerP;
+    @FXML
+    private TextField alturaPickerP;
+    @FXML
+    private TextField gorduraPickerP;
 
     @FXML
-    private TextField generoPicker;
+    private TextField nomePickerA;
+    @FXML
+    private TextField generoPickerA;
+    @FXML
+    private TextField idadePickerA;
+    @FXML
+    private TextField pesoPickerA;
+    @FXML
+    private TextField alturaPickerA;
+    @FXML
+    private TextField gorduraPickerA;
+    @FXML
+    private DatePicker matriculaPickerA;
 
     @FXML
-    private TextField idadePicker;
-
+    private TextField nomePickerAdm;
     @FXML
-    private TextField pesoPicker;
-
+    private TextField generoPickerAdm;
     @FXML
-    private TextField alturaPicker;
-
+    private TextField idadePickerAdm;
     @FXML
-    private TextField gorduraPicker;
-
+    private TextField pesoPickerAdm;
     @FXML
-    private DatePicker matriculaPicker;
+    private TextField alturaPickerAdm;
+    @FXML
+    private TextField gorduraPickerAdm;
 
     @FXML
     private TextField idProfPicker;
-
     @FXML
-    private ComboBox exercicioEnumComboBox;
-
+    public ChoiceBox academiaPicker;
     @FXML
-    private TextField seriePicker;
+    public ListView listaAlunosVinculados;
 
-    @FXML
-    private TextField repeticaoPicker;
 
-    @FXML
-    private TextField cargaPicker;
-
-    @FXML
-    private ListView<Aluno> listaUsuarios;
-
-    private ObservableList<Aluno> listaUsuariosObservavel;
 
     @FXML
     private TabPane treinosTabPane;
 
+    @FXML
+    private ListView<Aluno> listaUsuarios;
+    private ObservableList<Aluno> listaUsuariosObservavel;
 
-    public void setListaUsuariosObservavel(ObservableList<Aluno> lista) {
-        listaUsuariosObservavel = lista;
-        listaUsuarios.setItems(listaUsuariosObservavel);
+    @FXML
+    private ListView<Profissional> listaProfissionais;
+    private ObservableList<Profissional> listaProfissionaisObservavel;
+
+    @FXML
+    private ListView<Administrador> listaAdministradores;
+    private ObservableList<Administrador> listaAdministradoresObservavel;
+
+
+
+    private void genItems() { //PARA TESTES APENAS
+        int numeroNoNomeDoAluno = 0;
+
+
+        //PROFISSIONAIS ----------
+        for(int i=0;i<10;i++){
+            int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
+            int randomAcademia = ThreadLocalRandom.current().nextInt(0, EnumAcademias.values().length -1);
+
+            //lista.add(new String("Aluno_"+Integer.toString(i)));
+            listaProfissionaisObservavel.add(new Profissional(randomNum,"Professor_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"abc" + Integer.toString(i),EnumAcademias.values()[randomAcademia]));
+
+            //ALUNOS -----------
+            for(int j=0 + numeroNoNomeDoAluno;j<10 + numeroNoNomeDoAluno;j++){
+                int randomNumAluno = ThreadLocalRandom.current().nextInt(1, 1000000);
+                int randomQntTreinos = ThreadLocalRandom.current().nextInt(1, 7);
+
+                //lista.add(new String("Aluno_"+Integer.toString(i)));
+                listaUsuariosObservavel.add(new Aluno(randomNumAluno,"Aluno_"+Integer.toString(j),j+10,'M',j+50.6,j*1.70,0.7*(j/2),LocalDate.parse("10/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy")),listaProfissionaisObservavel.get(i).getId()));
+
+                for (int l = 0; l < randomQntTreinos; l++) {
+                    TreinoDiario novoTreino = new TreinoDiario();
+                    int randomQntExercicios = ThreadLocalRandom.current().nextInt(1, 10);
+
+                    for (int k = 0; k < randomQntExercicios; k++){
+                        int randomIdEnumExercicio = ThreadLocalRandom.current().nextInt(0, EnumExercicios.values().length - 1);
+                        int randomQntSeries = ThreadLocalRandom.current().nextInt(1, 6);
+                        int randomQntRepeticoes = ThreadLocalRandom.current().nextInt(8, 15);
+                        int randomCarga = ThreadLocalRandom.current().nextInt(10, 150);
+
+                        Exercicios novoExercicio = new Exercicios(EnumExercicios.values()[randomIdEnumExercicio],randomQntSeries,String.valueOf(randomQntRepeticoes),randomCarga);
+                        novoTreino.adicionarExercicio(novoExercicio);
+                    }
+                    listaUsuariosObservavel.get(j).adicionarTreino(novoTreino);
+
+                }
+                listaProfissionaisObservavel.get(i).adicionarAlunoNaLista(listaUsuariosObservavel.get(j));
+            }
+            numeroNoNomeDoAluno += 10;
+        }
+
+        //ADMS
+        for(int i=0;i<10;i++){
+            int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
+
+            listaAdministradoresObservavel.add(new Administrador(randomNum,"ADM_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"abc123"));
+
+        }
     }
 
     public void initialize(){
-        exercicioEnumComboBox.getItems().setAll(EnumExercicios.values());
-
-        //listaUsuariosObservavel = FXCollections.observableArrayList();
-
-
-        //genItems();
-        //listaUsuarios.setItems(listaUsuariosObservavel);
-
-
-
-
-        //registerEventHandlers();
-    }
-    private void genItems() { //PARA TESTES APENAS
-        for(int i=0;i<10;i++){
-            int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
-            int randomQntTreinos = ThreadLocalRandom.current().nextInt(1, 7);
-
-            //lista.add(new String("Aluno_"+Integer.toString(i)));
-            listaUsuariosObservavel.add(new Aluno(randomNum,"Aluno_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),LocalDate.parse("10/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy")),178*i));
-
-            for (int j = 0; j < randomQntTreinos; j++) {
-                TreinoDiario novoTreino = new TreinoDiario();
-                int randomQntExercicios = ThreadLocalRandom.current().nextInt(1, 10);
-
-                for (int k = 0; k < randomQntExercicios; k++){
-                    int randomIdEnumExercicio = ThreadLocalRandom.current().nextInt(0, EnumExercicios.values().length - 1);
-                    int randomQntSeries = ThreadLocalRandom.current().nextInt(1, 6);
-                    int randomQntRepeticoes = ThreadLocalRandom.current().nextInt(8, 15);
-                    int randomCarga = ThreadLocalRandom.current().nextInt(10, 150);
-
-                    Exercicios novoExercicio = new Exercicios(EnumExercicios.values()[randomIdEnumExercicio],randomQntSeries,String.valueOf(randomQntRepeticoes),randomCarga);
-                    novoTreino.adicionarExercicio(novoExercicio);
-                }
-                listaUsuariosObservavel.get(i).adicionarTreino(novoTreino);
-            }
-        }
-    }
-
-    @FXML
-    public void clickAluno(){
-        Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
-        System.out.println("[DEBUG] Aluno: " + aluno);
-        namePicker.setText(aluno.getNome());
-        generoPicker.setText(String.valueOf(aluno.getGenero()));
-        idadePicker.setText(String.valueOf(aluno.getIdade()));
-        pesoPicker.setText(String.valueOf(aluno.getPeso()));
-        alturaPicker.setText(String.valueOf(aluno.getAltura()));
-        gorduraPicker.setText(String.valueOf(aluno.getPercentualGordura()));
-        matriculaPicker.setValue(aluno.getDataMatricula());
-        idProfPicker.setText(String.valueOf(aluno.getProfessor()));
-
-        treinosTabPane.getTabs().clear();
-        for (int i = 0; i < aluno.getSequenciaDeTreinos().size(); i++) {
-            Tab novaTab = new Tab(String.format("Treino %d",i));
-            ListView<Exercicios> listaExercicios = new ListView<Exercicios>();
-            listaExercicios.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                                                  @Override
-                                                  public void handle(MouseEvent mouseEvent) {
-                                                      Exercicios exercicio = listaExercicios.getSelectionModel().getSelectedItem();
-                                                      exercicioEnumComboBox.setValue(exercicio.getTipo());
-                                                      seriePicker.setText(String.valueOf(exercicio.getSerie()));
-                                                      repeticaoPicker.setText(String.valueOf(exercicio.getRepeticao()));
-                                                      cargaPicker.setText(String.valueOf(exercicio.getCarga()));
-                                                  }
-                                              });
-
-
-                    listaExercicios.setItems(FXCollections.observableArrayList(aluno.getTreinoDiarioEspecifico(i).getExercicios()));
-            novaTab.setContent(listaExercicios);
-            treinosTabPane.getTabs().add(novaTab);
-        }
-        /*Tab novaTab = new Tab("Exercicio1");
-        novaTab.setContent(listaUsuarios);
-        treinosTabPane.getTabs().add(novaTab);*/
-
-    }
-
-
-    @FXML
-    public void btnDeletePressed(ActionEvent eventoacao){
-        int id = listaUsuarios.getSelectionModel().getSelectedIndex();
-        listaUsuariosObservavel.remove(id);
-
-        System.out.println("[DEBUG] Delete Pressionado");
-    }
-
-
-
-    @FXML
-    public void btnUpdatePressed(ActionEvent eventoacao) {
-        Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
-        aluno.setNome(namePicker.getText());
-        aluno.setIdade(Integer.parseInt(idadePicker.getText()));
-        aluno.setGenero(Character.toUpperCase(generoPicker.getText().charAt(0)));
-        aluno.setPeso(Double.parseDouble(pesoPicker.getText()));
-        aluno.setAltura(Double.parseDouble(alturaPicker.getText()));
-        aluno.setPercentualGordura(Double.parseDouble(gorduraPicker.getText()));
-        aluno.setDataMatricula(matriculaPicker.getValue());
-        aluno.setProfessor(Long.valueOf(idProfPicker.getText()));
-
-        
+        academiaPicker.setItems(FXCollections.observableArrayList(EnumAcademias.values()));
+        listaUsuariosObservavel = FXCollections.observableArrayList();
+        listaProfissionaisObservavel = FXCollections.observableArrayList();
+        listaAdministradoresObservavel = FXCollections.observableArrayList();
+        genItems();
         listaUsuarios.setItems(listaUsuariosObservavel);
-        System.out.println("[DEBUG] Update Pressionado");
+        listaProfissionais.setItems(listaProfissionaisObservavel);
+        listaAdministradores.setItems(listaAdministradoresObservavel);
     }
 
-    @FXML
-    public void btnAddPressed(ActionEvent eventoacao) {
-        int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
 
-        System.out.println("[DEBUG] Add Pressionado");
-
-
-        //AQUI SERIA A FUNÇÃO PADRÃO PARA COLOCAR UM NOVO USUÁRIO NA LISTA
-        Aluno alunoNovo = new Aluno((long) randomNum,namePicker.getText(),Integer.parseInt(idadePicker.getText()),Character.toUpperCase(generoPicker.getText().charAt(0)),Double.parseDouble(pesoPicker.getText()),Double.parseDouble(alturaPicker.getText()),Double.parseDouble(gorduraPicker.getText()),matriculaPicker.getValue(),Long.valueOf(idProfPicker.getText()));
-        listaUsuariosObservavel.add(alunoNovo);
-    }
-
-    @FXML
-    public void btnClearPressed(ActionEvent eventoacao){
-        namePicker.setText(null);
-        idadePicker.setText(null);
-        generoPicker.setText(null);
-        pesoPicker.setText(null);
-        alturaPicker.setText(null);
-        gorduraPicker.setText(null);
-        matriculaPicker.setValue(null);
-        idProfPicker.setText(null);
-        System.out.println("[DEBUG] Clear Pressionado");
-    }
-
-    @FXML
-    public void btnNewPressed(ActionEvent eventoacao) {
-
-        Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
-        ObservableList<Tab> tabs = treinosTabPane.getTabs();
-        int numeroExercicioNovo = 0;
-
-        for (int i = 0; i < tabs.size(); i++ ) {
-            numeroExercicioNovo += 1;
-        }
-
-        Tab novaTab = new Tab(String.format("Treino %d",numeroExercicioNovo));
-        ListView<Exercicios> listaExercicios = new ListView<Exercicios>();
-        aluno.adicionarTreino(new TreinoDiario());
-
-        listaExercicios.setItems(FXCollections.observableArrayList(aluno.getTreinoDiarioEspecifico(aluno.getTreinoDiario().size() -1).getExercicios()));
-        novaTab.setContent(listaExercicios);
-
-        treinosTabPane.getTabs().add(novaTab);
-
-
-    }
-
-    @FXML
-    public void btnRemovePressed(ActionEvent eventoacao) {
-        Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
-        int tabAtualId = treinosTabPane.getSelectionModel().getSelectedIndex();
-        Tab tabAtual = treinosTabPane.getSelectionModel().getSelectedItem();
-
-        aluno.removerTreino(aluno.getTreinoDiarioEspecifico(tabAtualId));
-
-        treinosTabPane.getTabs().remove(tabAtual);
-    }
-
-    @FXML
-    public void btnAlterPressed(ActionEvent eventoacao) {
-        Tab tabAtual = treinosTabPane.getSelectionModel().getSelectedItem();
-        ListView<Exercicios> listaExercicios = (ListView<Exercicios>) tabAtual.getContent();
-        Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
-        int tabAtualId = treinosTabPane.getSelectionModel().getSelectedIndex();
-
-        Exercicios exercicioSelecionado = listaExercicios.getSelectionModel().getSelectedItem();
-
-        exercicioSelecionado.setTipo(EnumExercicios.values()[exercicioEnumComboBox.getSelectionModel().getSelectedIndex()]);
-        exercicioSelecionado.setSerie(Integer.parseInt(seriePicker.getText()));
-        exercicioSelecionado.setRepeticao(repeticaoPicker.getText());
-        exercicioSelecionado.setCarga(Integer.parseInt(cargaPicker.getText()));
-
-        listaExercicios.setItems(FXCollections.observableArrayList(aluno.getTreinoDiarioEspecifico(tabAtualId).getExercicios()));
-
-        tabAtual.setContent(listaExercicios);
-    }
-
-    @FXML
-    public void btnInsertPressed(ActionEvent eventoacao) {
-        Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
-        int tabAtualId = treinosTabPane.getSelectionModel().getSelectedIndex();
-        Tab tabAtual = treinosTabPane.getSelectionModel().getSelectedItem();
-
-        aluno.getTreinoDiarioEspecifico(tabAtualId).adicionarExercicio(new Exercicios(EnumExercicios.values()[exercicioEnumComboBox.getSelectionModel().getSelectedIndex()],Integer.parseInt(seriePicker.getText()),repeticaoPicker.getText(),Integer.parseInt(cargaPicker.getText())));
-
-        System.out.print("[DEBUG] treinos do aluno: " + aluno.getTreinoDiarioEspecifico(tabAtualId));
-
-        ListView<Exercicios> listaExercicios = new ListView<Exercicios>();
-        listaExercicios.setItems(FXCollections.observableArrayList(aluno.getTreinoDiarioEspecifico(tabAtualId).getExercicios()));
-
-        tabAtual.setContent(listaExercicios);
-
-    }
-
-    @FXML
-    public void btnErasePressed(ActionEvent eventoacao) {
-        Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
-        int tabAtualId = treinosTabPane.getSelectionModel().getSelectedIndex();
-        Tab tabAtual = treinosTabPane.getSelectionModel().getSelectedItem();
-        ListView<Exercicios> listaExercicios = (ListView<Exercicios>) tabAtual.getContent();
-        Exercicios exercicioSelecionado = listaExercicios.getSelectionModel().getSelectedItem();
-
-        System.out.print("[DEBUG] Exercicio do aluno: " + exercicioSelecionado + "\n");
-
-
-        aluno.getTreinoDiarioEspecifico(tabAtualId).retirarExercicio(exercicioSelecionado);
-
-        System.out.print("[DEBUG] treinos do aluno: " + aluno.getTreinoDiarioEspecifico(tabAtualId) + "\n");
-
-
-
-        //listaExercicios.getItems().remove(exercicioSelecionado);
-        listaExercicios.setItems(FXCollections.observableArrayList(aluno.getTreinoDiarioEspecifico(tabAtualId).getExercicios()));
-
-        tabAtual.setContent(listaExercicios);
-
-    }
 
     @FXML
     public void btnBackPressed(ActionEvent event) {
@@ -318,4 +186,170 @@ public class AdminController {
         stage.setScene(scene);
         stage.show();
     }
+
+
+
+    @FXML
+    public void clickProfissional(){
+        Profissional professor = listaProfissionais.getSelectionModel().getSelectedItem();
+        System.out.println("[DEBUG] Prof: " + professor);
+        nomePickerP.setText(professor.getNome());
+        generoPickerP.setText(String.valueOf(professor.getGenero()));
+        idadePickerP.setText(String.valueOf(professor.getIdade()));
+        pesoPickerP.setText(String.valueOf(professor.getPeso()));
+        alturaPickerP.setText(String.valueOf(professor.getAltura()));
+        gorduraPickerP.setText(String.valueOf(professor.getPercentualGordura()));
+        academiaPicker.setValue(professor.getUnidadeAtual());
+    }
+
+    @FXML
+    public void clickAluno(){
+        Aluno aluno = (Aluno) listaUsuarios.getSelectionModel().getSelectedItem();
+        System.out.println("[DEBUG] Aluno: " + aluno);
+        nomePickerA.setText(aluno.getNome());
+        generoPickerA.setText(String.valueOf(aluno.getGenero()));
+        idadePickerA.setText(String.valueOf(aluno.getIdade()));
+        pesoPickerA.setText(String.valueOf(aluno.getPeso()));
+        alturaPickerA.setText(String.valueOf(aluno.getAltura()));
+        gorduraPickerA.setText(String.valueOf(aluno.getPercentualGordura()));
+        matriculaPickerA.setValue(aluno.getDataMatricula());
+        idProfPicker.setText(String.valueOf(aluno.getProfessor()));
+
+        treinosTabPane.getTabs().clear();
+        for (int i = 0; i < aluno.getSequenciaDeTreinos().size(); i++) {
+            Tab novaTab = new Tab(String.format("Treino %d",i));
+            ListView<Exercicios> listaExercicios = new ListView<Exercicios>();
+            listaExercicios.setItems(FXCollections.observableArrayList(aluno.getTreinoDiarioEspecifico(i).getExercicios()));
+            novaTab.setContent(listaExercicios);
+            treinosTabPane.getTabs().add(novaTab);
+        }
+    }
+
+    @FXML
+    public void clickAdministrador(){
+        Administrador administrador = listaAdministradores.getSelectionModel().getSelectedItem();
+        System.out.println("[DEBUG] Adm: " + administrador);
+        nomePickerAdm.setText(administrador.getNome());
+        generoPickerAdm.setText(String.valueOf(administrador.getGenero()));
+        idadePickerAdm.setText(String.valueOf(administrador.getIdade()));
+        pesoPickerAdm.setText(String.valueOf(administrador.getPeso()));
+        alturaPickerAdm.setText(String.valueOf(administrador.getAltura()));
+        gorduraPickerAdm.setText(String.valueOf(administrador.getPercentualGordura()));
+
+    }
+
+
+
+    public void btnCadastrarPressed(ActionEvent actionEvent) {
+        int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
+        if(profissionaisTabPane.isSelected()){
+            Profissional novoProfissional = new Profissional();
+            novoProfissional.setId(randomNum);
+            novoProfissional.setNome("");
+            listaProfissionaisObservavel.add(novoProfissional);
+        }else if(alunosTabPane.isSelected()){
+            Aluno novoAluno = new Aluno();
+            novoAluno.setId(randomNum);
+            novoAluno.setNome("");
+            listaUsuariosObservavel.add(novoAluno);
+        }else if(admsTabPane.isSelected()){
+            Administrador novoAdministrador = new Administrador();
+            novoAdministrador.setId(randomNum);
+            novoAdministrador.setNome("");
+            listaAdministradoresObservavel.add(novoAdministrador);
+        }
+    }
+
+    public void btnEditarPressed(ActionEvent actionEvent) {
+        if(profissionaisTabPane.isSelected()){
+            Profissional professor = listaProfissionais.getSelectionModel().getSelectedItem();
+            professor.setNome(nomePickerP.getText());
+            professor.setIdade(Integer.parseInt(idadePickerP.getText()));
+            professor.setGenero(Character.toUpperCase(generoPickerP.getText().charAt(0)));
+            professor.setPeso(Double.parseDouble(pesoPickerP.getText()));
+            professor.setAltura(Double.parseDouble(alturaPickerP.getText()));
+            professor.setPercentualGordura(Double.parseDouble(gorduraPickerP.getText()));
+            professor.setUnidadeAtual((EnumAcademias) academiaPicker.getValue());
+
+            listaProfissionais.refresh();
+
+        }else if(alunosTabPane.isSelected()){
+            Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
+            aluno.setNome(nomePickerA.getText());
+            aluno.setIdade(Integer.parseInt(idadePickerA.getText()));
+            aluno.setGenero(Character.toUpperCase(generoPickerA.getText().charAt(0)));
+            aluno.setPeso(Double.parseDouble(pesoPickerA.getText()));
+            aluno.setAltura(Double.parseDouble(alturaPickerA.getText()));
+            aluno.setPercentualGordura(Double.parseDouble(gorduraPickerA.getText()));
+            aluno.setDataMatricula(matriculaPickerA.getValue());
+            aluno.setProfessor(Long.parseLong(idProfPicker.getText()));
+
+            listaUsuarios.refresh();
+
+        }else if(admsTabPane.isSelected()){
+            Administrador administrador = listaAdministradores.getSelectionModel().getSelectedItem();
+            administrador.setNome(nomePickerAdm.getText());
+            administrador.setIdade(Integer.parseInt(idadePickerAdm.getText()));
+            administrador.setGenero(Character.toUpperCase(generoPickerAdm.getText().charAt(0)));
+            administrador.setPeso(Double.parseDouble(pesoPickerAdm.getText()));
+            administrador.setAltura(Double.parseDouble(alturaPickerAdm.getText()));
+            administrador.setPercentualGordura(Double.parseDouble(gorduraPickerAdm.getText()));
+
+            listaAdministradores.refresh();
+        }
+
+    }
+
+    public void btnDeletarPressed(ActionEvent actionEvent){
+        if(profissionaisTabPane.isSelected()){
+            int id = listaProfissionais.getSelectionModel().getSelectedIndex();
+            listaProfissionaisObservavel.remove(id);
+        }else if(alunosTabPane.isSelected()){
+            int id = listaUsuarios.getSelectionModel().getSelectedIndex();
+            listaUsuariosObservavel.remove(id);
+        }else if(admsTabPane.isSelected()){
+            int id = listaAdministradores.getSelectionModel().getSelectedIndex();
+            listaAdministradoresObservavel.remove(id);
+        }
+    }
+
+    public void btnSearchPressed(ActionEvent actionEvent) {
+        if (profissionaisTabPane.isSelected()) {
+            ArrayList<Profissional> listaProfissionaisId = new ArrayList<Profissional>();
+            for (Profissional i : listaProfissionaisObservavel) {
+                if (i.getId() == Long.parseLong(searchFieldP.getText())) {
+                    listaProfissionaisId.add(i);
+                }
+            }
+            if (listaProfissionaisId != null) {
+                listaProfissionais.setItems(FXCollections.observableArrayList(listaProfissionaisId));
+            }
+
+        } else if (alunosTabPane.isSelected()) {
+            ArrayList<Aluno> listaAlunosId = new ArrayList<Aluno>();
+            for (Aluno i : listaUsuariosObservavel) {
+                if (i.getId() == Long.parseLong(searchFieldA.getText())) {
+                    listaAlunosId.add(i);
+                }
+            }
+            if (listaAlunosId != null) {
+                listaUsuarios.setItems(FXCollections.observableArrayList(listaAlunosId));
+            }
+        } else if (admsTabPane.isSelected()) {
+            ArrayList<Administrador> listaAdministradoresId = new ArrayList<Administrador>();
+            for (Administrador i : listaAdministradoresObservavel) {
+                if (i.getId() == Long.parseLong(searchFieldAdm.getText())) {
+                    listaAdministradoresId.add(i);
+                }
+            }
+            if (listaAdministradoresId != null) {
+                listaAdministradores.setItems(FXCollections.observableArrayList(listaAdministradoresId));
+            }
+        }
+
+
+    }
+
+
+
 }

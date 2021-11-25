@@ -20,6 +20,10 @@ public class Administrador extends UsuarioGeral implements Serializable {
         this.senha = senha;
     }
 
+    public Administrador(){
+
+    }
+
     public String getSenha() {
         return senha;
     }

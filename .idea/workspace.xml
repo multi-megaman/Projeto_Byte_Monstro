@@ -5,23 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2137f37-a309-4cdd-86e1-2b8bf25fd94c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_dados/RepositorioFileUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/ControladorRepositorioAdministrador.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/ControladorRepositorioAluno.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/ControladorRepositorioProfissional.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Profissionais.dat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/AdminController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_dados/IRepositorioUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_dados/IRepositorioUsuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_dados/RepositorioUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_dados/RepositorioUsuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/Byte_Monstro_FX.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/Byte_Monstro_FX.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/MainWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/ProfessionalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/ProfessionalController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Administrador.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Administrador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Aluno.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Aluno.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Profissional.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Profissional.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Administrador.class" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Administrador.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Aluno.class" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Aluno.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Profissional.class" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Profissional.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,15 +43,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/provas_passadas-master" />
-    <property name="settings.editor.selected.configurable" value="Errors" />
+    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/SceneBuilder/SceneBuilder.exe" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\01011000\Documents\GitHub\Projeto_Byte_Monstro\Byte_Monstro_FX\src\main\resources\br\ufrpe\byte_monstro\byte_monstro_fx" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="br.ufrpe.byte_monstro.byte_monstro_fx" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="br.ufrpe.byte_monstro.byte_monstro_fx" />
@@ -110,5 +102,24 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/AlunoController.java</url>
+          <line>41</line>
+          <properties class="br.ufrpe.byte_monstro.byte_monstro_fx.AlunoController" method="initialize">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/AlunoController.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
