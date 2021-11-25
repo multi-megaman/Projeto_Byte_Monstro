@@ -19,6 +19,7 @@
             <Button layoutX="290.0" layoutY="52.0" mnemonicParsing="false" onAction="#btnSearchPressed" text="Search" />
             <Button layoutX="364.0" layoutY="52.0" mnemonicParsing="false" onAction="#btnResetPressed" text="Reset" />
             <Label layoutX="490.0" layoutY="56.0" text="Clique duas vezes no seu usuário" />
+            <Button layoutX="350.0" layoutY="282.0" mnemonicParsing="false" onAction="#btnTestePressed" text="Teste" />
          </children>
       </Pane>
    </center>

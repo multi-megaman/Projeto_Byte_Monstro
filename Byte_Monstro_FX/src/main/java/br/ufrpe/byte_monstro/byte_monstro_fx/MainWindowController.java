@@ -49,21 +49,30 @@ public class MainWindowController {
     private ObservableList<Administrador> listaAdministradoresObservavel;
 
 
+    private ControladorRepositorioAluno repositorioAluno;
+
+    private ControladorRepositorioProfissional repositorioProfissional;
+
+    private ControladorRepositorioAdministrador repositorioAdministrador;
+
+
     public void initialize(){
 
-        listaUsuariosObservavel = FXCollections.observableArrayList();
-        listaProfissionaisObservavel = FXCollections.observableArrayList();
-        listaAdministradoresObservavel = FXCollections.observableArrayList();
+        repositorioAluno = new ControladorRepositorioAluno();
+        repositorioProfissional = new ControladorRepositorioProfissional();
+        repositorioAdministrador = new ControladorRepositorioAdministrador();
 
-        genItems();
+
+
+
+        listaUsuariosObservavel = FXCollections.observableArrayList(repositorioAluno.listarAlunos());
+        listaProfissionaisObservavel = FXCollections.observableArrayList(repositorioProfissional.listarProfissionais());
+        listaAdministradoresObservavel = FXCollections.observableArrayList(repositorioAdministrador.listarAdministradores());
+
+        //genItems();
         listaUsuarios.setItems(listaUsuariosObservavel);
         listaProfissionais.setItems(listaProfissionaisObservavel);
         listaAdministradores.setItems(listaAdministradoresObservavel);
-
-
-
-
-        //registerEventHandlers();
     }
     private void genItems() { //PARA TESTES APENAS
         int numeroNoNomeDoAluno = 0;
@@ -115,6 +124,23 @@ public class MainWindowController {
         }
     }
 
+
+    //PARA TESTE APENAS
+    @FXML
+    public void btnTestePressed(ActionEvent acaoevento) {
+        //PARA TESTE APENAS
+        repositorioProfissional.adicionarProfissional(new Profissional(1010,"Professor_Teste",10+10,'M',10+50.6,10*1.70,0.7*(10/2),"1",EnumAcademias.values()[1]));
+
+        listaProfissionaisObservavel = FXCollections.observableArrayList(repositorioProfissional.listarProfissionais());
+        listaProfissionais.setItems(listaProfissionaisObservavel);
+
+
+        repositorioAdministrador.adicionarAdministrador(new Administrador(1010,"ADM_Teste",10+10,'F',10+50.6,10*1.70,0.7*(10/2),"1"));
+
+        listaAdministradoresObservavel = FXCollections.observableArrayList(repositorioAdministrador.listarAdministradores());
+        listaAdministradores.setItems(listaAdministradoresObservavel);
+
+    }
 
     @FXML
     public void clickAluno(Event ev) throws IOException {
@@ -250,7 +276,7 @@ public class MainWindowController {
                                         }
 
                                         ProfessionalController professionalController = loaderProfissional.getController();
-                                        professionalController.setListaUsuariosObservavel(FXCollections.observableArrayList(profissionalEscolhido.getAlunos()));
+                                        professionalController.setAll(FXCollections.observableArrayList(profissionalEscolhido.getAlunos()),profissionalEscolhido);
 
                                         Stage stage = (Stage)((Node)click.getSource()).getScene().getWindow();
                                         Scene scene = new Scene(rootProfissional);
