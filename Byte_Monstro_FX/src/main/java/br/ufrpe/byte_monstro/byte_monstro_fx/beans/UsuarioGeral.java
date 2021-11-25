@@ -1,6 +1,8 @@
 package br.ufrpe.byte_monstro.byte_monstro_fx.beans;
 
-public abstract class UsuarioGeral {
+import java.io.Serializable;
+
+public abstract class UsuarioGeral implements Serializable {
     private long id;
     private String nome;
     private int idade;

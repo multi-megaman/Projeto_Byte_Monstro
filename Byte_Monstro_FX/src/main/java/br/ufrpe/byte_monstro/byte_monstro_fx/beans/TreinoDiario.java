@@ -12,6 +12,7 @@ public class TreinoDiario {
     }
 
     public ArrayList<Exercicios> getExercicios() {
+
         return exercicios;
     }
 

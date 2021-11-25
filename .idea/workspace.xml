@@ -6,12 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e2137f37-a309-4cdd-86e1-2b8bf25fd94c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Alunos.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/MainWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Aluno.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Aluno.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/resources/br/ufrpe/byte_monstro/byte_monstro_fx/MainWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/resources/br/ufrpe/byte_monstro/byte_monstro_fx/MainWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Administrador.class" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Administrador.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Aluno.class" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/beans/Aluno.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Administradores.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/TreinoDiario.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/TreinoDiario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Profissionais.dat" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
