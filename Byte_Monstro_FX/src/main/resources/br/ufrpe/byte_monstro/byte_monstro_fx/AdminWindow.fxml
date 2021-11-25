@@ -1,73 +1,186 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.byte_monstro.byte_monstro_fx.AdminController">
-   <right>
-      <VBox prefHeight="400.0" prefWidth="307.0" BorderPane.alignment="CENTER">
-         <children>
-            <Pane prefHeight="457.0" prefWidth="307.0">
-               <children>
-                  <ListView fx:id="listaUsuarios" layoutX="34.0" layoutY="51.0" onMouseClicked="#clickAluno" prefHeight="299.0" prefWidth="240.0" />
-               </children>
-            </Pane>
-         </children>
-      </VBox>
-   </right>
-   <center>
-      <Pane prefHeight="458.0" prefWidth="293.0" BorderPane.alignment="CENTER">
-         <children>
-            <TextField fx:id="generoPicker" layoutX="110.0" layoutY="174.0" />
-            <TextField fx:id="namePicker" layoutX="110.0" layoutY="98.0" />
-            <Label layoutX="14.0" layoutY="102.0" text="Nome do Aluno" />
-            <Label layoutX="75.0" layoutY="140.0" text="Idade" />
-            <Label layoutX="66.0" layoutY="178.0" text="Genero" />
-            <TextField fx:id="idadePicker" layoutX="110.0" layoutY="136.0" />
-            <TextField fx:id="pesoPicker" layoutX="110.0" layoutY="215.0" />
-            <TextField fx:id="alturaPicker" layoutX="110.0" layoutY="261.0" />
-            <TextField fx:id="gorduraPicker" layoutX="110.0" layoutY="303.0" />
-            <DatePicker fx:id="matriculaPicker" layoutX="110.0" layoutY="354.0" />
-            <Label layoutX="77.0" layoutY="219.0" text="Peso" />
-            <Label layoutX="71.0" layoutY="265.0" text="Altura" />
-            <Label layoutX="63.0" layoutY="307.0" text="Gordura" />
-            <Label layoutX="52.0" layoutY="358.0" text="Matricula" />
-            <Button fx:id="btnAdd" layoutX="324.0" layoutY="119.0" mnemonicParsing="false" onAction="#btnAddPressed" text="Add" />
-            <Button layoutX="321.0" layoutY="354.0" mnemonicParsing="false" onAction="#btnClearPressed" text="Clear" textFill="#798000" />
-            <Button fx:id="deleteButton" layoutX="317.0" layoutY="261.0" mnemonicParsing="false" onAction="#btnDeletePressed" text="Delete" />
-            <Button layoutX="315.0" layoutY="187.0" mnemonicParsing="false" onAction="#btnUpdatePressed" text="Update" />
-            <TextField fx:id="idProfPicker" layoutX="110.0" layoutY="404.0" />
-            <Label layoutX="63.0" layoutY="408.0" text="Id prof" />
-            <Button layoutX="30.0" layoutY="34.0" mnemonicParsing="false" onAction="#btnBackPressed" text=" &lt;- Back" />
-         </children>
-      </Pane>
-   </center>
-   <bottom>
-      <Pane prefHeight="356.0" prefWidth="750.0" BorderPane.alignment="CENTER">
-         <children>
-            <ComboBox fx:id="exercicioEnumComboBox" layoutX="571.0" layoutY="34.0" prefWidth="150.0" />
-            <Label layoutX="518.0" layoutY="38.0" text="Nome:" />
-            <TextField fx:id="seriePicker" layoutX="571.0" layoutY="79.0" />
-            <TextField fx:id="repeticaoPicker" layoutX="571.0" layoutY="128.0" />
-            <TextField fx:id="cargaPicker" layoutX="572.0" layoutY="170.0" />
-            <Label layoutX="522.0" layoutY="83.0" text="Series:" />
-            <Label layoutX="508.0" layoutY="132.0" text="Repetições:" />
-            <Label layoutX="525.0" layoutY="174.0" text="Carga:" />
-            <TabPane fx:id="treinosTabPane" layoutX="10.0" layoutY="9.0" prefHeight="234.0" prefWidth="487.0" tabClosingPolicy="UNAVAILABLE" />
-            <Button layoutX="625.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnAlterPressed" text="Alter" />
-            <Button layoutX="66.0" layoutY="267.0" mnemonicParsing="false" onAction="#btnNewPressed" text="New" />
-            <Button layoutX="291.0" layoutY="267.0" mnemonicParsing="false" onAction="#btnRemovePressed" text="Remove" />
-            <Button layoutX="568.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnInsertPressed" text="Insert" />
-            <Button layoutX="675.0" layoutY="206.0" mnemonicParsing="false" onAction="#btnErasePressed" text="Erase" />
-         </children>
-      </Pane>
-   </bottom>
-</BorderPane>
+<Pane prefHeight="714.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.byte_monstro.byte_monstro_fx.AdminController">
+   <children>
+      <Button layoutX="22.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnBackPressed" prefHeight="30.0" prefWidth="62.0" text="&lt;-Back" />
+      <TabPane layoutX="97.0" layoutY="14.0" prefHeight="673.0" prefWidth="629.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="profissionaisTabPane" closable="false" text="Profissionais">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="623.0" prefWidth="629.0">
+                     <children>
+                        <ListView fx:id="listaProfissionais" layoutX="14.0" layoutY="50.0" onMouseClicked="#clickProfissional" prefHeight="300.0" prefWidth="230.0" />
+                        <TextField fx:id="searchFieldP" layoutX="75.0" layoutY="14.0" prefHeight="25.0" prefWidth="130.0" />
+                        <Label layoutX="14.0" layoutY="18.0" text="Pesquisar:" />
+                        <Button layoutX="15.0" layoutY="380.0" mnemonicParsing="false" onAction="#btnCadastrarPressed" text="Cadastrar" />
+                        <Button layoutX="107.0" layoutY="380.0" mnemonicParsing="false" onAction="#btnEditarPressed" text="Editar" />
+                        <Button layoutX="179.0" layoutY="380.0" mnemonicParsing="false" onAction="#btnDeletarPressed" text="Deletar" />
+                        <GridPane layoutX="282.0" layoutY="27.0" prefHeight="314.0" prefWidth="300.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Idade:" GridPane.rowIndex="1" />
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Gordura:" GridPane.rowIndex="5" />
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Altura:" GridPane.rowIndex="4" />
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Peso:" GridPane.rowIndex="3" />
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Gênero:" GridPane.rowIndex="2" />
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Academia:" GridPane.rowIndex="6" />
+                              <TextField fx:id="idadePickerP" layoutX="160.0" layoutY="55.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="generoPickerP" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="alturaPickerP" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="pesoPickerP" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="gorduraPickerP" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Nome:" />
+                              <TextField fx:id="nomePickerP" GridPane.columnIndex="1" />
+                              <ChoiceBox fx:id="academiaPicker" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                           </children>
+                        </GridPane>
+                        <TitledPane animated="false" layoutX="275.0" layoutY="365.0" prefHeight="251.0" prefWidth="329.0" text="Alunos Vinculados">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="202.0" prefWidth="327.0">
+                                 <children>
+                                    <ListView fx:id="listaAlunosVinculados" layoutX="21.6" layoutY="17.6" prefHeight="143.0" prefWidth="309.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </TitledPane>
+                        <Button layoutX="210.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnSearchPressed" prefHeight="25.0" prefWidth="34.0" text="Ok" />
+                     </children>
+                  </AnchorPane>
+               </content>
+          </Tab>
+          <Tab fx:id="alunosTabPane" text="Alunos">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="571.0" prefWidth="441.0">
+                     <children>
+                        <ListView fx:id="listaUsuarios" layoutX="14.0" layoutY="50.0" onMouseClicked="#clickAluno" prefHeight="300.0" prefWidth="230.0" />
+                        <TextField fx:id="searchFieldA" layoutX="75.0" layoutY="14.0" prefHeight="25.0" prefWidth="130.0" />
+                        <Label layoutX="14.0" layoutY="18.0" text="Pesquisar:" />
+                        <Button layoutX="15.0" layoutY="380.0" mnemonicParsing="false" onAction="#btnCadastrarPressed" text="Cadastrar" />
+                        <Button layoutX="107.0" layoutY="380.0" mnemonicParsing="false" onAction="#btnEditarPressed" text="Editar" />
+                        <Button layoutX="179.0" layoutY="380.0" mnemonicParsing="false" onAction="#btnDeletarPressed" text="Deletar" />
+                        <Button layoutX="210.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnSearchPressed" prefHeight="25.0" prefWidth="34.0" text="Ok" />
+                        <GridPane layoutX="283.0" layoutY="15.0" prefHeight="338.0" prefWidth="300.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Idade:" GridPane.rowIndex="2" />
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Gordura:" GridPane.rowIndex="6" />
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Altura:" GridPane.rowIndex="5" />
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Peso:" GridPane.rowIndex="4" />
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Gênero:" GridPane.rowIndex="3" />
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Professor:" GridPane.rowIndex="7" />
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Data de matrícula:" GridPane.rowIndex="1" />
+                              <TextField fx:id="idadePickerA" layoutX="160.0" layoutY="55.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="generoPickerA" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="alturaPickerA" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <TextField fx:id="pesoPickerA" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="gorduraPickerA" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <TextField fx:id="idProfPicker" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Nome:" />
+                              <TextField fx:id="nomePickerA" GridPane.columnIndex="1" />
+                              <DatePicker fx:id="matriculaPickerA" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                        <TitledPane animated="false" layoutX="269.0" layoutY="368.0" prefHeight="251.0" prefWidth="329.0" text="Lista de treinos">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="202.0" prefWidth="327.0">
+                                 <children>
+                                    <TabPane fx:id="treinosTabPane" layoutX="53.0" layoutY="25.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="admsTabPane" text="ADMs">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="571.0" prefWidth="441.0">
+                     <children>
+                        <ListView fx:id="listaAdministradores" layoutX="14.0" layoutY="50.0" onMouseClicked="#clickAdministrador" prefHeight="300.0" prefWidth="230.0" />
+                        <TextField fx:id="searchFieldAdm" layoutX="75.0" layoutY="14.0" prefHeight="25.0" prefWidth="130.0" />
+                        <Label layoutX="14.0" layoutY="18.0" text="Pesquisar:" />
+                        <Button layoutX="15.0" layoutY="380.0" mnemonicParsing="false" onAction="#btnCadastrarPressed" text="Cadastrar" />
+                        <Button layoutX="107.0" layoutY="380.0" mnemonicParsing="false" onAction="#btnEditarPressed" text="Editar" />
+                        <Button layoutX="179.0" layoutY="380.0" mnemonicParsing="false" onAction="#btnDeletarPressed" text="Deletar" />
+                        <Button layoutX="210.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnSearchPressed" prefHeight="25.0" prefWidth="34.0" text="Ok" />
+                        <GridPane layoutX="279.0" layoutY="55.0" prefHeight="291.0" prefWidth="300.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Idade:" GridPane.rowIndex="1" />
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Gordura:" GridPane.rowIndex="5" />
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Altura:" GridPane.rowIndex="4" />
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Peso:" GridPane.rowIndex="3" />
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Gênero:" GridPane.rowIndex="2" />
+                              <TextField fx:id="idadePickerAdm" layoutX="160.0" layoutY="55.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="generoPickerAdm" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="alturaPickerAdm" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="pesoPickerAdm" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="gorduraPickerAdm" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label prefHeight="34.0" prefWidth="147.0" text="Nome:" />
+                              <TextField fx:id="nomePickerAdm" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </TabPane>
+   </children>
+</Pane>
