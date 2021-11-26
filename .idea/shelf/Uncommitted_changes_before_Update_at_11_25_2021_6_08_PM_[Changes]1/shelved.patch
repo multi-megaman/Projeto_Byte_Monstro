@@ -1,0 +1,18 @@
+Index: Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/UsuarioGeral.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package br.ufrpe.byte_monstro.byte_monstro_fx.beans;\r\n\r\npublic abstract class UsuarioGeral {\r\n    private long id;\r\n    private String nome;\r\n    private int idade;\r\n    private char genero;\r\n    private double peso;\r\n    private double altura;\r\n    private double percentualGordura;\r\n\r\n    public UsuarioGeral(long id, String nome, int idade, char genero, double peso, double altura, double percentualGordura) {\r\n        this.id = id;\r\n        this.nome = nome;\r\n        this.idade = idade;\r\n        this.genero = genero;\r\n        this.peso = peso;\r\n        this.altura = altura;\r\n        this.percentualGordura = percentualGordura;\r\n    }\r\n\r\n    public UsuarioGeral() {\r\n\r\n    }\r\n\r\n    public long getId() {\r\n        return id;\r\n    }\r\n\r\n    public void setId(long id) {\r\n        this.id = id;\r\n    }\r\n\r\n    public String getNome() {\r\n        return nome;\r\n    }\r\n\r\n    public void setNome(String nome) {\r\n        this.nome = nome;\r\n    }\r\n\r\n    public int getIdade() {\r\n        return idade;\r\n    }\r\n\r\n    public void setIdade(int idade) {\r\n        this.idade = idade;\r\n    }\r\n\r\n    public char getGenero() {\r\n        return genero;\r\n    }\r\n\r\n    public void setGenero(char genero) {\r\n        this.genero = genero;\r\n    }\r\n\r\n    public double getPeso() {\r\n        return peso;\r\n    }\r\n\r\n    public void setPeso(double peso) {\r\n        this.peso = peso;\r\n    }\r\n\r\n    public double getAltura() {\r\n        return altura;\r\n    }\r\n\r\n    public void setAltura(double altura) {\r\n        this.altura = altura;\r\n    }\r\n\r\n    public double getPercentualGordura() {\r\n        return percentualGordura;\r\n    }\r\n\r\n    public void setPercentualGordura(double percentualGordura) {\r\n        this.percentualGordura = percentualGordura;\r\n    }\r\n\r\n\r\n\r\n    @Override\r\n    public String toString(){\r\n        return String.format(\"%-8d|%-40s\", getId(), getNome());\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/UsuarioGeral.java b/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/UsuarioGeral.java
+--- a/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/UsuarioGeral.java	
++++ b/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/beans/UsuarioGeral.java	
+@@ -83,6 +83,6 @@
+ 
+     @Override
+     public String toString(){
+-        return String.format("%-8d|%-40s", getId(), getNome());
++        return String.format("%-8s|%-40s", getId(), getNome());
+     }
+ }
