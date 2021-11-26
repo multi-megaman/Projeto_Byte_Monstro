@@ -330,7 +330,9 @@ public class ProfessionalController {
 
     @FXML
     public void btnBackPressed(ActionEvent event) {
-        FXMLLoader loaderMain = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+
+        ScreenManager.getInstance().showMainScreen();
+        /*FXMLLoader loaderMain = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
         Parent root = null;
         try {
             root = loaderMain.load();
@@ -342,7 +344,7 @@ public class ProfessionalController {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();
+        stage.show();*/
     }
 
     @FXML

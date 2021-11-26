@@ -84,7 +84,9 @@ public class MainWindowController {
             int randomAcademia = ThreadLocalRandom.current().nextInt(0, EnumAcademias.values().length -1);
 
             //lista.add(new String("Aluno_"+Integer.toString(i)));
-            listaProfissionaisObservavel.add(new Profissional(randomNum,"Professor_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"abc" + Integer.toString(i),EnumAcademias.values()[randomAcademia]));
+            repositorioProfissional.adicionarProfissional(new Profissional(randomNum,"Professor_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"1",EnumAcademias.values()[randomAcademia]));
+            listaProfissionaisObservavel = FXCollections.observableArrayList(repositorioProfissional.listarProfissionais());
+
 
             //ALUNOS -----------
             for(int j=0 + numeroNoNomeDoAluno;j<10 + numeroNoNomeDoAluno;j++){
@@ -92,7 +94,8 @@ public class MainWindowController {
                 int randomQntTreinos = ThreadLocalRandom.current().nextInt(1, 7);
 
                 //lista.add(new String("Aluno_"+Integer.toString(i)));
-                listaUsuariosObservavel.add(new Aluno(randomNumAluno,"Aluno_"+Integer.toString(j),j+10,'M',j+50.6,j*1.70,0.7*(j/2),LocalDate.parse("10/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy")),listaProfissionaisObservavel.get(i).getId()));
+                repositorioAluno.adicionarAluno(new Aluno(randomNumAluno,"Aluno_"+Integer.toString(j),j+10,'M',j+50.6,j*1.70,0.7*(j/2),LocalDate.parse("10/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy")),listaProfissionaisObservavel.get(i).getId()));
+                listaUsuariosObservavel = FXCollections.observableArrayList(repositorioAluno.listarAlunos());
 
                 for (int l = 0; l < randomQntTreinos; l++) {
                     TreinoDiario novoTreino = new TreinoDiario();
@@ -108,9 +111,13 @@ public class MainWindowController {
                         novoTreino.adicionarExercicio(novoExercicio);
                     }
                     listaUsuariosObservavel.get(j).adicionarTreino(novoTreino);
+                    repositorioAluno.atualizarAluno(listaUsuariosObservavel.get(j));
 
                 }
-                listaProfissionaisObservavel.get(i).adicionarAlunoNaLista(listaUsuariosObservavel.get(j));
+                //listaProfissionaisObservavel.get(i).adicionarAlunoNaLista(listaUsuariosObservavel.get(j));
+                //repositorioProfissional.atualizarProfissional(listaProfissionaisObservavel.get(i));
+                //listaProfissionaisObservavel = FXCollections.observableArrayList(repositorioProfissional.listarProfissionais());
+
             }
             numeroNoNomeDoAluno += 10;
             }
@@ -119,7 +126,8 @@ public class MainWindowController {
         for(int i=0;i<10;i++){
             int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
 
-            listaAdministradoresObservavel.add(new Administrador(randomNum,"ADM_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"abc123"));
+            repositorioAdministrador.adicionarAdministrador(new Administrador(randomNum,"ADM_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"2"));
+            listaAdministradoresObservavel = FXCollections.observableArrayList(repositorioAdministrador.listarAdministradores());
 
         }
     }
@@ -129,13 +137,17 @@ public class MainWindowController {
     @FXML
     public void btnTestePressed(ActionEvent acaoevento) {
         //PARA TESTE APENAS
-        repositorioProfissional.adicionarProfissional(new Profissional(1010,"Professor_Teste",10+10,'M',10+50.6,10*1.70,0.7*(10/2),"1",EnumAcademias.values()[1]));
+        //repositorioProfissional.adicionarProfissional(new Profissional(1010,"Professor_Teste",10+10,'M',10+50.6,10*1.70,0.7*(10/2),"1",EnumAcademias.values()[1]));
+        genItems();
+
+        listaUsuariosObservavel = FXCollections.observableArrayList(repositorioAluno.listarAlunos());
+        listaUsuarios.setItems(listaUsuariosObservavel);
 
         listaProfissionaisObservavel = FXCollections.observableArrayList(repositorioProfissional.listarProfissionais());
         listaProfissionais.setItems(listaProfissionaisObservavel);
 
 
-        repositorioAdministrador.adicionarAdministrador(new Administrador(1010,"ADM_Teste",10+10,'F',10+50.6,10*1.70,0.7*(10/2),"1"));
+        //repositorioAdministrador.adicionarAdministrador(new Administrador(1010,"ADM_Teste",10+10,'F',10+50.6,10*1.70,0.7*(10/2),"1"));
 
         listaAdministradoresObservavel = FXCollections.observableArrayList(repositorioAdministrador.listarAdministradores());
         listaAdministradores.setItems(listaAdministradoresObservavel);
@@ -183,12 +195,12 @@ public class MainWindowController {
 
 
 
-
-                            //IR PARA A JANELA DO PROFiSSIONAL-------------------
+                        ScreenManager.getInstance().showAlunoScreen(alunoEscolhido);
+                            //-------------------
 
                             //Stage stageAtual = (Stage) listaUsuarios.getScene().getWindow();
                             //stageAtual.close();
-                            FXMLLoader loaderAluno = new FXMLLoader(getClass().getResource("AlunoWindow.fxml"));
+                            /*FXMLLoader loaderAluno = new FXMLLoader(getClass().getResource("AlunoWindow.fxml"));
 
                             Parent rootAluno = null;
                             try {
@@ -206,7 +218,7 @@ public class MainWindowController {
                             stage.show();
 
 
-                            System.out.println("[DEBUG] ir para a tela do Aluno. ");
+                            System.out.println("[DEBUG] ir para a tela do Aluno. ");*/
 
                         }
 
@@ -226,12 +238,6 @@ public class MainWindowController {
 
 
                     //---------------------------------
-
-
-
-
-
-
 
 
     @FXML
@@ -263,9 +269,11 @@ public class MainWindowController {
                                 System.out.println("[DEBUG] senha digitada: "+ senhaInput.getText());
                                 if(profissionalEscolhido.getSenha().equals(senhaInput.getText())) {
                                     //IR PARA A JANELA DO PROFiSSIONAL-------------------
-
                                     Stage stageAtual = (Stage) btnConfirmar.getScene().getWindow();
                                     stageAtual.close();
+
+                                    ScreenManager.getInstance().showProfissionalScreen(FXCollections.observableArrayList(profissionalEscolhido.getAlunos()),profissionalEscolhido);
+                                    /*
                                         FXMLLoader loaderProfissional = new FXMLLoader(getClass().getResource("ProfessionalWindow.fxml"));
 
                                         Parent rootProfissional = null;
@@ -284,7 +292,7 @@ public class MainWindowController {
                                         stage.show();
 
 
-                                        System.out.println("[DEBUG] ir para a tela do professor. lista: " + FXCollections.observableArrayList(profissionalEscolhido.getAlunos()));
+                                        System.out.println("[DEBUG] ir para a tela do professor. lista: " + FXCollections.observableArrayList(profissionalEscolhido.getAlunos()));*/
 
                                     }
                                 else {

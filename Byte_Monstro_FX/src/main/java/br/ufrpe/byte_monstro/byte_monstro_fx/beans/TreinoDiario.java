@@ -1,9 +1,11 @@
 package br.ufrpe.byte_monstro.byte_monstro_fx.beans;
 
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.Exercicios;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TreinoDiario {
+public class TreinoDiario implements Serializable {
     public ArrayList<Exercicios> exercicios;
 
     public TreinoDiario() {

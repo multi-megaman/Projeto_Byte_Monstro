@@ -10,10 +10,14 @@ import java.io.IOException;
 public class MonsterApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MonsterApplication.class.getResource("MainWindow.fxml"));
+
+        ScreenManager.getInstance().setMainStage(stage);
+        ScreenManager.getInstance().showMainScreen();
+
+        /*FXMLLoader fxmlLoader = new FXMLLoader(MonsterApplication.class.getResource("MainWindow.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 800, 750);
         stage.setTitle("01011000");
-        stage.setScene(scene);
+        stage.setScene(scene);*/
         stage.show();
     }
 

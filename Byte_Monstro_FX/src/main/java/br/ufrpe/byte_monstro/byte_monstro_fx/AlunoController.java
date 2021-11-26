@@ -118,8 +118,10 @@ public class AlunoController {
 
     @FXML
     public void btnBackPressed(ActionEvent event) {
-        System.out.println(aluno);
-        Parent root = null;
+        System.out.println(aluno.getTreinoDiario());
+
+        ScreenManager.getInstance().showMainScreen();
+        /*Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
         } catch (IOException e) {
@@ -128,6 +130,6 @@ public class AlunoController {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();
+        stage.show();*/
     }
 }

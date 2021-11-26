@@ -2,7 +2,10 @@ package br.ufrpe.byte_monstro.byte_monstro_fx.beans;
 
 import br.ufrpe.byte_monstro.byte_monstro_fx.beans.EnumExercicios;
 
-public class Exercicios {
+import java.io.Serial;
+import java.io.Serializable;
+
+public class Exercicios implements Serializable {
     private EnumExercicios tipo;
     private int serie;
     private String repeticao;

@@ -175,7 +175,8 @@ public class AdminController {
 
     @FXML
     public void btnBackPressed(ActionEvent event) {
-        Parent root = null;
+        ScreenManager.getInstance().showMainScreen();
+        /*Parent root = null;
         try {
             root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
         } catch (IOException e) {
@@ -184,7 +185,7 @@ public class AdminController {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.show();
+        stage.show();*/
     }
 
 
