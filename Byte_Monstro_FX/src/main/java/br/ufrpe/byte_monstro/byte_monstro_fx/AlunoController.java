@@ -44,6 +44,10 @@ public class AlunoController {
 
     private Aluno aluno;
 
+    public void atualizarListas() {
+
+    }
+
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
     }
@@ -88,6 +92,7 @@ public class AlunoController {
     public void btnImprimirPressed() {
         aluno.setQntTreinosPercorridos(aluno.getQntTreinosPercorridos()+1);
 
+
         if (aluno.getQntTreinosPercorridos() >= aluno.getQntMaximaDeSequencia()) {
             aluno.setPedirTrocaDoTreino(true);
         }
@@ -101,6 +106,8 @@ public class AlunoController {
 
         Tpercorridos.setText(String.format("Treino %d/%d",aluno.getQntTreinosPercorridos(),aluno.getQntMaximaDeSequencia()));
 
+        RepositorioManager.getInstance().atualizarAluno(aluno);
+
         Alert warningAlert = new Alert(Alert.AlertType.WARNING);
         warningAlert.setHeaderText("SIMULAÇÃO DE IMPRESSÂO DE FICHA DE TREINO");
         warningAlert.setContentText("RETIRE SUA FICHA DE TREINO NA MAQUINETA");
@@ -113,6 +120,8 @@ public class AlunoController {
         aluno.setPedirTrocaDoTreino(true);
         Tpercorridos.setText(String.format("Treino %d/%d",aluno.getQntTreinosPercorridos(),aluno.getQntMaximaDeSequencia()));
         trocaTreinoTF.setText("Pedido para a troca dos treinos feita.");
+
+        RepositorioManager.getInstance().atualizarAluno(aluno);
 
     }
 

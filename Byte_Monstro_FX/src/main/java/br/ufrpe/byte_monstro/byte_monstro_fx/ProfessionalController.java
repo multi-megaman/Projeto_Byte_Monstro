@@ -81,9 +81,13 @@ public class ProfessionalController {
 
     private Profissional profissionalEscolhido;
 
-    private ControladorRepositorioAluno repositorioAluno;
-    private ControladorRepositorioProfissional repositorioProfissional;
+    /*private ControladorRepositorioAluno repositorioAluno;
+    private ControladorRepositorioProfissional repositorioProfissional;*/
 
+    public void atualizarListas() {
+        listaUsuariosObservavel = FXCollections.observableArrayList(profissionalEscolhido.getAlunos());
+        listaUsuarios.setItems(listaUsuariosObservavel);
+    }
 
     public void setAll(ObservableList<Aluno> lista, Profissional profissional) {
         listaUsuariosObservavel = lista;
@@ -97,8 +101,8 @@ public class ProfessionalController {
     public void initialize(){
         exercicioEnumComboBox.getItems().setAll(EnumExercicios.values());
 
-        repositorioAluno = new ControladorRepositorioAluno();
-        repositorioProfissional = new ControladorRepositorioProfissional();
+        /*repositorioAluno = new ControladorRepositorioAluno();
+        repositorioProfissional = new ControladorRepositorioProfissional();*/
 
 
     }
@@ -172,10 +176,13 @@ public class ProfessionalController {
     public void btnDeletePressed(ActionEvent eventoacao){
         Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
         //int id = listaUsuarios.getSelectionModel().getSelectedIndex();
-        listaUsuariosObservavel.remove(aluno);
+        //listaUsuariosObservavel.remove(aluno);
 
-        repositorioAluno.removerAluno(aluno);
-        repositorioProfissional.atualizarProfissional(profissionalEscolhido);
+        profissionalEscolhido.removerAlunoNaLista(aluno);
+
+        RepositorioManager.getInstance().removerAluno(aluno);
+        RepositorioManager.getInstance().atualizarProfissional(profissionalEscolhido);
+        atualizarListas();
 
         System.out.println("[DEBUG] Delete Pressionado");
     }
@@ -197,10 +204,11 @@ public class ProfessionalController {
         aluno.adicionarPesoAoHistorico(Double.parseDouble(pesoPicker.getText()));
         aluno.adicionarGorudraAoHistorico(Double.parseDouble(gorduraPicker.getText()));
 
-        repositorioAluno.atualizarAluno(aluno);
+        RepositorioManager.getInstance().atualizarAluno(aluno);
+        RepositorioManager.getInstance().atualizarProfissional(profissionalEscolhido);
 
-        
-        listaUsuarios.setItems(listaUsuariosObservavel);
+
+        atualizarListas();
         System.out.println("[DEBUG] Update Pressionado");
 
         aluno.verHistoricos();
@@ -215,10 +223,12 @@ public class ProfessionalController {
 
         //AQUI SERIA A FUNÇÃO PADRÃO PARA COLOCAR UM NOVO USUÁRIO NA LISTA
         Aluno alunoNovo = new Aluno((long) randomNum,namePicker.getText(),Integer.parseInt(idadePicker.getText()),Character.toUpperCase(generoPicker.getText().charAt(0)),Double.parseDouble(pesoPicker.getText()),Double.parseDouble(alturaPicker.getText()),Double.parseDouble(gorduraPicker.getText()),matriculaPicker.getValue(),Long.valueOf(idProfPicker.getText()));
-        listaUsuariosObservavel.add(alunoNovo);
+        //RepositorioManager.getInstance().adicionarAluno(alunoNovo);
+        profissionalEscolhido.adicionarAlunoNaLista(alunoNovo);
 
-        repositorioAluno.adicionarAluno(alunoNovo);
-        repositorioProfissional.atualizarProfissional(profissionalEscolhido);
+        RepositorioManager.getInstance().adicionarAluno(alunoNovo);
+        RepositorioManager.getInstance().atualizarProfissional(profissionalEscolhido);
+        atualizarListas();
     }
 
     @FXML
@@ -249,10 +259,14 @@ public class ProfessionalController {
         ListView<Exercicios> listaExercicios = new ListView<Exercicios>();
         aluno.adicionarTreino(new TreinoDiario());
 
+        RepositorioManager.getInstance().atualizarAluno(aluno);
+        RepositorioManager.getInstance().atualizarProfissional(profissionalEscolhido);
+
         listaExercicios.setItems(FXCollections.observableArrayList(aluno.getTreinoDiarioEspecifico(aluno.getTreinoDiario().size() -1).getExercicios()));
         novaTab.setContent(listaExercicios);
 
         treinosTabPane.getTabs().add(novaTab);
+        atualizarListas();
 
 
     }
@@ -264,6 +278,8 @@ public class ProfessionalController {
         Tab tabAtual = treinosTabPane.getSelectionModel().getSelectedItem();
 
         aluno.removerTreino(aluno.getTreinoDiarioEspecifico(tabAtualId));
+        RepositorioManager.getInstance().atualizarAluno(aluno);
+        RepositorioManager.getInstance().atualizarProfissional(profissionalEscolhido);
 
         treinosTabPane.getTabs().remove(tabAtual);
     }
@@ -284,6 +300,8 @@ public class ProfessionalController {
 
         listaExercicios.setItems(FXCollections.observableArrayList(aluno.getTreinoDiarioEspecifico(tabAtualId).getExercicios()));
 
+        RepositorioManager.getInstance().atualizarAluno(aluno);
+        RepositorioManager.getInstance().atualizarProfissional(profissionalEscolhido);
         tabAtual.setContent(listaExercicios);
     }
 
@@ -300,6 +318,8 @@ public class ProfessionalController {
         ListView<Exercicios> listaExercicios = new ListView<Exercicios>();
         listaExercicios.setItems(FXCollections.observableArrayList(aluno.getTreinoDiarioEspecifico(tabAtualId).getExercicios()));
 
+        RepositorioManager.getInstance().atualizarAluno(aluno);
+        RepositorioManager.getInstance().atualizarProfissional(profissionalEscolhido);
         tabAtual.setContent(listaExercicios);
 
     }
@@ -324,13 +344,15 @@ public class ProfessionalController {
         //listaExercicios.getItems().remove(exercicioSelecionado);
         listaExercicios.setItems(FXCollections.observableArrayList(aluno.getTreinoDiarioEspecifico(tabAtualId).getExercicios()));
 
+        RepositorioManager.getInstance().atualizarAluno(aluno);
+        RepositorioManager.getInstance().atualizarProfissional(profissionalEscolhido);
         tabAtual.setContent(listaExercicios);
 
     }
 
     @FXML
     public void btnBackPressed(ActionEvent event) {
-
+        System.out.println(profissionalEscolhido.getAlunos());
         ScreenManager.getInstance().showMainScreen();
         /*FXMLLoader loaderMain = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
         Parent root = null;

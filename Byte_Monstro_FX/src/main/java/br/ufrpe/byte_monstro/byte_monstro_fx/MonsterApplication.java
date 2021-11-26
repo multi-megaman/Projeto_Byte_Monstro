@@ -11,6 +11,7 @@ public class MonsterApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
+        //RepositorioManager.getInstance();
         ScreenManager.getInstance().setMainStage(stage);
         ScreenManager.getInstance().showMainScreen();
 

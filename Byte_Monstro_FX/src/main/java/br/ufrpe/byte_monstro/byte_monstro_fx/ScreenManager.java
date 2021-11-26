@@ -24,7 +24,7 @@ public class ScreenManager {
     private Scene admScene;
 
     private AlunoController alunoController;
-    //private MainWindowController mainWindowController;
+    private MainWindowController mainWindowController;
     private ProfessionalController professionalController;
     private AdminController adminController;
 
@@ -40,54 +40,53 @@ public class ScreenManager {
     private ScreenManager() {
         // Construtor privado para evitar instanciação
 
+        FXMLLoader loadMain = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+        Parent rootMain = null;
         try {
-            BorderPane mainPane = FXMLLoader.load(getClass().getResource(
-                    "MainWindow.fxml"));
-            // inicializando cena
-            this.mainScene = new Scene(mainPane);
-
-
-            FXMLLoader loadAluno = new FXMLLoader(getClass().getResource("AlunoWindow.fxml"));
-            Parent rootAluno = null;
-            try {
-                rootAluno = loadAluno.load();
-            } catch (IOException t) {
-                t.printStackTrace();
-            }
-            // inicializando cena
-            this.alunoScene = new Scene(rootAluno);
-            alunoController = loadAluno.getController();
-
-
-            FXMLLoader loaderProfissional = new FXMLLoader(getClass().getResource("ProfessionalWindow.fxml"));
-
-            Parent rootProfissional = null;
-            try {
-                rootProfissional = loaderProfissional.load();
-            } catch (IOException t) {
-                t.printStackTrace();
-            }
-            professionalController = loaderProfissional.getController();
-            this.profissionalScene = new Scene(rootProfissional);
-
-
-            FXMLLoader loaderAdm = new FXMLLoader(getClass().getResource("AdminWindow.fxml"));
-
-            Parent rootAdm = null;
-            try {
-                rootAdm = loaderAdm.load();
-            } catch (IOException t) {
-                t.printStackTrace();
-            }
-            adminController = loaderAdm.getController();
-            this.admScene = new Scene(rootAdm);
-
-
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            rootMain = loadMain.load();
+        } catch (IOException t) {
+            t.printStackTrace();
         }
+        // inicializando cena
+        mainWindowController = loadMain.getController();
+        this.mainScene = new Scene(rootMain);
+
+
+        FXMLLoader loadAluno = new FXMLLoader(getClass().getResource("AlunoWindow.fxml"));
+        Parent rootAluno = null;
+        try {
+            rootAluno = loadAluno.load();
+        } catch (IOException t) {
+            t.printStackTrace();
+        }
+        // inicializando cena
+        this.alunoScene = new Scene(rootAluno);
+        alunoController = loadAluno.getController();
+
+
+        FXMLLoader loaderProfissional = new FXMLLoader(getClass().getResource("ProfessionalWindow.fxml"));
+
+        Parent rootProfissional = null;
+        try {
+            rootProfissional = loaderProfissional.load();
+        } catch (IOException t) {
+            t.printStackTrace();
+        }
+        professionalController = loaderProfissional.getController();
+        this.profissionalScene = new Scene(rootProfissional);
+
+
+        FXMLLoader loaderAdm = new FXMLLoader(getClass().getResource("AdminWindow.fxml"));
+
+        Parent rootAdm = null;
+        try {
+            rootAdm = loaderAdm.load();
+        } catch (IOException t) {
+            t.printStackTrace();
+        }
+        adminController = loaderAdm.getController();
+        this.admScene = new Scene(rootAdm);
+
 
     }
 
@@ -107,6 +106,7 @@ public class ScreenManager {
     }
 
     public void showMainScreen() {
+        mainWindowController.atualizarListas();
         this.mainStage.setScene(this.mainScene);
         this.mainStage.show();
     }
@@ -120,6 +120,7 @@ public class ScreenManager {
 
     public void showProfissionalScreen(ObservableList listaAlunos, Profissional profissionalEscolhido) {
         professionalController.setAll(listaAlunos,profissionalEscolhido);
+        professionalController.atualizarListas();
         this.mainStage.setScene(this.profissionalScene);
         this.mainStage.show();
     }

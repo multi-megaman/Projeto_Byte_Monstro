@@ -49,25 +49,36 @@ public class MainWindowController {
     private ObservableList<Administrador> listaAdministradoresObservavel;
 
 
-    private ControladorRepositorioAluno repositorioAluno;
+    /*private ControladorRepositorioAluno repositorioAluno;
 
     private ControladorRepositorioProfissional repositorioProfissional;
 
-    private ControladorRepositorioAdministrador repositorioAdministrador;
+    private ControladorRepositorioAdministrador repositorioAdministrador;*/
 
+
+    public void atualizarListas() {
+        listaUsuariosObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarAlunos());
+        listaProfissionaisObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarProfissionais());
+        listaAdministradoresObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarAdministradores());
+
+        //genItems();
+        listaUsuarios.setItems(listaUsuariosObservavel);
+        listaProfissionais.setItems(listaProfissionaisObservavel);
+        listaAdministradores.setItems(listaAdministradoresObservavel);
+    }
 
     public void initialize(){
 
-        repositorioAluno = new ControladorRepositorioAluno();
+        /*repositorioAluno = new ControladorRepositorioAluno();
         repositorioProfissional = new ControladorRepositorioProfissional();
-        repositorioAdministrador = new ControladorRepositorioAdministrador();
+        repositorioAdministrador = new ControladorRepositorioAdministrador();*/
 
 
 
 
-        listaUsuariosObservavel = FXCollections.observableArrayList(repositorioAluno.listarAlunos());
-        listaProfissionaisObservavel = FXCollections.observableArrayList(repositorioProfissional.listarProfissionais());
-        listaAdministradoresObservavel = FXCollections.observableArrayList(repositorioAdministrador.listarAdministradores());
+        listaUsuariosObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarAlunos());
+        listaProfissionaisObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarProfissionais());
+        listaAdministradoresObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarAdministradores());
 
         //genItems();
         listaUsuarios.setItems(listaUsuariosObservavel);
@@ -84,8 +95,8 @@ public class MainWindowController {
             int randomAcademia = ThreadLocalRandom.current().nextInt(0, EnumAcademias.values().length -1);
 
             //lista.add(new String("Aluno_"+Integer.toString(i)));
-            repositorioProfissional.adicionarProfissional(new Profissional(randomNum,"Professor_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"1",EnumAcademias.values()[randomAcademia]));
-            listaProfissionaisObservavel = FXCollections.observableArrayList(repositorioProfissional.listarProfissionais());
+            RepositorioManager.getInstance().adicionarProfissional(new Profissional(randomNum,"Professor_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"1",EnumAcademias.values()[randomAcademia]));
+            listaProfissionaisObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarProfissionais());
 
 
             //ALUNOS -----------
@@ -94,8 +105,8 @@ public class MainWindowController {
                 int randomQntTreinos = ThreadLocalRandom.current().nextInt(1, 7);
 
                 //lista.add(new String("Aluno_"+Integer.toString(i)));
-                repositorioAluno.adicionarAluno(new Aluno(randomNumAluno,"Aluno_"+Integer.toString(j),j+10,'M',j+50.6,j*1.70,0.7*(j/2),LocalDate.parse("10/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy")),listaProfissionaisObservavel.get(i).getId()));
-                listaUsuariosObservavel = FXCollections.observableArrayList(repositorioAluno.listarAlunos());
+                RepositorioManager.getInstance().adicionarAluno(new Aluno(randomNumAluno,"Aluno_"+Integer.toString(j),j+10,'M',j+50.6,j*1.70,0.7*(j/2),LocalDate.parse("10/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy")),listaProfissionaisObservavel.get(i).getId()));
+                listaUsuariosObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarAlunos());
 
                 for (int l = 0; l < randomQntTreinos; l++) {
                     TreinoDiario novoTreino = new TreinoDiario();
@@ -111,12 +122,12 @@ public class MainWindowController {
                         novoTreino.adicionarExercicio(novoExercicio);
                     }
                     listaUsuariosObservavel.get(j).adicionarTreino(novoTreino);
-                    repositorioAluno.atualizarAluno(listaUsuariosObservavel.get(j));
+                    RepositorioManager.getInstance().atualizarAluno(listaUsuariosObservavel.get(j));
 
                 }
-                //listaProfissionaisObservavel.get(i).adicionarAlunoNaLista(listaUsuariosObservavel.get(j));
-                //repositorioProfissional.atualizarProfissional(listaProfissionaisObservavel.get(i));
-                //listaProfissionaisObservavel = FXCollections.observableArrayList(repositorioProfissional.listarProfissionais());
+                listaProfissionaisObservavel.get(i).adicionarAlunoNaLista(listaUsuariosObservavel.get(j));
+                RepositorioManager.getInstance().atualizarProfissional(listaProfissionaisObservavel.get(i));
+                listaProfissionaisObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarProfissionais());
 
             }
             numeroNoNomeDoAluno += 10;
@@ -126,8 +137,8 @@ public class MainWindowController {
         for(int i=0;i<10;i++){
             int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
 
-            repositorioAdministrador.adicionarAdministrador(new Administrador(randomNum,"ADM_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"2"));
-            listaAdministradoresObservavel = FXCollections.observableArrayList(repositorioAdministrador.listarAdministradores());
+            RepositorioManager.getInstance().adicionarAdministrador(new Administrador(randomNum,"ADM_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"2"));
+            listaAdministradoresObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarAdministradores());
 
         }
     }
@@ -140,24 +151,22 @@ public class MainWindowController {
         //repositorioProfissional.adicionarProfissional(new Profissional(1010,"Professor_Teste",10+10,'M',10+50.6,10*1.70,0.7*(10/2),"1",EnumAcademias.values()[1]));
         genItems();
 
-        listaUsuariosObservavel = FXCollections.observableArrayList(repositorioAluno.listarAlunos());
+        listaUsuariosObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarAlunos());
         listaUsuarios.setItems(listaUsuariosObservavel);
 
-        listaProfissionaisObservavel = FXCollections.observableArrayList(repositorioProfissional.listarProfissionais());
+        listaProfissionaisObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarProfissionais());
         listaProfissionais.setItems(listaProfissionaisObservavel);
 
 
         //repositorioAdministrador.adicionarAdministrador(new Administrador(1010,"ADM_Teste",10+10,'F',10+50.6,10*1.70,0.7*(10/2),"1"));
 
-        listaAdministradoresObservavel = FXCollections.observableArrayList(repositorioAdministrador.listarAdministradores());
+        listaAdministradoresObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarAdministradores());
         listaAdministradores.setItems(listaAdministradoresObservavel);
 
     }
 
     @FXML
-    public void clickAluno(Event ev) throws IOException {
-        Aluno alunoEscolhido = listaUsuarios.getSelectionModel().getSelectedItem();
-        //Profissional profissionalEscolhido = listaProfissionais.getSelectionModel().getSelectedItem();
+    public void clickAluno()  {
 
         //IR PARA A JANELA DO ALUNO-------------------
 
@@ -184,6 +193,7 @@ public class MainWindowController {
 
 
 
+
             @Override
             public void handle(MouseEvent click) {
 
@@ -193,8 +203,8 @@ public class MainWindowController {
                 if (click.getClickCount() == 2) {
                     //POPUP----------------------------
 
-
-
+                    Aluno alunoEscolhido = listaUsuarios.getSelectionModel().getSelectedItem();
+                    //System.out.println(alunoEscolhido);
                         ScreenManager.getInstance().showAlunoScreen(alunoEscolhido);
                             //-------------------
 
@@ -237,13 +247,9 @@ public class MainWindowController {
     }
 
 
-                    //---------------------------------
-
-
     @FXML
     public void clickProfissional() throws  IOException {
 
-        Profissional profissionalEscolhido = listaProfissionais.getSelectionModel().getSelectedItem();
 
 
 
@@ -259,6 +265,7 @@ public class MainWindowController {
 
                 if (click.getClickCount() == 2) {
                     //POPUP----------------------------
+                    Profissional profissionalEscolhido = listaProfissionais.getSelectionModel().getSelectedItem();
 
                     Label labelPopUp = new Label("Digite sua senha:");
                     Button btnConfirmar = new Button("Fazer Login");
@@ -335,33 +342,64 @@ public class MainWindowController {
 
     @FXML
     public void clickAdm() throws IOException{
-        Administrador admEscolhido = listaAdministradores.getSelectionModel().getSelectedItem();
+
         listaAdministradores.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+
 
             @Override
             public void handle(MouseEvent click) {
+
                 //AtomicBoolean confirmar = new AtomicBoolean(false);
+
+
                 if (click.getClickCount() == 2) {
+                    //POPUP----------------------------
+                    Administrador admEscolhido = listaAdministradores.getSelectionModel().getSelectedItem();
 
-                    FXMLLoader loaderAdm = new FXMLLoader(getClass().getResource("AdminWindow.fxml"));
+                    Label labelPopUp = new Label("Digite sua senha:");
+                    Button btnConfirmar = new Button("Fazer Login");
+                    TextField senhaInput = new TextField();
 
-                    Parent rootAdm = null;
-                    try {
-                        rootAdm = loaderAdm.load();
-                    } catch (IOException t) {
-                        t.printStackTrace();
-                    }
 
-                    AdminController adminController = loaderAdm.getController();
-                    Stage stage = (Stage) ((Node) click.getSource()).getScene().getWindow();
-                    Scene scene = new Scene(rootAdm);
-                    stage.setScene(scene);
-                    stage.show();
+                    btnConfirmar.setOnAction(e -> {
+                        System.out.println("[DEBUG] senha digitada: "+ senhaInput.getText());
+                        if(admEscolhido.getSenha().equals(senhaInput.getText())) {
+                            //IR PARA A JANELA DO PROFiSSIONAL-------------------
+                            Stage stageAtual = (Stage) btnConfirmar.getScene().getWindow();
+                            stageAtual.close();
 
-                    System.out.println("[DEBUG] ir para a tela do Adm. ");
+                            ScreenManager.getInstance().showAdmScreen();
+                        }
+                        else {
+                            Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                            errorAlert.setHeaderText("!SENHA INCORRETA!");
+                            errorAlert.setContentText("A SENHA DIGITADA ESTÀ INCORRETA, TENTE NOVAMENTE");
+                            errorAlert.showAndWait();
+                        }
+
+                    });
+
+                    FlowPane flowPane = new FlowPane();
+                    flowPane.getChildren().addAll(labelPopUp,senhaInput,btnConfirmar);
+                    flowPane.setPadding(new Insets(20));
+                    flowPane.setVgap(20);
+
+                    Scene popUpLogin = new Scene(flowPane,250,150);
+                    Stage stagePopUp = new Stage();
+                    stagePopUp.initModality(Modality.APPLICATION_MODAL);
+                    stagePopUp.setScene(popUpLogin);
+                    stagePopUp.show();
+
+
+                    //---------------------------------
+
+
+
+
                 }
-
             }
+
         });
     }
 
