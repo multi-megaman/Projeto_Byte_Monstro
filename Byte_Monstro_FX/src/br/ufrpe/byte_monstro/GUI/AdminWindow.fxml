@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane prefHeight="714.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.byte_monstro.byte_monstro_fx.AdminController">
+<Pane prefHeight="714.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.ufrpe.byte_monstro.GUI.AdminController">
    <children>
       <Button layoutX="22.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnBackPressed" prefHeight="30.0" prefWidth="62.0" text="&lt;-Back" />
       <TabPane layoutX="97.0" layoutY="14.0" prefHeight="673.0" prefWidth="629.0" tabClosingPolicy="UNAVAILABLE">

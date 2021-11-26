@@ -81,7 +81,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                br.ufrpe.byte_monstro.byte_monstro_fx/br.ufrpe.byte_monstro.byte_monstro_fx.HelloApplication
+                                br.ufrpe.byte_monstro.byte_monstro_fx/br.ufrpe.byte_monstro.GUI.HelloApplication
                             </mainClass>
                         </configuration>
                     </execution>

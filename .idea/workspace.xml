@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e2137f37-a309-4cdd-86e1-2b8bf25fd94c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/RepositorioManager.java" afterDir="false" />
+    <list default="true" id="e2137f37-a309-4cdd-86e1-2b8bf25fd94c" name="Changes" comment="Tela adm + construtores vazios em Aluno e Adm">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Administradores.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Alunos.dat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/AlunoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/AlunoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/MainWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/MonsterApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/MonsterApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/ProfessionalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/ProfessionalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/ScreenManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/src/main/java/br/ufrpe/byte_monstro/byte_monstro_fx/ScreenManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/MonsterApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/MonsterApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Profissionais.dat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/beans/UsuarioGeral.class" beforeDir="false" afterPath="$PROJECT_DIR$/Byte_Monstro_FX/target/classes/br/ufrpe/byte_monstro/byte_monstro_fx/beans/UsuarioGeral.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +36,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/provas_passadas-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Byte_Monstro_FX" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -54,6 +45,12 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\01011000\Documents\GitHub\Projeto_Byte_Monstro\Byte_Monstro_FX\src\main\resources\br\ufrpe\byte_monstro\byte_monstro_fx" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\israe\IdeaProjects\Projeto_Byte_Monstro\Byte_Monstro_FX\src\main\br.ufrpe.byte_monstro" />
+      <recent name="C:\Users\israe\IdeaProjects\Projeto_Byte_Monstro\Byte_Monstro_FX\src\main\br\ufrpe" />
+      <recent name="C:\Users\israe\IdeaProjects\Projeto_Byte_Monstro\Byte_Monstro_FX\src\main\br" />
+      <recent name="C:\Users\israe\IdeaProjects\Projeto_Byte_Monstro\Byte_Monstro_FX\src\main" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="br.ufrpe.byte_monstro.byte_monstro_fx" />
@@ -104,5 +101,16 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Byte_Monstro_FX/src/main/br/ufrpe/byte_monstro/byte_monstro_fx/MonsterApplication.java</url>
+          <line>15</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
