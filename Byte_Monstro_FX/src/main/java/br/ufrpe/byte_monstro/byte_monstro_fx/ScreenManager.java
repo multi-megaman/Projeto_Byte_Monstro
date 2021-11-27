@@ -126,6 +126,7 @@ public class ScreenManager {
     }
 
     public void showAdmScreen() {
+        adminController.atualizarListas();
         this.mainStage.setScene(this.admScene);
         this.mainStage.show();
     }

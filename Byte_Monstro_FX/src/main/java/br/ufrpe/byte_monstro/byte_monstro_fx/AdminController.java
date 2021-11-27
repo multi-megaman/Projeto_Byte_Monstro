@@ -160,15 +160,25 @@ public class AdminController {
         }
     }
 
+    public void atualizarListas() {
+        listaUsuariosObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarAlunos());
+        listaProfissionaisObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarProfissionais());
+        listaAdministradoresObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarAdministradores());
+
+        listaUsuarios.setItems(listaUsuariosObservavel);
+        listaProfissionais.setItems(listaProfissionaisObservavel);
+        listaAdministradores.setItems(listaAdministradoresObservavel);
+    }
+
     public void initialize(){
         academiaPicker.setItems(FXCollections.observableArrayList(EnumAcademias.values()));
-        listaUsuariosObservavel = FXCollections.observableArrayList();
+        /*listaUsuariosObservavel = FXCollections.observableArrayList();
         listaProfissionaisObservavel = FXCollections.observableArrayList();
         listaAdministradoresObservavel = FXCollections.observableArrayList();
         genItems();
         listaUsuarios.setItems(listaUsuariosObservavel);
         listaProfissionais.setItems(listaProfissionaisObservavel);
-        listaAdministradores.setItems(listaAdministradoresObservavel);
+        listaAdministradores.setItems(listaAdministradoresObservavel);*/
     }
 
 
@@ -247,17 +257,23 @@ public class AdminController {
             Profissional novoProfissional = new Profissional();
             novoProfissional.setId(randomNum);
             novoProfissional.setNome("");
-            listaProfissionaisObservavel.add(novoProfissional);
+            RepositorioManager.getInstance().adicionarProfissional(novoProfissional);
+            atualizarListas();
+            //listaProfissionaisObservavel.add(novoProfissional);
         }else if(alunosTabPane.isSelected()){
             Aluno novoAluno = new Aluno();
             novoAluno.setId(randomNum);
             novoAluno.setNome("");
-            listaUsuariosObservavel.add(novoAluno);
+            RepositorioManager.getInstance().adicionarAluno(novoAluno);
+            atualizarListas();
+            //listaUsuariosObservavel.add(novoAluno);
         }else if(admsTabPane.isSelected()){
             Administrador novoAdministrador = new Administrador();
             novoAdministrador.setId(randomNum);
             novoAdministrador.setNome("");
-            listaAdministradoresObservavel.add(novoAdministrador);
+            RepositorioManager.getInstance().adicionarAdministrador(novoAdministrador);
+            atualizarListas();
+            //listaAdministradoresObservavel.add(novoAdministrador);
         }
     }
 
@@ -272,6 +288,8 @@ public class AdminController {
             professor.setPercentualGordura(Double.parseDouble(gorduraPickerP.getText()));
             professor.setUnidadeAtual((EnumAcademias) academiaPicker.getValue());
 
+            RepositorioManager.getInstance().atualizarProfissional(professor);
+            //atualizarListas();
             listaProfissionais.refresh();
 
         }else if(alunosTabPane.isSelected()){
@@ -285,6 +303,9 @@ public class AdminController {
             aluno.setDataMatricula(matriculaPickerA.getValue());
             aluno.setProfessor(Long.parseLong(idProfPicker.getText()));
 
+            RepositorioManager.getInstance().atualizarAluno(aluno);
+            //atualizarListas();
+
             listaUsuarios.refresh();
 
         }else if(admsTabPane.isSelected()){
@@ -296,6 +317,9 @@ public class AdminController {
             administrador.setAltura(Double.parseDouble(alturaPickerAdm.getText()));
             administrador.setPercentualGordura(Double.parseDouble(gorduraPickerAdm.getText()));
 
+            RepositorioManager.getInstance().atualizarAdministrador(administrador);
+            //atualizarListas();
+
             listaAdministradores.refresh();
         }
 
@@ -303,14 +327,26 @@ public class AdminController {
 
     public void btnDeletarPressed(ActionEvent actionEvent){
         if(profissionaisTabPane.isSelected()){
-            int id = listaProfissionais.getSelectionModel().getSelectedIndex();
-            listaProfissionaisObservavel.remove(id);
+            Profissional profissonal = listaProfissionais.getSelectionModel().getSelectedItem();
+
+            RepositorioManager.getInstance().removerProfissional(profissonal);
+            //atualizarListas();
+            listaProfissionais.refresh();
+            //listaProfissionaisObservavel.remove(id);
         }else if(alunosTabPane.isSelected()){
-            int id = listaUsuarios.getSelectionModel().getSelectedIndex();
-            listaUsuariosObservavel.remove(id);
+            Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
+
+            RepositorioManager.getInstance().removerAluno(aluno);
+            //atualizarListas();
+            listaUsuarios.refresh();
+            //listaUsuariosObservavel.remove(id);
         }else if(admsTabPane.isSelected()){
-            int id = listaAdministradores.getSelectionModel().getSelectedIndex();
-            listaAdministradoresObservavel.remove(id);
+            Administrador administrador = listaAdministradores.getSelectionModel().getSelectedItem();
+
+            RepositorioManager.getInstance().atualizarAdministrador(administrador);
+            //atualizarListas();
+            listaAdministradores.refresh();
+            // listaAdministradoresObservavel.remove(id);
         }
     }
 
