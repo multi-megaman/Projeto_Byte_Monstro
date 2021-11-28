@@ -4,27 +4,21 @@ import br.ufrpe.byte_monstro.byte_monstro_fx.beans.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MainWindowController {
 
@@ -269,7 +263,7 @@ public class MainWindowController {
 
                     Label labelPopUp = new Label("Digite sua senha:");
                     Button btnConfirmar = new Button("Fazer Login");
-                    TextField senhaInput = new TextField();
+                    PasswordField senhaInput = new PasswordField();
 
 
                     btnConfirmar.setOnAction(e -> {
@@ -359,7 +353,7 @@ public class MainWindowController {
 
                     Label labelPopUp = new Label("Digite sua senha:");
                     Button btnConfirmar = new Button("Fazer Login");
-                    TextField senhaInput = new TextField();
+                    PasswordField senhaInput = new PasswordField();
 
 
                     btnConfirmar.setOnAction(e -> {

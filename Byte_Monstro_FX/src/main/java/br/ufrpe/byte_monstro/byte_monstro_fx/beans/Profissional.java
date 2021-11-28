@@ -4,11 +4,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import br.ufrpe.byte_monstro.byte_monstro_fx.beans.EnumAcademias;
-import br.ufrpe.byte_monstro.byte_monstro_fx.beans.UsuarioGeral;
-import br.ufrpe.byte_monstro.byte_monstro_fx.beans.TreinoDiario;
-import br.ufrpe.byte_monstro.byte_monstro_fx.beans.Aluno;
-
 public class Profissional extends UsuarioGeral implements Serializable {
     @Serial
     private static final long serialVersionUID = -4258163491103260294L;
@@ -53,7 +48,7 @@ public class Profissional extends UsuarioGeral implements Serializable {
 
     @Override
 	public String toString() {
-		return super.toString() + " [senha (NÃO MOSTRAR A SENHA NO PROGRAMA FINAL)=" + senha + ", unidadeAtual=" + unidadeAtual + "]";
+		return super.toString() + " unidadeAtual=" + unidadeAtual + "]";
 	}
 
 	public TreinoDiario criarFichasDeExercicio() {
