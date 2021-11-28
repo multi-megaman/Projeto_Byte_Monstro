@@ -12,9 +12,9 @@ import java.util.List;
 public class RepositorioManager {
     private static RepositorioManager instance;
 
-    private ControladorRepositorioAluno controladorRepositorioAluno;
-    private ControladorRepositorioProfissional controladorRepositorioProfissional ;
-    private ControladorRepositorioAdministrador controladorRepositorioAdministrador;
+    private final ControladorRepositorioAluno controladorRepositorioAluno;
+    private final ControladorRepositorioProfissional controladorRepositorioProfissional ;
+    private final ControladorRepositorioAdministrador controladorRepositorioAdministrador;
 
     public static RepositorioManager getInstance() {
         if (instance == null) {

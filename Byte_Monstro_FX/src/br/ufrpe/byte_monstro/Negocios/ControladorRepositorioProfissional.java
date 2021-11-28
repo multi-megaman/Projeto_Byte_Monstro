@@ -15,8 +15,6 @@ public class ControladorRepositorioProfissional {
 
     public ControladorRepositorioProfissional() {
         this.repositorioProfissional = new RepositorioUsuario<>("Profissionais.dat");
-
-
     }
 
     public void adicionarProfissional(Profissional profissional) throws UsuarioJaCadastrado {

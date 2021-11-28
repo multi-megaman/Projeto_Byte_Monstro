@@ -10,8 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -50,6 +48,7 @@ public class AdminController {
     @FXML private TextField idProfPicker;
     @FXML public ChoiceBox academiaPicker;
     @FXML public ListView listaAlunosVinculados;
+    private ObservableList<Aluno> listaAVObservavel;
 
     @FXML private TabPane treinosTabPane;
 
@@ -61,56 +60,6 @@ public class AdminController {
 
     @FXML private ListView<Administrador> listaAdministradores;
     private ObservableList<Administrador> listaAdministradoresObservavel;
-
-    private void genItems() { //PARA TESTES APENAS
-        int numeroNoNomeDoAluno = 0;
-
-
-        //PROFISSIONAIS ----------
-        for(int i=0;i<10;i++){
-            int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
-            int randomAcademia = ThreadLocalRandom.current().nextInt(0, EnumAcademia.values().length -1);
-
-            //lista.add(new String("Aluno_"+Integer.toString(i)));
-            listaProfissionaisObservavel.add(new Profissional(randomNum,"Professor_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"abc" + Integer.toString(i),EnumAcademia.values()[randomAcademia]));
-
-            //ALUNOS -----------
-            for(int j = numeroNoNomeDoAluno; j<10 + numeroNoNomeDoAluno; j++){
-                int randomNumAluno = ThreadLocalRandom.current().nextInt(1, 1000000);
-                int randomQntTreinos = ThreadLocalRandom.current().nextInt(1, 7);
-
-                //lista.add(new String("Aluno_"+Integer.toString(i)));
-                listaUsuariosObservavel.add(new Aluno(randomNumAluno,"Aluno_"+Integer.toString(j),j+10,'M',j+50.6,j*1.70,0.7*(j/2),LocalDate.parse("10/10/2021", DateTimeFormatter.ofPattern("dd/MM/yyyy")),listaProfissionaisObservavel.get(i).getId()));
-
-                for (int l = 0; l < randomQntTreinos; l++) {
-                    TreinoDiario novoTreino = new TreinoDiario();
-                    int randomQntExercicios = ThreadLocalRandom.current().nextInt(1, 10);
-
-                    for (int k = 0; k < randomQntExercicios; k++){
-                        int randomIdEnumExercicio = ThreadLocalRandom.current().nextInt(0, EnumExercicio.values().length - 1);
-                        int randomQntSeries = ThreadLocalRandom.current().nextInt(1, 6);
-                        int randomQntRepeticoes = ThreadLocalRandom.current().nextInt(8, 15);
-                        int randomCarga = ThreadLocalRandom.current().nextInt(10, 150);
-
-                        Exercicio novoExercicio = new Exercicio(EnumExercicio.values()[randomIdEnumExercicio],randomQntSeries,String.valueOf(randomQntRepeticoes),randomCarga);
-                        novoTreino.adicionarExercicio(novoExercicio);
-                    }
-                    listaUsuariosObservavel.get(j).adicionarTreino(novoTreino);
-
-                }
-                listaProfissionaisObservavel.get(i).adicionarAlunoNaLista(listaUsuariosObservavel.get(j));
-            }
-            numeroNoNomeDoAluno += 10;
-        }
-
-        //ADMS
-        for(int i=0;i<10;i++){
-            int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
-
-            listaAdministradoresObservavel.add(new Administrador(randomNum,"ADM_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"abc123"));
-
-        }
-    }
 
     public void atualizarListas() {
         listaUsuariosObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarAlunos());
@@ -124,6 +73,12 @@ public class AdminController {
 
     public void initialize(){
         academiaPicker.setItems(FXCollections.observableArrayList(EnumAcademia.values()));
+    }
+
+    public void setListaAlunosVinculados(){
+        listaAVObservavel = FXCollections.observableArrayList(listaProfissionais.getSelectionModel().getSelectedItem().getAlunos());
+        listaAlunosVinculados.setItems(listaAVObservavel);
+
     }
 
     @FXML public void btnBackPressed(ActionEvent event) {
@@ -231,7 +186,13 @@ public class AdminController {
             aluno.setPercentualGordura(Double.parseDouble(gorduraPickerA.getText()));
             aluno.setDataMatricula(matriculaPickerA.getValue());
             aluno.setProfessor(Long.parseLong(idProfPicker.getText()));
-
+            for(Profissional professor : RepositorioManager.getInstance().listarProfissionais()){
+                if(professor.getId() == Long.parseLong(idProfPicker.getText())){
+                    professor.adicionarAlunoNaLista(aluno);
+                }else{
+                    throw new UsuarioNaoExiste();
+                }
+            }
             RepositorioManager.getInstance().atualizarAluno(aluno);
             //atualizarListas();
 
