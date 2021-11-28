@@ -49,7 +49,7 @@ public class Profissional extends UsuarioGeral implements Serializable {
 
     @Override
 	public String toString() {
-		return super.toString() + " [senha (NÃO MOSTRAR A SENHA NO PROGRAMA FINAL)=" + senha + ", unidadeAtual=" + unidadeAtual + "]";
+		return super.toString() + ", unidadeAtual=" + unidadeAtual + "]";
 	}
 
 	public TreinoDiario criarFichasDeExercicio() {

@@ -232,7 +232,7 @@ public class ProfessionalController {
         alturaPicker.setText(null);
         gorduraPicker.setText(null);
         matriculaPicker.setValue(null);
-        idProfPicker.setText(null);
+        //idProfPicker.setText(null);
         System.out.println("[DEBUG] Clear Pressionado");
     }
 

@@ -142,7 +142,7 @@ public class MainWindowController {
 
 
     //PARA TESTE APENAS
-    @FXML
+    /*@FXML
     public void btnTestePressed(ActionEvent acaoevento) throws UsuarioNaoExiste, UsuarioJaCadastrado {
         //PARA TESTE APENAS
         //repositorioProfissional.adicionarProfissional(new Profissional(1010,"Professor_Teste",10+10,'M',10+50.6,10*1.70,0.7*(10/2),"1",EnumAcademias.values()[1]));
@@ -161,7 +161,7 @@ public class MainWindowController {
         listaAdministradores.setItems(listaAdministradoresObservavel);
 
     }
-
+    */
     @FXML
     public void clickAluno()  {
 
@@ -266,7 +266,7 @@ public class MainWindowController {
 
                     Label labelPopUp = new Label("Digite sua senha:");
                     Button btnConfirmar = new Button("Fazer Login");
-                    TextField senhaInput = new TextField();
+                    PasswordField senhaInput = new PasswordField();
 
 
                     btnConfirmar.setOnAction(e -> {
@@ -350,7 +350,7 @@ public class MainWindowController {
 
                     Label labelPopUp = new Label("Digite sua senha:");
                     Button btnConfirmar = new Button("Fazer Login");
-                    TextField senhaInput = new TextField();
+                    PasswordField senhaInput = new PasswordField();
                     btnConfirmar.setOnAction(e -> {
                         System.out.println("[DEBUG] senha digitada: "+ senhaInput.getText());
                         if(admEscolhido.getSenha().equals(senhaInput.getText())) {

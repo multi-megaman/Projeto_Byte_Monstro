@@ -49,6 +49,6 @@ public class Exercicio implements Serializable {
 
     @Override
     public String toString(){
-        return String.format("%-25s|%dX|%-5s|%d Kg", tipo, serie, repeticao, carga);
+        return String.format("%-25s | %3d Séries | %5s Repetições | Peso: %dKg", tipo, serie, repeticao, carga);
     }
 }
