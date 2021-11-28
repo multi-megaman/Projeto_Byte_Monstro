@@ -1,5 +1,6 @@
 package br.ufrpe.byte_monstro.GUI;
 
+import br.ufrpe.byte_monstro.Exceptions.UsuarioNaoExiste;
 import br.ufrpe.byte_monstro.Negocios.RepositorioManager;
 import br.ufrpe.byte_monstro.Negocios.beans.Aluno;
 import br.ufrpe.byte_monstro.Negocios.beans.Exercicio;
@@ -73,7 +74,7 @@ public class AlunoController {
     }
 
     @FXML
-    public void btnImprimirPressed() {
+    public void btnImprimirPressed() throws UsuarioNaoExiste {
         aluno.setQntTreinosPercorridos(aluno.getQntTreinosPercorridos()+1);
 
 
@@ -99,7 +100,7 @@ public class AlunoController {
     }
 
     @FXML
-    public void btnTrocaDeTreinoPressed() {
+    public void btnTrocaDeTreinoPressed() throws UsuarioNaoExiste {
         aluno.setQntTreinosPercorridos(aluno.getQntMaximaDeSequencia());
         aluno.setPedirTrocaDoTreino(true);
         Tpercorridos.setText(String.format("Treino %d/%d",aluno.getQntTreinosPercorridos(),aluno.getQntMaximaDeSequencia()));

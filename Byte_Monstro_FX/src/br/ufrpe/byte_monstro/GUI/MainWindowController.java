@@ -1,5 +1,7 @@
 package br.ufrpe.byte_monstro.GUI;
 
+import br.ufrpe.byte_monstro.Exceptions.UsuarioJaCadastrado;
+import br.ufrpe.byte_monstro.Exceptions.UsuarioNaoExiste;
 import br.ufrpe.byte_monstro.Negocios.RepositorioManager;
 import br.ufrpe.byte_monstro.Negocios.beans.*;
 import javafx.collections.FXCollections;
@@ -80,7 +82,7 @@ public class MainWindowController {
         listaProfissionais.setItems(listaProfissionaisObservavel);
         listaAdministradores.setItems(listaAdministradoresObservavel);
     }
-    private void genItems() { //PARA TESTES APENAS
+    private void genItems() throws UsuarioJaCadastrado, UsuarioNaoExiste { //PARA TESTES APENAS
         int numeroNoNomeDoAluno = 0;
 
 
@@ -141,7 +143,7 @@ public class MainWindowController {
 
     //PARA TESTE APENAS
     @FXML
-    public void btnTestePressed(ActionEvent acaoevento) {
+    public void btnTestePressed(ActionEvent acaoevento) throws UsuarioNaoExiste, UsuarioJaCadastrado {
         //PARA TESTE APENAS
         //repositorioProfissional.adicionarProfissional(new Profissional(1010,"Professor_Teste",10+10,'M',10+50.6,10*1.70,0.7*(10/2),"1",EnumAcademias.values()[1]));
         genItems();
@@ -339,15 +341,9 @@ public class MainWindowController {
     public void clickAdm() throws IOException{
 
         listaAdministradores.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
-
-
             @Override
             public void handle(MouseEvent click) {
-
-                //AtomicBoolean confirmar = new AtomicBoolean(false);
-
-
+                //AtomicBoolean confirmar = new AtomicBoolean(false);+
                 if (click.getClickCount() == 2) {
                     //POPUP----------------------------
                     Administrador admEscolhido = listaAdministradores.getSelectionModel().getSelectedItem();
@@ -355,8 +351,6 @@ public class MainWindowController {
                     Label labelPopUp = new Label("Digite sua senha:");
                     Button btnConfirmar = new Button("Fazer Login");
                     TextField senhaInput = new TextField();
-
-
                     btnConfirmar.setOnAction(e -> {
                         System.out.println("[DEBUG] senha digitada: "+ senhaInput.getText());
                         if(admEscolhido.getSenha().equals(senhaInput.getText())) {
@@ -372,7 +366,6 @@ public class MainWindowController {
                             errorAlert.setContentText("A SENHA DIGITADA ESTÀ INCORRETA, TENTE NOVAMENTE");
                             errorAlert.showAndWait();
                         }
-
                     });
 
                     FlowPane flowPane = new FlowPane();
@@ -386,15 +379,8 @@ public class MainWindowController {
                     stagePopUp.setScene(popUpLogin);
                     stagePopUp.show();
 
-
-                    //---------------------------------
-
-
-
-
                 }
             }
-
         });
     }
 

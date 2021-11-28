@@ -1,6 +1,10 @@
 package br.ufrpe.byte_monstro.Dados;
 
+import br.ufrpe.byte_monstro.Exceptions.UsuarioJaCadastrado;
+import br.ufrpe.byte_monstro.Exceptions.UsuarioNaoExiste;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class RepositorioUsuario<T> implements IRepositorioUsuario<T> {
@@ -20,77 +24,53 @@ public class RepositorioUsuario<T> implements IRepositorioUsuario<T> {
 	}
 	
 	@Override
-	public void inserir(T ug){
+	public void inserir(T ug) throws UsuarioJaCadastrado {
 		
-		if(elementos.contains(ug) || ug.equals(null)) {
-			
-			System.out.println("N foi possível cadastrar o usuário");
-			return;
-			
-		}
-		
-		else {
-
+		if(!elementos.contains(ug) && !ug.equals(null)) {
 			elementos.add(ug);
-	
 		}
-
+		else {
+			throw new UsuarioJaCadastrado();
+		}
 		RepositorioFileUtil.salvarArquivo(elementos,this.filename);
 		
-}
+	}
+
+	@Override
+	public void remover(T ug) throws UsuarioNaoExiste {
+		
+		if(elementos.contains(ug) && !ug.equals(null)) {
+			this.elementos.remove(ug);
+		}
+		else {
+			throw new UsuarioNaoExiste();
+		}
+		RepositorioFileUtil.salvarArquivo(elementos,this.filename);
+
+	}
+
+	@Override
+	public void atualizar(T usuario) throws UsuarioNaoExiste{
+		
+		if(elementos.contains(usuario)) {
+			int posUsuario = this.elementos.indexOf(usuario);
+			this.elementos.set(posUsuario, usuario);
+		}
+		else {
+			throw new UsuarioNaoExiste();
+		}
+		RepositorioFileUtil.salvarArquivo(elementos,this.filename);
+
+	}
 
 	@Override
 	public List<T> listar() {
-		return (this.elementos);
+		return (Collections.unmodifiableList(this.elementos));
 	}
-
-	@Override
-	public void remover(T ug){
-		
-		if(elementos.contains(ug) && !ug.equals(null)) {
-			
-			
-			this.elementos.remove(ug);
-			
-		}
-		
-		else {
-			
-			System.out.println("N foi possível remover o usuário");
-			return;
-	
-		}
-
-		RepositorioFileUtil.salvarArquivo(elementos,this.filename);
-	}
-
-	@Override
-	public void atualizar(T usuario) {
-		
-		if(elementos.contains(usuario)) {
-			
-			int posUsuario = this.elementos.indexOf(usuario);
-			this.elementos.set(posUsuario, usuario);
-			
-		}
-		
-		else {
-			
-			
-			System.out.println("N foi possível atualizar o usuário");
-			
-		}
-
-		RepositorioFileUtil.salvarArquivo(elementos,this.filename);
-	}
-
-	
 	
 	@Override
 	public String toString() {
 		return "RepositorioUsuario [usuarios=" + elementos + "]";
 	}
-
-
 
 }

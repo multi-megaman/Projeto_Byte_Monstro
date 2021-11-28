@@ -1,114 +1,66 @@
-package br.ufrpe.byte_monstro.byte_monstro_fx;
+package br.ufrpe.byte_monstro.GUI;
 
-import br.ufrpe.byte_monstro.byte_monstro_dados.IRepositorioUsuario;
-import com.dlsc.formsfx.model.structure.DateField;
+import br.ufrpe.byte_monstro.Exceptions.UsuarioJaCadastrado;
+import br.ufrpe.byte_monstro.Exceptions.UsuarioNaoExiste;
+import br.ufrpe.byte_monstro.Negocios.RepositorioManager;
+import br.ufrpe.byte_monstro.Negocios.beans.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 
-import java.io.IOException;
-import java.time.format.DateTimeFormatter;
-
-import br.ufrpe.byte_monstro.byte_monstro_fx.beans.*;
-import javafx.scene.input.InputMethodEvent;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-
 import java.time.LocalDate;
-
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class AdminController {
 
-    @FXML
-    public Tab profissionaisTabPane;
-    @FXML
-    private Tab alunosTabPane;
-    @FXML
-    private Tab admsTabPane;
+    @FXML private Tab profissionaisTabPane;
+    @FXML private Tab alunosTabPane;
+    @FXML private Tab admsTabPane;
 
-    @FXML
-    public TextField searchFieldP;
-    @FXML
-    public TextField searchFieldA;
-    @FXML
-    public TextField searchFieldAdm;
+    @FXML public TextField searchFieldP;
+    @FXML public TextField searchFieldA;
+    @FXML public TextField searchFieldAdm;
 
-    @FXML
-    private TextField nomePickerP;
-    @FXML
-    private TextField generoPickerP;
-    @FXML
-    private TextField idadePickerP;
-    @FXML
-    private TextField pesoPickerP;
-    @FXML
-    private TextField alturaPickerP;
-    @FXML
-    private TextField gorduraPickerP;
+    @FXML private TextField nomePickerP;
+    @FXML private TextField generoPickerP;
+    @FXML private TextField idadePickerP;
+    @FXML private TextField pesoPickerP;
+    @FXML private TextField alturaPickerP;
+    @FXML private TextField gorduraPickerP;
 
-    @FXML
-    private TextField nomePickerA;
-    @FXML
-    private TextField generoPickerA;
-    @FXML
-    private TextField idadePickerA;
-    @FXML
-    private TextField pesoPickerA;
-    @FXML
-    private TextField alturaPickerA;
-    @FXML
-    private TextField gorduraPickerA;
-    @FXML
-    private DatePicker matriculaPickerA;
+    @FXML private TextField nomePickerA;
+    @FXML private TextField generoPickerA;
+    @FXML private TextField idadePickerA;
+    @FXML private TextField pesoPickerA;
+    @FXML private TextField alturaPickerA;
+    @FXML private TextField gorduraPickerA;
+    @FXML private DatePicker matriculaPickerA;
 
-    @FXML
-    private TextField nomePickerAdm;
-    @FXML
-    private TextField generoPickerAdm;
-    @FXML
-    private TextField idadePickerAdm;
-    @FXML
-    private TextField pesoPickerAdm;
-    @FXML
-    private TextField alturaPickerAdm;
-    @FXML
-    private TextField gorduraPickerAdm;
+    @FXML private TextField nomePickerAdm;
+    @FXML private TextField generoPickerAdm;
+    @FXML private TextField idadePickerAdm;
+    @FXML private TextField pesoPickerAdm;
+    @FXML private TextField alturaPickerAdm;
+    @FXML private TextField gorduraPickerAdm;
 
-    @FXML
-    private TextField idProfPicker;
-    @FXML
-    public ChoiceBox academiaPicker;
-    @FXML
-    public ListView listaAlunosVinculados;
+    @FXML private TextField idProfPicker;
+    @FXML public ChoiceBox academiaPicker;
+    @FXML public ListView listaAlunosVinculados;
 
+    @FXML private TabPane treinosTabPane;
 
-
-    @FXML
-    private TabPane treinosTabPane;
-
-    @FXML
-    private ListView<Aluno> listaUsuarios;
+    @FXML private ListView<Aluno> listaUsuarios;
     private ObservableList<Aluno> listaUsuariosObservavel;
 
-    @FXML
-    private ListView<Profissional> listaProfissionais;
+    @FXML private ListView<Profissional> listaProfissionais;
     private ObservableList<Profissional> listaProfissionaisObservavel;
 
-    @FXML
-    private ListView<Administrador> listaAdministradores;
+    @FXML private ListView<Administrador> listaAdministradores;
     private ObservableList<Administrador> listaAdministradoresObservavel;
-
-
 
     private void genItems() { //PARA TESTES APENAS
         int numeroNoNomeDoAluno = 0;
@@ -117,13 +69,13 @@ public class AdminController {
         //PROFISSIONAIS ----------
         for(int i=0;i<10;i++){
             int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
-            int randomAcademia = ThreadLocalRandom.current().nextInt(0, EnumAcademias.values().length -1);
+            int randomAcademia = ThreadLocalRandom.current().nextInt(0, EnumAcademia.values().length -1);
 
             //lista.add(new String("Aluno_"+Integer.toString(i)));
-            listaProfissionaisObservavel.add(new Profissional(randomNum,"Professor_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"abc" + Integer.toString(i),EnumAcademias.values()[randomAcademia]));
+            listaProfissionaisObservavel.add(new Profissional(randomNum,"Professor_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"abc" + Integer.toString(i),EnumAcademia.values()[randomAcademia]));
 
             //ALUNOS -----------
-            for(int j=0 + numeroNoNomeDoAluno;j<10 + numeroNoNomeDoAluno;j++){
+            for(int j = numeroNoNomeDoAluno; j<10 + numeroNoNomeDoAluno; j++){
                 int randomNumAluno = ThreadLocalRandom.current().nextInt(1, 1000000);
                 int randomQntTreinos = ThreadLocalRandom.current().nextInt(1, 7);
 
@@ -135,12 +87,12 @@ public class AdminController {
                     int randomQntExercicios = ThreadLocalRandom.current().nextInt(1, 10);
 
                     for (int k = 0; k < randomQntExercicios; k++){
-                        int randomIdEnumExercicio = ThreadLocalRandom.current().nextInt(0, EnumExercicios.values().length - 1);
+                        int randomIdEnumExercicio = ThreadLocalRandom.current().nextInt(0, EnumExercicio.values().length - 1);
                         int randomQntSeries = ThreadLocalRandom.current().nextInt(1, 6);
                         int randomQntRepeticoes = ThreadLocalRandom.current().nextInt(8, 15);
                         int randomCarga = ThreadLocalRandom.current().nextInt(10, 150);
 
-                        Exercicios novoExercicio = new Exercicios(EnumExercicios.values()[randomIdEnumExercicio],randomQntSeries,String.valueOf(randomQntRepeticoes),randomCarga);
+                        Exercicio novoExercicio = new Exercicio(EnumExercicio.values()[randomIdEnumExercicio],randomQntSeries,String.valueOf(randomQntRepeticoes),randomCarga);
                         novoTreino.adicionarExercicio(novoExercicio);
                     }
                     listaUsuariosObservavel.get(j).adicionarTreino(novoTreino);
@@ -171,37 +123,15 @@ public class AdminController {
     }
 
     public void initialize(){
-        academiaPicker.setItems(FXCollections.observableArrayList(EnumAcademias.values()));
-        /*listaUsuariosObservavel = FXCollections.observableArrayList();
-        listaProfissionaisObservavel = FXCollections.observableArrayList();
-        listaAdministradoresObservavel = FXCollections.observableArrayList();
-        genItems();
-        listaUsuarios.setItems(listaUsuariosObservavel);
-        listaProfissionais.setItems(listaProfissionaisObservavel);
-        listaAdministradores.setItems(listaAdministradoresObservavel);*/
+        academiaPicker.setItems(FXCollections.observableArrayList(EnumAcademia.values()));
     }
 
-
-
-    @FXML
-    public void btnBackPressed(ActionEvent event) {
+    @FXML public void btnBackPressed(ActionEvent event) {
         ScreenManager.getInstance().showMainScreen();
-        /*Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();*/
     }
 
 
-
-    @FXML
-    public void clickProfissional(){
+    @FXML public void clickProfissional(){
         Profissional professor = listaProfissionais.getSelectionModel().getSelectedItem();
         System.out.println("[DEBUG] Prof: " + professor);
         nomePickerP.setText(professor.getNome());
@@ -229,7 +159,7 @@ public class AdminController {
         treinosTabPane.getTabs().clear();
         for (int i = 0; i < aluno.getSequenciaDeTreinos().size(); i++) {
             Tab novaTab = new Tab(String.format("Treino %d",i));
-            ListView<Exercicios> listaExercicios = new ListView<Exercicios>();
+            ListView<Exercicio> listaExercicios = new ListView<Exercicio>();
             listaExercicios.setItems(FXCollections.observableArrayList(aluno.getTreinoDiarioEspecifico(i).getExercicios()));
             novaTab.setContent(listaExercicios);
             treinosTabPane.getTabs().add(novaTab);
@@ -250,8 +180,7 @@ public class AdminController {
     }
 
 
-
-    public void btnCadastrarPressed(ActionEvent actionEvent) {
+    public void btnCadastrarPressed(ActionEvent actionEvent) throws UsuarioJaCadastrado {
         int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
         if(profissionaisTabPane.isSelected()){
             Profissional novoProfissional = new Profissional();
@@ -277,7 +206,7 @@ public class AdminController {
         }
     }
 
-    public void btnEditarPressed(ActionEvent actionEvent) {
+    public void btnEditarPressed(ActionEvent actionEvent) throws UsuarioNaoExiste {
         if(profissionaisTabPane.isSelected()){
             Profissional professor = listaProfissionais.getSelectionModel().getSelectedItem();
             professor.setNome(nomePickerP.getText());
@@ -286,7 +215,7 @@ public class AdminController {
             professor.setPeso(Double.parseDouble(pesoPickerP.getText()));
             professor.setAltura(Double.parseDouble(alturaPickerP.getText()));
             professor.setPercentualGordura(Double.parseDouble(gorduraPickerP.getText()));
-            professor.setUnidadeAtual((EnumAcademias) academiaPicker.getValue());
+            professor.setUnidadeAtual((EnumAcademia) academiaPicker.getValue());
 
             RepositorioManager.getInstance().atualizarProfissional(professor);
             //atualizarListas();
@@ -325,63 +254,55 @@ public class AdminController {
 
     }
 
-    public void btnDeletarPressed(ActionEvent actionEvent){
+    public void btnDeletarPressed(ActionEvent actionEvent) throws UsuarioNaoExiste {
         if(profissionaisTabPane.isSelected()){
-            Profissional profissonal = listaProfissionais.getSelectionModel().getSelectedItem();
-
-            RepositorioManager.getInstance().removerProfissional(profissonal);
-            //atualizarListas();
+            RepositorioManager.getInstance().removerProfissional(listaProfissionais.getSelectionModel().getSelectedItem());
+            atualizarListas();
             listaProfissionais.refresh();
-            //listaProfissionaisObservavel.remove(id);
+
         }else if(alunosTabPane.isSelected()){
-            Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
-
-            RepositorioManager.getInstance().removerAluno(aluno);
-            //atualizarListas();
+            RepositorioManager.getInstance().removerAluno(listaUsuarios.getSelectionModel().getSelectedItem());
+            atualizarListas();
             listaUsuarios.refresh();
-            //listaUsuariosObservavel.remove(id);
-        }else if(admsTabPane.isSelected()){
-            Administrador administrador = listaAdministradores.getSelectionModel().getSelectedItem();
 
-            RepositorioManager.getInstance().atualizarAdministrador(administrador);
-            //atualizarListas();
+        }else if(admsTabPane.isSelected()){
+            RepositorioManager.getInstance().removerAdministrador(listaAdministradores.getSelectionModel().getSelectedItem());
+            atualizarListas();
             listaAdministradores.refresh();
-            // listaAdministradoresObservavel.remove(id);
         }
     }
 
     public void btnSearchPressed(ActionEvent actionEvent) {
+        String ID;
         if (profissionaisTabPane.isSelected()) {
             ArrayList<Profissional> listaProfissionaisId = new ArrayList<Profissional>();
             for (Profissional i : listaProfissionaisObservavel) {
-                if (i.getId() == Long.parseLong(searchFieldP.getText())) {
+                ID = String.valueOf(i.getId());
+                if (ID.contains(searchFieldP.getText())) {
                     listaProfissionaisId.add(i);
                 }
             }
-            if (listaProfissionaisId != null) {
-                listaProfissionais.setItems(FXCollections.observableArrayList(listaProfissionaisId));
-            }
+            listaProfissionais.setItems(FXCollections.observableArrayList(listaProfissionaisId));
 
         } else if (alunosTabPane.isSelected()) {
             ArrayList<Aluno> listaAlunosId = new ArrayList<Aluno>();
             for (Aluno i : listaUsuariosObservavel) {
-                if (i.getId() == Long.parseLong(searchFieldA.getText())) {
+                ID = String.valueOf(i.getId());
+                if (ID.contains(searchFieldA.getText())) {
                     listaAlunosId.add(i);
                 }
             }
-            if (listaAlunosId != null) {
-                listaUsuarios.setItems(FXCollections.observableArrayList(listaAlunosId));
-            }
+            listaUsuarios.setItems(FXCollections.observableArrayList(listaAlunosId));
+
         } else if (admsTabPane.isSelected()) {
             ArrayList<Administrador> listaAdministradoresId = new ArrayList<Administrador>();
             for (Administrador i : listaAdministradoresObservavel) {
-                if (i.getId() == Long.parseLong(searchFieldAdm.getText())) {
+                ID = String.valueOf(i.getId());
+                if (ID.contains(searchFieldAdm.getText())) {
                     listaAdministradoresId.add(i);
                 }
             }
-            if (listaAdministradoresId != null) {
-                listaAdministradores.setItems(FXCollections.observableArrayList(listaAdministradoresId));
-            }
+            listaAdministradores.setItems(FXCollections.observableArrayList(listaAdministradoresId));
         }
 
 

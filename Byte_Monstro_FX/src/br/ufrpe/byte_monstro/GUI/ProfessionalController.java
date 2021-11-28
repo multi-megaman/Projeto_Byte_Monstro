@@ -1,5 +1,7 @@
 package br.ufrpe.byte_monstro.GUI;
 
+import br.ufrpe.byte_monstro.Exceptions.UsuarioJaCadastrado;
+import br.ufrpe.byte_monstro.Exceptions.UsuarioNaoExiste;
 import br.ufrpe.byte_monstro.Negocios.RepositorioManager;
 import br.ufrpe.byte_monstro.Negocios.beans.*;
 import javafx.collections.FXCollections;
@@ -163,7 +165,7 @@ public class ProfessionalController {
 
 
     @FXML
-    public void btnDeletePressed(ActionEvent eventoacao){
+    public void btnDeletePressed(ActionEvent eventoacao) throws UsuarioNaoExiste {
         Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
         //int id = listaUsuarios.getSelectionModel().getSelectedIndex();
         //listaUsuariosObservavel.remove(aluno);
@@ -180,7 +182,7 @@ public class ProfessionalController {
 
 
     @FXML
-    public void btnUpdatePressed(ActionEvent eventoacao) {
+    public void btnUpdatePressed(ActionEvent eventoacao) throws UsuarioNaoExiste {
         Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
         aluno.setNome(namePicker.getText());
         aluno.setIdade(Integer.parseInt(idadePicker.getText()));
@@ -205,7 +207,7 @@ public class ProfessionalController {
     }
 
     @FXML
-    public void btnAddPressed(ActionEvent eventoacao) {
+    public void btnAddPressed(ActionEvent eventoacao) throws UsuarioJaCadastrado, UsuarioNaoExiste {
         int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
 
         System.out.println("[DEBUG] Add Pressionado");
@@ -235,7 +237,7 @@ public class ProfessionalController {
     }
 
     @FXML
-    public void btnNewPressed(ActionEvent eventoacao) {
+    public void btnNewPressed(ActionEvent eventoacao) throws UsuarioNaoExiste {
 
         Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
         ObservableList<Tab> tabs = treinosTabPane.getTabs();
@@ -262,7 +264,7 @@ public class ProfessionalController {
     }
 
     @FXML
-    public void btnRemovePressed(ActionEvent eventoacao) {
+    public void btnRemovePressed(ActionEvent eventoacao) throws UsuarioNaoExiste {
         Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
         int tabAtualId = treinosTabPane.getSelectionModel().getSelectedIndex();
         Tab tabAtual = treinosTabPane.getSelectionModel().getSelectedItem();
@@ -275,7 +277,7 @@ public class ProfessionalController {
     }
 
     @FXML
-    public void btnAlterPressed(ActionEvent eventoacao) {
+    public void btnAlterPressed(ActionEvent eventoacao) throws UsuarioNaoExiste {
         Tab tabAtual = treinosTabPane.getSelectionModel().getSelectedItem();
         ListView<Exercicio> listaExercicios = (ListView<Exercicio>) tabAtual.getContent();
         Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
@@ -296,7 +298,7 @@ public class ProfessionalController {
     }
 
     @FXML
-    public void btnInsertPressed(ActionEvent eventoacao) {
+    public void btnInsertPressed(ActionEvent eventoacao) throws UsuarioNaoExiste {
         Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
         int tabAtualId = treinosTabPane.getSelectionModel().getSelectedIndex();
         Tab tabAtual = treinosTabPane.getSelectionModel().getSelectedItem();
@@ -315,7 +317,7 @@ public class ProfessionalController {
     }
 
     @FXML
-    public void btnErasePressed(ActionEvent eventoacao) {
+    public void btnErasePressed(ActionEvent eventoacao) throws UsuarioNaoExiste {
         Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
         int tabAtualId = treinosTabPane.getSelectionModel().getSelectedIndex();
         Tab tabAtual = treinosTabPane.getSelectionModel().getSelectedItem();
