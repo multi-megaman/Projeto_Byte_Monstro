@@ -1,15 +1,30 @@
-package br.ufrpe.byte_monstro.GUI;
+package br.ufrpe.byte_monstro.byte_monstro_fx;
 
-import br.ufrpe.byte_monstro.Negocios.beans.*;
+import br.ufrpe.byte_monstro.byte_monstro_dados.IRepositorioUsuario;
+import com.dlsc.formsfx.model.structure.DateField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 
-import java.time.LocalDate;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+
+import br.ufrpe.byte_monstro.byte_monstro_fx.beans.*;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
+import java.time.LocalDate;
+
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class AdminController {
@@ -102,10 +117,10 @@ public class AdminController {
         //PROFISSIONAIS ----------
         for(int i=0;i<10;i++){
             int randomNum = ThreadLocalRandom.current().nextInt(1, 1000000);
-            int randomAcademia = ThreadLocalRandom.current().nextInt(0, EnumAcademia.values().length -1);
+            int randomAcademia = ThreadLocalRandom.current().nextInt(0, EnumAcademias.values().length -1);
 
             //lista.add(new String("Aluno_"+Integer.toString(i)));
-            listaProfissionaisObservavel.add(new Profissional(randomNum,"Professor_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"abc" + Integer.toString(i), EnumAcademia.values()[randomAcademia]));
+            listaProfissionaisObservavel.add(new Profissional(randomNum,"Professor_"+Integer.toString(i),i+10,'M',i+50.6,i*1.70,0.7*(i/2),"abc" + Integer.toString(i),EnumAcademias.values()[randomAcademia]));
 
             //ALUNOS -----------
             for(int j=0 + numeroNoNomeDoAluno;j<10 + numeroNoNomeDoAluno;j++){
@@ -120,12 +135,12 @@ public class AdminController {
                     int randomQntExercicios = ThreadLocalRandom.current().nextInt(1, 10);
 
                     for (int k = 0; k < randomQntExercicios; k++){
-                        int randomIdEnumExercicio = ThreadLocalRandom.current().nextInt(0, EnumExercicio.values().length - 1);
+                        int randomIdEnumExercicio = ThreadLocalRandom.current().nextInt(0, EnumExercicios.values().length - 1);
                         int randomQntSeries = ThreadLocalRandom.current().nextInt(1, 6);
                         int randomQntRepeticoes = ThreadLocalRandom.current().nextInt(8, 15);
                         int randomCarga = ThreadLocalRandom.current().nextInt(10, 150);
 
-                        Exercicio novoExercicio = new Exercicio(EnumExercicio.values()[randomIdEnumExercicio],randomQntSeries,String.valueOf(randomQntRepeticoes),randomCarga);
+                        Exercicios novoExercicio = new Exercicios(EnumExercicios.values()[randomIdEnumExercicio],randomQntSeries,String.valueOf(randomQntRepeticoes),randomCarga);
                         novoTreino.adicionarExercicio(novoExercicio);
                     }
                     listaUsuariosObservavel.get(j).adicionarTreino(novoTreino);
@@ -145,15 +160,25 @@ public class AdminController {
         }
     }
 
+    public void atualizarListas() {
+        listaUsuariosObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarAlunos());
+        listaProfissionaisObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarProfissionais());
+        listaAdministradoresObservavel = FXCollections.observableArrayList(RepositorioManager.getInstance().listarAdministradores());
+
+        listaUsuarios.setItems(listaUsuariosObservavel);
+        listaProfissionais.setItems(listaProfissionaisObservavel);
+        listaAdministradores.setItems(listaAdministradoresObservavel);
+    }
+
     public void initialize(){
-        academiaPicker.setItems(FXCollections.observableArrayList(EnumAcademia.values()));
-        listaUsuariosObservavel = FXCollections.observableArrayList();
+        academiaPicker.setItems(FXCollections.observableArrayList(EnumAcademias.values()));
+        /*listaUsuariosObservavel = FXCollections.observableArrayList();
         listaProfissionaisObservavel = FXCollections.observableArrayList();
         listaAdministradoresObservavel = FXCollections.observableArrayList();
         genItems();
         listaUsuarios.setItems(listaUsuariosObservavel);
         listaProfissionais.setItems(listaProfissionaisObservavel);
-        listaAdministradores.setItems(listaAdministradoresObservavel);
+        listaAdministradores.setItems(listaAdministradoresObservavel);*/
     }
 
 
@@ -204,7 +229,7 @@ public class AdminController {
         treinosTabPane.getTabs().clear();
         for (int i = 0; i < aluno.getSequenciaDeTreinos().size(); i++) {
             Tab novaTab = new Tab(String.format("Treino %d",i));
-            ListView<Exercicio> listaExercicios = new ListView<Exercicio>();
+            ListView<Exercicios> listaExercicios = new ListView<Exercicios>();
             listaExercicios.setItems(FXCollections.observableArrayList(aluno.getTreinoDiarioEspecifico(i).getExercicios()));
             novaTab.setContent(listaExercicios);
             treinosTabPane.getTabs().add(novaTab);
@@ -232,17 +257,23 @@ public class AdminController {
             Profissional novoProfissional = new Profissional();
             novoProfissional.setId(randomNum);
             novoProfissional.setNome("");
-            listaProfissionaisObservavel.add(novoProfissional);
+            RepositorioManager.getInstance().adicionarProfissional(novoProfissional);
+            atualizarListas();
+            //listaProfissionaisObservavel.add(novoProfissional);
         }else if(alunosTabPane.isSelected()){
             Aluno novoAluno = new Aluno();
             novoAluno.setId(randomNum);
             novoAluno.setNome("");
-            listaUsuariosObservavel.add(novoAluno);
+            RepositorioManager.getInstance().adicionarAluno(novoAluno);
+            atualizarListas();
+            //listaUsuariosObservavel.add(novoAluno);
         }else if(admsTabPane.isSelected()){
             Administrador novoAdministrador = new Administrador();
             novoAdministrador.setId(randomNum);
             novoAdministrador.setNome("");
-            listaAdministradoresObservavel.add(novoAdministrador);
+            RepositorioManager.getInstance().adicionarAdministrador(novoAdministrador);
+            atualizarListas();
+            //listaAdministradoresObservavel.add(novoAdministrador);
         }
     }
 
@@ -255,8 +286,10 @@ public class AdminController {
             professor.setPeso(Double.parseDouble(pesoPickerP.getText()));
             professor.setAltura(Double.parseDouble(alturaPickerP.getText()));
             professor.setPercentualGordura(Double.parseDouble(gorduraPickerP.getText()));
-            professor.setUnidadeAtual((EnumAcademia) academiaPicker.getValue());
+            professor.setUnidadeAtual((EnumAcademias) academiaPicker.getValue());
 
+            RepositorioManager.getInstance().atualizarProfissional(professor);
+            //atualizarListas();
             listaProfissionais.refresh();
 
         }else if(alunosTabPane.isSelected()){
@@ -270,6 +303,9 @@ public class AdminController {
             aluno.setDataMatricula(matriculaPickerA.getValue());
             aluno.setProfessor(Long.parseLong(idProfPicker.getText()));
 
+            RepositorioManager.getInstance().atualizarAluno(aluno);
+            //atualizarListas();
+
             listaUsuarios.refresh();
 
         }else if(admsTabPane.isSelected()){
@@ -281,6 +317,9 @@ public class AdminController {
             administrador.setAltura(Double.parseDouble(alturaPickerAdm.getText()));
             administrador.setPercentualGordura(Double.parseDouble(gorduraPickerAdm.getText()));
 
+            RepositorioManager.getInstance().atualizarAdministrador(administrador);
+            //atualizarListas();
+
             listaAdministradores.refresh();
         }
 
@@ -288,14 +327,26 @@ public class AdminController {
 
     public void btnDeletarPressed(ActionEvent actionEvent){
         if(profissionaisTabPane.isSelected()){
-            int id = listaProfissionais.getSelectionModel().getSelectedIndex();
-            listaProfissionaisObservavel.remove(id);
+            Profissional profissonal = listaProfissionais.getSelectionModel().getSelectedItem();
+
+            RepositorioManager.getInstance().removerProfissional(profissonal);
+            //atualizarListas();
+            listaProfissionais.refresh();
+            //listaProfissionaisObservavel.remove(id);
         }else if(alunosTabPane.isSelected()){
-            int id = listaUsuarios.getSelectionModel().getSelectedIndex();
-            listaUsuariosObservavel.remove(id);
+            Aluno aluno = listaUsuarios.getSelectionModel().getSelectedItem();
+
+            RepositorioManager.getInstance().removerAluno(aluno);
+            //atualizarListas();
+            listaUsuarios.refresh();
+            //listaUsuariosObservavel.remove(id);
         }else if(admsTabPane.isSelected()){
-            int id = listaAdministradores.getSelectionModel().getSelectedIndex();
-            listaAdministradoresObservavel.remove(id);
+            Administrador administrador = listaAdministradores.getSelectionModel().getSelectedItem();
+
+            RepositorioManager.getInstance().atualizarAdministrador(administrador);
+            //atualizarListas();
+            listaAdministradores.refresh();
+            // listaAdministradoresObservavel.remove(id);
         }
     }
 
