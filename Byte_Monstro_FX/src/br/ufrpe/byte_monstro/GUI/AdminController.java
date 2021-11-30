@@ -96,6 +96,7 @@ public class AdminController {
         alturaPickerP.setText(String.valueOf(professor.getAltura()));
         gorduraPickerP.setText(String.valueOf(professor.getPercentualGordura()));
         academiaPicker.setValue(professor.getUnidadeAtual());
+        setListaAlunosVinculados();
     }
 
     @FXML
